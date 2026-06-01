@@ -54,7 +54,7 @@ html {
   color: white;
 }
 
-/* Add to your globals.css */
+
 
 /* Better touch targets on mobile */
 @media (max-width: 768px) {
@@ -89,4 +89,25 @@ html {
 /* Better tap highlight removal */
 * {
   -webkit-tap-highlight-color: transparent;
+}
+
+/* iOS specific fixes */
+@supports (padding: max(0px)) {
+  .fixed {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Improve performance on mobile */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent pull-to-refresh on iOS when menu is open */
+body.menu-open {
+  position: fixed;
+  width: 100%;
+  overflow: hidden;
 }
