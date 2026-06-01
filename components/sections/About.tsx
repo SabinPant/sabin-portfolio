@@ -146,27 +146,27 @@ const interests = [
    Framer helpers
 ───────────────────────────────────────── */
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 16 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.65, ease: "easeOut" as const },
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
   },
 };
 const fadeLeft: Variants = {
-  hidden: { opacity: 0, x: -36 },
+  hidden: { opacity: 0, x: -20 },
   show: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.7, ease: "easeOut" as const },
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
   },
 };
 const fadeRight: Variants = {
-  hidden: { opacity: 0, x: 36 },
+  hidden: { opacity: 0, x: 20 },
   show: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.7, ease: "easeOut" as const },
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
   },
 };
 
@@ -176,18 +176,22 @@ const fadeRight: Variants = {
 export default function About() {
   return (
     <section id="about" className="py-28 relative overflow-hidden">
-      {/* ── ambient glows ── */}
+      {/* ── ambient glows — radial-gradient, no filter:blur, GPU-friendly ── */}
       <div
         aria-hidden
-        className="pointer-events-none absolute top-[-80px] right-[-80px]
-        w-[520px] h-[520px] rounded-full blur-[130px] opacity-[0.045]"
-        style={{ background: "var(--primary)" }}
+        className="pointer-events-none absolute top-[-80px] right-[-80px] w-[520px] h-[520px]"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 70%)",
+        }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-[-60px] left-[-60px]
-        w-[380px] h-[380px] rounded-full blur-[110px] opacity-[0.035]"
-        style={{ background: "#3b82f6" }}
+        className="pointer-events-none absolute bottom-[-60px] left-[-60px] w-[380px] h-[380px]"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%)",
+        }}
       />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
@@ -198,7 +202,7 @@ export default function About() {
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-80px" }}
           className="text-center mb-20"
         >
           <span
@@ -227,7 +231,7 @@ export default function About() {
             variants={fadeLeft}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-80px" }}
             className="flex flex-col gap-6"
           >
             {/* Photo card */}
@@ -260,10 +264,10 @@ export default function About() {
                 {/* availability badge */}
                 <div className="absolute bottom-0 left-0 right-0 z-20 px-4 pb-4">
                   <motion.div
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 8 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.55, duration: 0.5 }}
+                    viewport={{ once: true, margin: "-80px" }}
+                    transition={{ delay: 0.3, duration: 0.4 }}
                     className="flex items-center gap-3 px-4 py-3 rounded-xl
                       bg-[var(--background)]/70 backdrop-blur-md
                       border border-[var(--border)]"
@@ -290,13 +294,12 @@ export default function About() {
               {stats.map((stat, i) => (
                 <motion.div
                   key={stat.label}
-                  initial={{ opacity: 0, scale: 0.88 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 + i * 0.09, duration: 0.45 }}
-                  whileHover={{ scale: 1.03 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ delay: 0.08 + i * 0.07, duration: 0.4 }}
                   className="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4
-                    hover:border-[var(--primary)]/40 transition-colors duration-200 cursor-default"
+                    hover:border-[var(--primary)]/40 hover:scale-[1.03] transition-[colors,transform] duration-200 cursor-default will-change-transform"
                 >
                   <div
                     className="text-2xl font-bold mb-0.5 tabular-nums"
@@ -317,7 +320,7 @@ export default function About() {
             variants={fadeRight}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-80px" }}
             className="flex flex-col gap-7 pt-1"
           >
             {/* Current role pill */}
@@ -397,7 +400,7 @@ export default function About() {
               <a
                 href="#contact"
                 className="px-5 py-2.5 rounded-lg bg-[var(--primary)] text-white text-sm font-medium
-                  hover:opacity-90 active:scale-95 transition-all duration-150"
+                  hover:opacity-90 active:scale-95 transition-[opacity,transform] duration-150 will-change-transform"
               >
                 Get in Touch
               </a>
@@ -409,10 +412,10 @@ export default function About() {
             Interest / hobby cards strip
         ══════════════════════════════ */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
           className="space-y-5"
         >
           {/* strip label */}
@@ -428,13 +431,12 @@ export default function About() {
             {interests.map((item, i) => (
               <motion.div
                 key={item.label}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ delay: i * 0.07, duration: 0.4 }}
                 className="group bg-[var(--card)] border border-[var(--border)] rounded-xl p-5
-                  hover:border-[var(--primary)]/40 transition-colors duration-250 cursor-default"
+                  hover:border-[var(--primary)]/40 hover:-translate-y-1 transition-[colors,transform] duration-200 cursor-default will-change-transform"
               >
                 {/* icon circle */}
                 <div

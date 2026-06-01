@@ -159,7 +159,7 @@ function OrbitRing({
   color: string;
 }) {
   return (
-    <motion.div
+    <div
       className="absolute inset-0 flex items-center justify-center"
       style={{ pointerEvents: "none" }}
     >
@@ -213,7 +213,7 @@ function OrbitRing({
           opacity: 0.4,
         }}
       />
-    </motion.div>
+    </div>
   );
 }
 
@@ -232,7 +232,7 @@ function CounterBadge({
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay, duration: 0.5, type: "spring", stiffness: 200 }}
-      className="absolute bg-[var(--card)] border border-[var(--border)] rounded-xl px-3 py-2 text-center backdrop-blur-sm"
+      className="bg-[var(--card)] border border-[var(--border)] rounded-xl px-3 py-2 text-center backdrop-blur-sm"
       style={{ minWidth: 72 }}
     >
       <div className="text-lg font-bold text-[var(--primary)] leading-none">
@@ -550,29 +550,24 @@ export default function Hero() {
           </div>
 
           {/* ── RIGHT: Visual side ── */}
-          <div className="flex justify-center lg:justify-end order-1 lg:order-2 relative">
-            <div className="relative w-full max-w-md">
+          <div className="flex flex-col items-center order-1 lg:order-2 w-full lg:pl-8">
+            <div className="relative" style={{ width: 320, height: 320 }}>
               {/* Orbiting tech badges */}
-              <div
-                className="absolute inset-0 flex items-center justify-center"
-                style={{ width: "100%", paddingBottom: "100%" }}
-              >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <OrbitRing
-                    radius={180}
-                    duration={22}
-                    startAngle={0}
-                    iconText="TS"
-                    color="#3b82f6"
-                  />
-                  <OrbitRing
-                    radius={220}
-                    duration={32}
-                    startAngle={90}
-                    iconText="AWS"
-                    color="#f59e0b"
-                  />
-                </div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <OrbitRing
+                  radius={180}
+                  duration={22}
+                  startAngle={0}
+                  iconText="TS"
+                  color="#3b82f6"
+                />
+                <OrbitRing
+                  radius={220}
+                  duration={32}
+                  startAngle={90}
+                  iconText="AWS"
+                  color="#f59e0b"
+                />
               </div>
 
               {/* Photo container */}
@@ -584,10 +579,8 @@ export default function Hero() {
                   delay: 0.3,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="relative z-10 mx-auto"
-                style={{ width: 300, height: 300 }}
+                className="absolute inset-0 z-10"
               >
-                {/* Hexagon-ish clip via border-radius trick */}
                 <div className="relative w-full h-full">
                   {/* Rotating gradient border */}
                   <motion.div
@@ -624,83 +617,76 @@ export default function Hero() {
                 </div>
               </motion.div>
 
-              {/* Floating stat badges */}
-              <div className="absolute inset-0 pointer-events-none z-20">
-                <CounterBadge
-                  value="5×"
-                  label="AWS Certs"
-                  delay={1.2}
-                  // top-right
-                />
-                <motion.div
-                  className="absolute"
-                  style={{ top: "8%", right: "-8%" }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.2, duration: 0.5, type: "spring" }}
-                ></motion.div>
-
-                <motion.div
-                  className="absolute"
-                  style={{ bottom: "10%", left: "-10%" }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.5, duration: 0.5, type: "spring" }}
-                >
-                  <div className="bg-[var(--card)] border border-[var(--border)] rounded-xl px-3 py-2 text-center backdrop-blur-sm">
-                    <div className="text-lg font-bold text-[var(--primary)] leading-none">
-                      3+
-                    </div>
-                    <div className="text-[10px] text-[var(--muted-foreground)] mt-0.5 font-medium uppercase tracking-wider">
-                      Projects
-                    </div>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  className="absolute"
-                  style={{
-                    top: "50%",
-                    left: "-14%",
-                    transform: "translateY(-50%)",
-                  }}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 1.8, duration: 0.5 }}
-                >
-                  <div className="bg-[var(--card)] border border-[var(--border)] rounded-xl px-3 py-2 backdrop-blur-sm">
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                      <span className="text-[11px] text-green-400 font-mono font-medium">
-                        Open to hire
-                      </span>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Terminal card — below photo */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.8 }}
-                className="relative z-10 mt-6 rounded-xl border border-[var(--border)] bg-[var(--card)] overflow-hidden"
-                style={{ boxShadow: "0 0 40px rgba(99,102,241,0.06)" }}
+              {/* Open to hire badge - anchored to the outer 320×320 wrapper */}
+              <FloatingBadge
+                delay={1.8}
+                className="absolute top-[30%] -right-[60px] z-30"
               >
-                {/* Terminal title bar */}
-                <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[var(--border)] bg-[var(--secondary)]/50">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
-                  <span className="ml-2 text-xs text-[var(--muted-foreground)] font-mono">
-                    sabin@portfolio: ~
-                  </span>
+                <div className="bg-[var(--card)] border border-[var(--border)] rounded-xl px-3 py-2 backdrop-blur-sm whitespace-nowrap">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                    <span className="text-[11px] text-green-400 font-mono font-medium">
+                      Open to hire
+                    </span>
+                  </div>
                 </div>
-                <div className="p-4">
-                  <Typewriter lines={terminalLines} />
-                </div>
-              </motion.div>
+              </FloatingBadge>
             </div>
+
+            {/* Stat badges row - below photo */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.95 }}
+              className="flex gap-3 mt-6"
+            >
+              <div className="bg-[var(--card)] border border-[var(--border)] rounded-xl px-4 py-3 text-center backdrop-blur-sm min-w-[80px]">
+                <div className="text-xl font-bold text-[var(--primary)] leading-none">
+                  5×
+                </div>
+                <div className="text-[10px] text-[var(--muted-foreground)] mt-1 font-medium uppercase tracking-wider">
+                  AWS Certs
+                </div>
+              </div>
+              <div className="bg-[var(--card)] border border-[var(--border)] rounded-xl px-4 py-3 text-center backdrop-blur-sm min-w-[80px]">
+                <div className="text-xl font-bold text-[var(--primary)] leading-none">
+                  2+
+                </div>
+                <div className="text-[10px] text-[var(--muted-foreground)] mt-1 font-medium uppercase tracking-wider">
+                  Projects
+                </div>
+              </div>
+              <div className="bg-[var(--card)] border border-[var(--border)] rounded-xl px-4 py-3 text-center backdrop-blur-sm min-w-[80px]">
+                <div className="text-xl font-bold text-[var(--primary)] leading-none">
+                  1st
+                </div>
+                <div className="text-[10px] text-[var(--muted-foreground)] mt-1 font-medium uppercase tracking-wider">
+                  Architecture
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Terminal card — below stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.8 }}
+              className="relative z-10 mt-6 rounded-xl border border-[var(--border)] bg-[var(--card)] overflow-hidden w-full max-w-[380px]"
+              style={{ boxShadow: "0 0 40px rgba(99,102,241,0.06)" }}
+            >
+              {/* Terminal title bar */}
+              <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[var(--border)] bg-[var(--secondary)]/50">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
+                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
+                <div className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
+                <span className="ml-2 text-xs text-[var(--muted-foreground)] font-mono">
+                  sabin@portfolio: ~
+                </span>
+              </div>
+              <div className="p-4">
+                <Typewriter lines={terminalLines} />
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
