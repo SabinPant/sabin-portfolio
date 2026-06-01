@@ -650,7 +650,7 @@ export default function Hero() {
               </div>
               <div className="bg-[var(--card)] border border-[var(--border)] rounded-xl px-4 py-3 text-center backdrop-blur-sm min-w-[80px]">
                 <div className="text-xl font-bold text-[var(--primary)] leading-none">
-                  2+
+                  3+
                 </div>
                 <div className="text-[10px] text-[var(--muted-foreground)] mt-1 font-medium uppercase tracking-wider">
                   Projects
