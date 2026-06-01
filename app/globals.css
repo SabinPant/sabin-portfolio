@@ -53,3 +53,40 @@ html {
   background: var(--primary);
   color: white;
 }
+
+/* Add to your globals.css */
+
+/* Better touch targets on mobile */
+@media (max-width: 768px) {
+  button, 
+  a,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve scrolling on mobile */
+  .overflow-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Prevent zoom on input focus on iOS */
+@media (max-width: 768px) {
+  input, 
+  textarea, 
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Smooth backdrop blur performance */
+.backdrop-blur-lg {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Better tap highlight removal */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
