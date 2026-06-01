@@ -94,15 +94,6 @@ export default function Navbar() {
                   </a>
                 </li>
               ))}
-              <li>
-                <a
-                  href="#contact"
-                  onClick={() => setMobileOpen(false)}
-                  className="inline-flex items-center px-4 py-2 rounded-lg bg-[var(--primary)] text-white text-sm font-medium"
-                >
-                  Hire Me
-                </a>
-              </li>
             </ul>
           </motion.div>
         )}
