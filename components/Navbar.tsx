@@ -66,16 +66,6 @@ export default function Navbar() {
           ))}
         </motion.ul>
 
-        <motion.a
-          href="#contact"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--primary)] text-white text-sm font-medium hover:opacity-90 transition-opacity"
-        >
-          Hire Me
-        </motion.a>
-
         <button
           className="md:hidden text-[var(--foreground)]"
           onClick={() => setMobileOpen(!mobileOpen)}

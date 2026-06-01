@@ -346,13 +346,16 @@ export default function About() {
                 Origin Story
               </h3>
               <p className="text-[var(--muted-foreground)] leading-[1.8] text-[0.95rem]">
-                It started with a game. I wanted to build one, so I picked up C
-                and C++, and that first taste of making a machine do exactly
-                what I told it to was addictive. As my curiosity deepened, my
-                interests shifted from games to real applications Java, then
-                backend architecture, then databases and cloud infrastructure.
-                Every layer I pulled back revealed something more interesting
-                underneath.
+                It started with a game. I wanted to build one, so in high
+                school, I decided to pursue a Computer Science degree. I began
+                by picking up C and C++, and that first taste of building a
+                powerful foundation in programming paradigms and Data Structures
+                and Algorithms (DSA) was addictive. As my curiosity deepened, my
+                interests naturally shifted from games to real-world
+                applications. Every layer I pulled back revealed something more
+                interesting underneath leading me from C/C++ to Java, then into
+                backend architecture, and ultimately to databases and cloud
+                infrastructure.
               </p>
             </div>
 
@@ -393,17 +396,6 @@ export default function About() {
                 correctness, reliability, and scale in domains where all three
                 are non-negotiable.
               </p>
-            </div>
-
-            {/* CTA row */}
-            <div className="flex gap-3 pt-1">
-              <a
-                href="#contact"
-                className="px-5 py-2.5 rounded-lg bg-[var(--primary)] text-white text-sm font-medium
-                  hover:opacity-90 active:scale-95 transition-[opacity,transform] duration-150 will-change-transform"
-              >
-                Get in Touch
-              </a>
             </div>
           </motion.div>
         </div>
