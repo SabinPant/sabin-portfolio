@@ -44,7 +44,7 @@ export default function Contact() {
           </h2>
           <p className="text-[var(--muted-foreground)] mt-4 max-w-lg mx-auto">
             Whether you have a project in mind, a job opportunity, or just want
-            to say hi — my inbox is always open.
+            to say hi my inbox is always open.
           </p>
         </motion.div>
 

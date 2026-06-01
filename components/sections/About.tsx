@@ -56,7 +56,7 @@ const stats = [
 const interests = [
   {
     label: "Gaming",
-    desc: "Where it all started — gaming sparked my curiosity to understand how software really works.",
+    desc: "Where it all started gaming sparked my curiosity to understand how software really works.",
     icon: (
       <svg
         width="22"
@@ -78,7 +78,7 @@ const interests = [
   },
   {
     label: "Music",
-    desc: "Rhythm and patterns — music keeps me grounded and sharpens pattern recognition.",
+    desc: "Rhythm and patterns music keeps me grounded and sharpens pattern recognition.",
     icon: (
       <svg
         width="22"
@@ -99,7 +99,7 @@ const interests = [
   },
   {
     label: "Travelling",
-    desc: "New cities, new perspectives — travel rewires how I think and approach problems.",
+    desc: "New cities, new perspectives travel rewires how I think and approach problems.",
     icon: (
       <svg
         width="22"
@@ -119,7 +119,7 @@ const interests = [
   },
   {
     label: "FinTech & Banking",
-    desc: "My career north star — building the systems that move money reliably at scale.",
+    desc: "My career north star building the systems that move money reliably at scale.",
     icon: (
       <svg
         width="22"
@@ -346,7 +346,7 @@ export default function About() {
                 It started with a game. I wanted to build one, so I picked up C
                 and C++, and that first taste of making a machine do exactly
                 what I told it to was addictive. As my curiosity deepened, my
-                interests shifted from games to real applications — Java, then
+                interests shifted from games to real applications Java, then
                 backend architecture, then databases and cloud infrastructure.
                 Every layer I pulled back revealed something more interesting
                 underneath.
@@ -363,7 +363,7 @@ export default function About() {
               </h3>
               <p className="text-[var(--muted-foreground)] leading-[1.8] text-[0.95rem]">
                 Backend is the foundation everything else relies on. I'm drawn
-                to it because it's where complexity actually lives — race
+                to it because it's where complexity actually lives race
                 conditions, transaction atomicity, distributed consistency,
                 schema design. I like thinking about systems before I touch
                 code: mapping the actors, designing the data flow,
@@ -382,7 +382,7 @@ export default function About() {
                 Where I'm Headed
               </h3>
               <p className="text-[var(--muted-foreground)] leading-[1.8] text-[0.95rem]">
-                My goal is to work on enterprise-level infrastructure — the kind
+                My goal is to work on enterprise-level infrastructure the kind
                 that doesn't get a second chance. Banking systems, stock market
                 platforms, payment gateways, financial data pipelines. Systems
                 where a bug isn't just a bug, it's a liability. That high-stakes

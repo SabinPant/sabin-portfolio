@@ -453,7 +453,7 @@ export default function Hero() {
               <span className="text-[var(--foreground)] font-medium">
                 I spend weeks before touching a keyboard
               </span>{" "}
-              — actors, schemas, edge cases, race conditions.{" "}
+              actors, schemas, edge cases, race conditions.{" "}
               <em className="not-italic text-[var(--primary)]">Then</em> I
               build.
             </motion.p>

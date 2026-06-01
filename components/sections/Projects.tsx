@@ -6,7 +6,7 @@ const projects = [
     title: "MediLife",
     subtitle: "Hospital Management System",
     description:
-      "A full-featured hospital management platform built under strict MVC architecture — covering patient registration, doctor approval workflows, appointment scheduling, billing, and medical records across three roles.",
+      "A full-featured hospital management platform built under strict MVC architecture covering patient registration, doctor approval workflows, appointment scheduling, billing, and medical records across three roles.",
     highlights: [
       "Dual booking flow: Quick Consult and Admin-assigned appointments with rejection handling",
       "BCrypt password hashing, session-based auth with configurable timeout and account lock/unlock",
