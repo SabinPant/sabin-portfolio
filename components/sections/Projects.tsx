@@ -20,7 +20,7 @@ const projects = [
       "Maven",
       "JSP/JSTL",
     ],
-    github: "https://github.com/Sabinpabt23",
+    github: "https://github.com/Sabinpabt23/Hospital-Management-System.git",
     color: "from-blue-500/10 to-cyan-500/10",
     border: "hover:border-blue-500/50",
     accent: "#3b82f6",
@@ -50,7 +50,7 @@ const projects = [
       "Tailwind",
       "Gemini AI",
     ],
-    github: "https://github.com/Sabinpabt23",
+    github: "https://github.com/Sabinpabt23/Finance-Manager.git",
     color: "from-violet-500/10 to-purple-500/10",
     border: "hover:border-violet-500/50",
     accent: "#8b5cf6",
@@ -59,6 +59,37 @@ const projects = [
       { label: "Express API", icon: "server", color: "#6366f1" },
       { label: "Prisma ORM", icon: "layers", color: "#a855f7" },
       { label: "PostgreSQL", icon: "database", color: "#7c3aed" },
+    ],
+  },
+  {
+    title: "NetGuard IDS",
+    subtitle: "Network Intrusion Detection & Smart Data Analysis",
+    description:
+      "An end-to-end data science pipeline applied to a real-world IDS network traffic dataset of 488K records and 80 features. Covers full data preparation, statistical analysis, correlation discovery, and hypothesis-driven classification of BENIGN vs. Infiltration traffic.",
+    highlights: [
+      "Full data wrangling pipeline: NaN removal, duplicate detection (28.56%), feature selection down to 16 key columns",
+      "Pearson correlation heatmap revealing 0.9951 overlap between Packet Length Mean & Average Packet Size — flagging redundant features before modelling",
+      "Welch's t-test on Flow Duration (p=0.4736) proving single-feature classification is insufficient, motivating multi-feature ML approach",
+    ],
+    stack: [
+      "Python",
+      "Pandas",
+      "NumPy",
+      "Matplotlib",
+      "Seaborn",
+      "SciPy",
+      "Jupyter",
+    ],
+    github:
+      "https://github.com/Sabinpabt23/Smart-Data---Network-Intrusion-Analysis-Python-.git",
+    color: "from-emerald-500/10 to-teal-500/10",
+    border: "hover:border-emerald-500/50",
+    accent: "#10b981",
+    arch: [
+      { label: "Raw IDS CSV", icon: "database", color: "#10b981" },
+      { label: "Pandas EDA", icon: "layers", color: "#14b8a6" },
+      { label: "Stats & Viz", icon: "chart", color: "#06b6d4" },
+      { label: "Hypothesis", icon: "flask", color: "#0ea5e9" },
     ],
   },
 ];
@@ -174,6 +205,38 @@ function ArchDiagram({ nodes, accent }: { nodes: ArchNode[]; accent: string }) {
                     <rect x="3" y="3" width="18" height="18" rx="2" />
                     <line x1="3" y1="9" x2="21" y2="9" />
                     <line x1="9" y1="21" x2="9" y2="9" />
+                  </svg>
+                )}
+                {node.icon === "chart" && (
+                  <svg
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke={node.color}
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="18" y1="20" x2="18" y2="10" />
+                    <line x1="12" y1="20" x2="12" y2="4" />
+                    <line x1="6" y1="20" x2="6" y2="14" />
+                    <line x1="2" y1="20" x2="22" y2="20" />
+                  </svg>
+                )}
+                {node.icon === "flask" && (
+                  <svg
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke={node.color}
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M9 3h6M9 3v7l-4 8a1 1 0 0 0 .9 1.5h12.2A1 1 0 0 0 19 18l-4-8V3" />
+                    <line x1="7.5" y1="15" x2="16.5" y2="15" />
                   </svg>
                 )}
               </div>
@@ -319,7 +382,6 @@ export default function Projects() {
                   ))}
                 </div>
 
-                {/* ✅ Fixed: added opening <a> tag and closing </a> tag */}
                 <div className="flex gap-3 pt-2">
                   <a
                     href={project.github}
