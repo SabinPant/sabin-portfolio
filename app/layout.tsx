@@ -15,10 +15,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Sabin Pant — Software Developer",
   description: "Full-Stack & Backend Developer. System Design First.",
+  icons: {
+    icon: "data:,",
+  },
   openGraph: {
     title: "Sabin Pant — Software Developer",
     description: "Full-Stack & Backend Developer. System Design First.",
-    url: "https://sabin-portfolio.vercel.app",
+    url: "https://sabin-portfolio-hazel.vercel.app/",
     siteName: "Sabin Pant Portfolio",
     locale: "en_US",
     type: "website",
