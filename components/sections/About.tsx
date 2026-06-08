@@ -3,9 +3,6 @@ import { motion, type Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-/* ─────────────────────────────────────────
-   Optimized CountUp — requestAnimationFrame + delay
-───────────────────────────────────────── */
 function CountUp({
   target,
   suffix = "",
