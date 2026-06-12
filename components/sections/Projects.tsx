@@ -33,14 +33,15 @@ const projects = [
   },
   {
     title: "Nebula Chat",
-    subtitle: "Real-Time Chat Application",
+    subtitle: "Production-Grade Real-Time Chat Application",
     description:
-      "A production-grade real-time chat platform with one-to-one and group messaging, featuring dual authentication flows (OTP-based passwordless login and Google OAuth 2.0) and JWT-authenticated WebSocket connections managed through a singleton connection manager supporting multi-device sessions.",
+      "A full-stack, production-deployed chat platform with passwordless OTP login, Google OAuth 2.0, one-to-one and group messaging, typing indicators, online presence, and unread badges — built end-to-end under strict clean architecture with zero layer bleeding, deployed across Vercel, Render, Neon, and Upstash.",
     highlights: [
-      "Socket.IO real-time delivery with typing indicators, read receipts, and unread counts — all synced across multi-device sessions via a singleton connection manager",
-      "3NF-normalized PostgreSQL schema (8 tables) with soft-delete participant tracking, self-referencing message replies, and composite PKs on junction tables",
-      "Clean architecture enforced end-to-end: controllers route only, services own business logic, repositories handle data access, with Zod validation at every API boundary",
-      "JWT token rotation with httpOnly refresh cookies, in-memory access tokens, and Docker Compose deployment (PostgreSQL, Redis, MailHog) with zero hardcoded config values",
+      "Dual auth flows: passwordless OTP email login and Google OAuth 2.0 with server-side audience validation — JWT access tokens (15 min, in-memory) paired with httpOnly 7-day refresh cookies and full token rotation on every refresh",
+      "Socket.IO real-time engine with typing indicators, online presence, unread badge counts, and read receipts — all synced across multi-device sessions via a JWT-authenticated singleton SocketManager",
+      "3NF-normalized PostgreSQL schema across 8 tables with composite PKs on junction tables, soft-delete participant tracking (leftAt), and Redis pub/sub for scalable event broadcasting",
+      "Three-layer clean architecture enforced end-to-end: controllers route only, services own all business logic, repositories handle all data access — with Zod schemas validating every API boundary and typed HttpException subclasses caught by a single global error middleware",
+      "Deployed stack: React + Vite on Vercel, Express + Socket.IO on Render, Neon serverless PostgreSQL, Upstash serverless Redis, and Resend for transactional email — with Docker Compose for local parity",
     ],
     stack: [
       "TypeScript",
@@ -51,16 +52,19 @@ const projects = [
       "PostgreSQL",
       "Redis",
       "React",
+      "Zustand",
       "Tailwind CSS",
       "Docker",
+      "Zod",
     ],
     github: "https://github.com/Sabinpabt23/nebula-chat",
+    demo: "https://nebula-chat-seven.vercel.app",
     color: "from-cyan-500/10 to-sky-500/10",
     border: "hover:border-cyan-500/50",
     accent: "#06b6d4",
     arch: [
       { label: "React UI", icon: "browser", color: "#06b6d4" },
-      { label: "Socket.IO", icon: "server", color: "#0ea5e9" },
+      { label: "Express + Socket.IO", icon: "server", color: "#0ea5e9" },
       { label: "TypeORM", icon: "layers", color: "#3b82f6" },
       { label: "PostgreSQL & Redis", icon: "database", color: "#6366f1" },
     ],
@@ -386,7 +390,7 @@ export default function Projects() {
                   ))}
                 </div>
 
-                <div className="flex gap-3 pt-2">
+                <div className="flex gap-3 pt-2 flex-wrap">
                   <a
                     href={project.github}
                     target="_blank"
@@ -403,6 +407,51 @@ export default function Projects() {
                     </svg>
                     View on GitHub
                   </a>
+                  {"demo" in project && project.demo && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200"
+                      style={{
+                        background: project.accent + "18",
+                        border: `1px solid ${project.accent}44`,
+                        color: project.accent,
+                      }}
+                      onMouseEnter={(e) => {
+                        (
+                          e.currentTarget as HTMLAnchorElement
+                        ).style.background = project.accent + "30";
+                        (
+                          e.currentTarget as HTMLAnchorElement
+                        ).style.borderColor = project.accent + "99";
+                      }}
+                      onMouseLeave={(e) => {
+                        (
+                          e.currentTarget as HTMLAnchorElement
+                        ).style.background = project.accent + "18";
+                        (
+                          e.currentTarget as HTMLAnchorElement
+                        ).style.borderColor = project.accent + "44";
+                      }}
+                    >
+                      <svg
+                        width="15"
+                        height="15"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                      </svg>
+                      Live Demo
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>
