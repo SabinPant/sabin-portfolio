@@ -449,13 +449,13 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.65 }}
               className="text-[var(--muted-foreground)] text-base lg:text-lg leading-relaxed max-w-md mb-8"
             >
-              Most devs jump straight to code.{" "}
+              An hour of planning saves a week of debugging. Before I even fire
+              up my IDE, I'm mapping out system flows, sketching schemas, and
+              predicting where things might break (hello, race conditions).{" "}
               <span className="text-[var(--foreground)] font-medium">
-                I spend weeks before touching a keyboard
-              </span>{" "}
-              actors, schemas, edge cases, race conditions.{" "}
-              <em className="not-italic text-[var(--primary)]">Then</em> I
-              build.
+                For me, the design phase isn’t just prep work—it’s the actual
+                work.
+              </span>
             </motion.p>
 
             {/* CTAs */}

@@ -1,6 +1,6 @@
 "use client";
-import { motion, type Variants } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { useEffect, useRef, useState, CSSProperties } from "react";
 import Image from "next/image";
 
 function CountUp({
@@ -15,7 +15,7 @@ function CountUp({
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);
-  const animationRef = useRef<number | undefined>(undefined); // Fix: Add undefined
+  const animationRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -67,9 +67,6 @@ function CountUp({
   );
 }
 
-/* ─────────────────────────────────────────
-   Data (unchanged)
-───────────────────────────────────────── */
 const stats = [
   { value: 2, suffix: "+", label: "Years Coding", accent: "#6366f1" },
   { value: 5, suffix: "x", label: "AWS Certified", accent: "#f59e0b" },
@@ -79,12 +76,12 @@ const stats = [
 
 const interests = [
   {
+    id: "gaming",
     label: "Gaming",
-    desc: "Where it all started gaming sparked my curiosity to understand how software really works.",
     icon: (
       <svg
-        width="22"
-        height="22"
+        width="20"
+        height="20"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -98,15 +95,63 @@ const interests = [
         <circle cx="18" cy="13" r="0.75" fill="currentColor" stroke="none" />
       </svg>
     ),
+    desc: "Gaming is what got me into coding in the first place. I started out wanting to build my own games, and that curiosity led me down the rabbit hole of programming. These days I still enjoy diving into a good game like Mobile Legends or sometimes PUBG, though I'm not as active as I used to be.",
     accent: "#6366f1",
+    funFact: "I once spent more time modding a game than actually playing it",
   },
   {
-    label: "Music",
-    desc: "Rhythm and patterns music keeps me grounded and sharpens pattern recognition.",
+    id: "food",
+    label: "Food & Culture",
     icon: (
       <svg
-        width="22"
-        height="22"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
+        <path d="M7 2v20" />
+        <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
+      </svg>
+    ),
+    desc: "I love trying out new dishes and experiencing different cultures. There's something special about how food brings people together and tells stories about where they come from. Exploring new cuisines is one of my favorite ways to understand the world beyond my own bubble.",
+    accent: "#f59e0b",
+    funFact: "I judge cities by their street food scene",
+  },
+  {
+    id: "travel",
+    label: "Travelling",
+    icon: (
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+      </svg>
+    ),
+    desc: "I love exploring new places, especially nature spots with lots of greenery and peaceful vibes. There's nothing better than discovering a quiet trail, a hidden waterfall, or just sitting somewhere with a beautiful view. Travel clears my mind and gives me fresh energy.",
+    accent: "#06b6d4",
+    funFact:
+      "I prefer getting a little lost, it's the best way to find hidden gems",
+  },
+  {
+    id: "music",
+    label: "Music",
+    icon: (
+      <svg
+        width="20"
+        height="20"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -119,96 +164,55 @@ const interests = [
         <circle cx="18" cy="16" r="3" />
       </svg>
     ),
+    desc: "Music is my constant companion, especially when I'm deep in code. Whether it's lo-fi beats for focus sessions or something energetic to kick off the day, I've always got something playing in the background. It sets the mood for everything I do.",
     accent: "#ec4899",
-  },
-  {
-    label: "Travelling",
-    desc: "New cities, new perspectives travel rewires how I think and approach problems.",
-    icon: (
-      <svg
-        width="22"
-        height="22"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="12" cy="12" r="10" />
-        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-      </svg>
-    ),
-    accent: "#06b6d4",
-  },
-  {
-    label: "FinTech & Banking",
-    desc: "My career north star building the systems that move money reliably at scale.",
-    icon: (
-      <svg
-        width="22"
-        height="22"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <rect x="3" y="9" width="18" height="12" rx="2" />
-        <path d="M3 9l9-6 9 6" />
-        <line x1="12" y1="12" x2="12" y2="21" />
-        <line x1="8" y1="12" x2="8" y2="21" />
-        <line x1="16" y1="12" x2="16" y2="21" />
-      </svg>
-    ),
-    accent: "#10b981",
+    funFact: "My playlists are organized by mood, not genre",
   },
 ];
 
-/* ─────────────────────────────────────────
-   Framer helpers
-───────────────────────────────────────── */
+/* Animation Variants */
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+  },
+};
+
+const childVariants: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: [0.215, 0.61, 0.355, 1.0] },
+  },
+};
+
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 16 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
-const fadeLeft: Variants = {
-  hidden: { opacity: 0, x: -20 },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
-const fadeRight: Variants = {
-  hidden: { opacity: 0, x: 20 },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
-/* ─────────────────────────────────────────
-   Component
-───────────────────────────────────────── */
 export default function About() {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [activeInterest, setActiveInterest] = useState(interests[0]);
 
   return (
-    <section id="about" className="py-28 relative overflow-hidden">
-      {/* ── ambient glows — GPU-friendly ── */}
+    <section
+      id="about"
+      className="py-28 relative overflow-hidden bg-[var(--background)]"
+    >
+      {/* Ambient glows */}
       <div
         aria-hidden
         className="pointer-events-none absolute top-[-80px] right-[-80px] w-[520px] h-[520px] will-change-transform"
         style={{
           background:
-            "radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%)",
         }}
       />
       <div
@@ -216,7 +220,7 @@ export default function About() {
         className="pointer-events-none absolute bottom-[-60px] left-[-60px] w-[380px] h-[380px] will-change-transform"
         style={{
           background:
-            "radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%)",
         }}
       />
 
@@ -226,7 +230,7 @@ export default function About() {
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-20"
         >
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--border)] bg-[var(--secondary)] text-[10px] text-[var(--primary)] mb-5 font-semibold tracking-[0.18em] uppercase">
@@ -242,60 +246,48 @@ export default function About() {
           </p>
         </motion.div>
 
-        {/* Main two-column grid */}
-        <div className="grid lg:grid-cols-[400px_1fr] gap-14 xl:gap-20 items-start mb-16">
-          {/* LEFT: image + stats */}
-          <motion.div
-            variants={fadeLeft}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-80px" }}
-            className="flex flex-col gap-6"
-          >
-            {/* Photo card - OPTIMIZED with Next.js Image */}
-            <div className="relative w-full max-w-[360px] mx-auto lg:mx-0">
+        {/* Main layout grid */}
+        <div className="grid lg:grid-cols-[360px_1fr] gap-14 xl:gap-20 items-start mb-20">
+          {/* LEFT: Image + Stats */}
+          <div className="lg:sticky lg:top-28 flex flex-col gap-6 self-start w-full max-w-[360px] mx-auto lg:mx-0">
+            {/* Photo card */}
+            <motion.div
+              initial={{ opacity: 0, x: -16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="relative w-full"
+            >
               <div
                 aria-hidden
-                className="absolute inset-0 translate-x-[10px] translate-y-[10px] rounded-2xl border border-[var(--primary)]/20 pointer-events-none"
+                className="absolute inset-0 translate-x-[10px] translate-y-[10px] rounded-2xl border border-[var(--primary)]/15 pointer-events-none"
               />
-
-              <div className="relative rounded-2xl overflow-hidden border border-[var(--border)] bg-[var(--card)]">
+              <div className="relative rounded-2xl overflow-hidden border border-[var(--border)] bg-[var(--card)] shadow-sm">
                 <div
                   aria-hidden
-                  className="absolute inset-0 z-10 pointer-events-none rounded-2xl bg-gradient-to-b from-transparent via-transparent to-[var(--background)]/55"
+                  className="absolute inset-0 z-10 pointer-events-none rounded-2xl bg-gradient-to-b from-transparent via-transparent to-[var(--background)]/60"
                 />
 
-                {/* Optimized Image */}
                 <div className="relative w-full aspect-[3/4]">
                   <Image
                     src="/images/sabinpanta.jpg"
                     alt="Sabin Pant"
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
-                    className="object-cover object-top"
-                    priority={false}
-                    loading="eager"
-                    quality={85}
+                    sizes="(max-width: 768px) 100vw, 360px"
+                    className="object-cover object-top transition-opacity duration-500 ease-out"
+                    priority={true}
+                    quality={90}
                     onLoad={() => setImageLoaded(true)}
-                    style={{
-                      opacity: imageLoaded ? 1 : 0,
-                      transition: "opacity 0.3s ease",
-                    }}
+                    style={{ opacity: imageLoaded ? 1 : 0 }}
                   />
                   {!imageLoaded && (
                     <div className="absolute inset-0 bg-[var(--secondary)] animate-pulse" />
                   )}
                 </div>
 
-                {/* availability badge */}
+                {/* Availability badge */}
                 <div className="absolute bottom-0 left-0 right-0 z-20 px-4 pb-4">
-                  <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-80px" }}
-                    transition={{ delay: 0.3, duration: 0.4 }}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[var(--background)]/70 backdrop-blur-md border border-[var(--border)]"
-                  >
+                  <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[var(--background)]/70 backdrop-blur-md border border-[var(--border)]">
                     <span className="relative flex-shrink-0">
                       <span className="block w-2 h-2 rounded-full bg-emerald-400" />
                       <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-60" />
@@ -308,165 +300,258 @@ export default function About() {
                         Full-time · Internship · Freelance
                       </p>
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Stats grid - OPTIMIZED with will-change */}
-            <div className="grid grid-cols-2 gap-3 w-full max-w-[360px] mx-auto lg:mx-0">
+            {/* Stats grid */}
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-40px" }}
+              className="grid grid-cols-2 gap-3 w-full"
+            >
               {stats.map((stat, i) => (
                 <motion.div
                   key={stat.label}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ delay: 0.08 + i * 0.07, duration: 0.4 }}
-                  className="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 hover:border-[var(--primary)]/40 hover:scale-[1.02] transition-all duration-200 cursor-default will-change-transform"
+                  variants={childVariants}
+                  style={{ "--local-accent": stat.accent } as CSSProperties}
+                  className="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 transition-all duration-300 ease-out cursor-default will-change-transform group hover:border-[var(--local-accent)]/40 hover:shadow-[0_4px_20px_-4px_rgba(var(--local-accent),0.1)] hover:-translate-y-0.5"
                 >
                   <div
-                    className="text-2xl font-bold mb-0.5 tabular-nums"
+                    className="text-2xl font-bold mb-0.5 tabular-nums transition-transform duration-300 group-hover:scale-105 origin-left"
                     style={{ color: stat.accent }}
                   >
-                    {/* Add delay based on index to stagger counter starts */}
                     <CountUp
                       target={stat.value}
                       suffix={stat.suffix}
-                      delay={200 + i * 100}
+                      delay={150 + i * 80}
                     />
                   </div>
-                  <div className="text-[11px] text-[var(--muted-foreground)] font-medium">
+                  <div className="text-[11px] text-[var(--muted-foreground)] font-medium tracking-wide">
                     {stat.label}
                   </div>
                 </motion.div>
               ))}
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
-          {/* RIGHT: story - unchanged */}
+          {/* RIGHT: Story blocks */}
           <motion.div
-            variants={fadeRight}
-            initial="hidden"
-            whileInView="show"
+            initial={{ opacity: 0, x: 16 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            className="flex flex-col gap-7 pt-1"
+            transition={{ duration: 0.5 }}
+            className="flex flex-col gap-8 pt-1"
           >
             <div className="flex flex-wrap gap-2">
               {[
-                "Full-Stack Intern @ Leaflet Digital",
+                "Full-Stack Developer",
                 "BSc Computing · London Met",
                 "5× AWS Certified",
               ].map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 rounded-full text-[11px] font-medium tracking-wide bg-[var(--secondary)] border border-[var(--border)] text-[var(--secondary-foreground)]"
+                  className="px-3 py-1 rounded-full text-[11px] font-medium tracking-wide bg-[var(--secondary)] border border-[var(--border)] text-[var(--secondary-foreground)] shadow-sm"
                 >
                   {tag}
                 </span>
               ))}
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-3">
               <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--primary)]">
                 Origin Story
               </h3>
-              <p className="text-[var(--muted-foreground)] leading-[1.8] text-[0.95rem]">
+              <p className="text-[var(--muted-foreground)] leading-[1.8] text-[0.95rem] font-normal text-justify lg:text-left">
                 It started with a game. I wanted to build one, so in high
-                school, I decided to pursue a Computer Science degree. I began
-                by picking up C and C++, and that first taste of building a
-                powerful foundation in programming paradigms and Data Structures
+                school, I decided to pursue a Computer Science path. I began by
+                picking up C and C++, and that first taste of building a
+                powerful foundation in programming paradigms, Data Structures,
                 and Algorithms (DSA) was addictive. As my curiosity deepened, my
                 interests naturally shifted from games to real-world
                 applications. Every layer I pulled back revealed something more
-                interesting underneath leading me from C/C++ to Java, then into
-                backend architecture, and ultimately to databases and cloud
-                infrastructure.
+                interesting underneath, leading me from foundational systems
+                into backend architecture, robust data pipelines, and scalable
+                cloud infrastructure.
               </p>
             </div>
 
-            <div className="h-px w-full bg-[var(--border)]" />
+            <div className="h-px w-full bg-[var(--border)] opacity-60" />
 
-            <div className="space-y-2">
+            <div className="space-y-3">
               <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--primary)]">
                 Why Backend & System Design
               </h3>
-              <p className="text-[var(--muted-foreground)] leading-[1.8] text-[0.95rem]">
-                Backend is the foundation everything else relies on. I'm drawn
-                to it because it's where complexity actually lives race
-                conditions, transaction atomicity, distributed consistency,
-                schema design. I like thinking about systems before I touch
-                code: mapping the actors, designing the data flow,
-                stress-testing the edge cases on paper first. The frontend
-                shines because the backend orchestrates it. I'm the one behind
-                the curtain making that happen.
+              <p className="text-[var(--muted-foreground)] leading-[1.8] text-[0.95rem] font-normal text-justify lg:text-left">
+                Backend is where the abstract logic maps neatly to true systemic
+                resilience. I'm drawn to it because that's where the
+                architectural complexity lives, handling race conditions,
+                ensuring transaction atomicity, designing robust relational
+                schemas, and preserving consistency across distributed layouts.
+                I live for mapping actor interactions, visualizing
+                cross-functional data flows, and stress-testing edge cases on
+                paper long before opening an IDE. The frontend captures
+                attention, but the backend earns trust.
               </p>
             </div>
 
-            <div className="h-px w-full bg-[var(--border)]" />
+            <div className="h-px w-full bg-[var(--border)] opacity-60" />
 
-            <div className="space-y-2">
+            <div className="space-y-3">
               <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--primary)]">
                 Where I'm Headed
               </h3>
-              <p className="text-[var(--muted-foreground)] leading-[1.8] text-[0.95rem]">
-                My goal is to work on enterprise-level infrastructure the kind
-                that doesn't get a second chance. Banking systems, stock market
-                platforms, payment gateways, financial data pipelines. Systems
-                where a bug isn't just a bug, it's a liability. That high-stakes
-                environment is exactly what drives me: designing for
-                correctness, reliability, and scale in domains where all three
-                are non-negotiable.
+              <p className="text-[var(--muted-foreground)] leading-[1.8] text-[0.95rem] font-normal text-justify lg:text-left">
+                My objective is to build enterprise-grade critical
+                infrastructure, the type that demands absolute zero-fault
+                execution: banking networks, high-reliability payment systems,
+                real-time transaction clearing environments, and low-latency
+                data pipelines. I operate best in environments where a bug isn't
+                just an interface flaw, but an engineering liability. That
+                high-stakes paradigm motivates me to design for predictable
+                consistency, reliable correctness, and structural scale.
               </p>
             </div>
           </motion.div>
         </div>
 
-        {/* Interests section */}
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5 }}
-          className="space-y-5"
-        >
-          <div className="flex items-center gap-4">
-            <div className="h-px flex-1 bg-[var(--border)]" />
-            <span className="text-[10px] font-semibold tracking-[0.18em] uppercase text-[var(--muted-foreground)]">
-              Interests
+        {/* Interests & Hobbies */}
+        <div className="mt-16 w-full">
+          {/* Section Header */}
+          <div className="flex items-center gap-3 mb-6">
+            <span className="text-[var(--primary)] font-semibold text-sm uppercase tracking-wider">
+              Outside the Code
             </span>
-            <div className="h-px flex-1 bg-[var(--border)]" />
+            <div className="flex-1 h-px bg-gradient-to-r from-[var(--border)] to-transparent" />
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {interests.map((item, i) => (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ delay: i * 0.07, duration: 0.4 }}
-                className="group bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 hover:border-[var(--primary)]/40 hover:-translate-y-1 transition-all duration-200 cursor-default will-change-transform"
-              >
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 transition-colors duration-250"
-                  style={{
-                    background: item.accent + "18",
-                    borderColor: item.accent + "35",
-                    color: item.accent,
-                  }}
+          {/* Interactive Interest Cards */}
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)]/40 backdrop-blur-md overflow-hidden flex flex-col md:flex-row shadow-2xl relative">
+            {/* Left Sidebar (Navigation) */}
+            <div className="w-full md:w-[280px] bg-[var(--background)]/50 border-b md:border-b-0 md:border-r border-[var(--border)] flex flex-row md:flex-col p-3 gap-2 overflow-x-auto hide-scrollbar z-20">
+              {interests.map((item) => {
+                const isActive = activeInterest.id === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveInterest(item)}
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-out flex-shrink-0 md:flex-shrink"
+                    style={{
+                      backgroundColor: isActive
+                        ? item.accent + "15"
+                        : "transparent",
+                      borderLeft: isActive
+                        ? `3px solid ${item.accent}`
+                        : "3px solid transparent",
+                    }}
+                  >
+                    <div
+                      className="transition-colors duration-300"
+                      style={{
+                        color: isActive
+                          ? item.accent
+                          : "var(--muted-foreground)",
+                      }}
+                    >
+                      {item.icon}
+                    </div>
+                    <span
+                      className="text-sm font-semibold tracking-wide whitespace-nowrap"
+                      style={{
+                        color: isActive
+                          ? "var(--foreground)"
+                          : "var(--muted-foreground)",
+                      }}
+                    >
+                      {item.label}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Right Content Display */}
+            <div className="flex-1 relative p-8 md:p-12 min-h-[380px] flex flex-col justify-center">
+              {/* Subtle background pattern */}
+              <div
+                className="absolute inset-0 pointer-events-none opacity-[0.08] dark:opacity-[0.04]"
+                style={{
+                  backgroundImage: `radial-gradient(circle, var(--border) 1px, transparent 1px)`,
+                  backgroundSize: "20px 20px",
+                }}
+              />
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeInterest.id}
+                  initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className="relative z-10 w-full max-w-2xl"
                 >
-                  {item.icon}
-                </div>
-                <h4 className="text-sm font-semibold text-[var(--foreground)] mb-1.5">
-                  {item.label}
-                </h4>
-                <p className="text-[11.5px] text-[var(--muted-foreground)] leading-relaxed">
-                  {item.desc}
-                </p>
-              </motion.div>
-            ))}
+                  {/* Icon & Label */}
+                  <div className="flex items-center gap-3 mb-6">
+                    <div style={{ color: activeInterest.accent }}>
+                      {activeInterest.icon}
+                    </div>
+                    <h3 className="text-3xl font-bold text-[var(--foreground)] tracking-tight">
+                      {activeInterest.label}
+                    </h3>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-[var(--muted-foreground)] text-[0.95rem] leading-relaxed mb-8">
+                    {activeInterest.desc}
+                  </p>
+
+                  {/* Fun Fact Bubble */}
+                  <div
+                    className="inline-flex items-start gap-3 px-5 py-4 rounded-2xl"
+                    style={{
+                      backgroundColor: activeInterest.accent + "12",
+                      border: `1px solid ${activeInterest.accent}25`,
+                    }}
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      style={{
+                        color: activeInterest.accent,
+                        marginTop: "2px",
+                        flexShrink: 0,
+                      }}
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                      <path d="M12 17h.01" />
+                    </svg>
+                    <div>
+                      <p
+                        className="text-xs font-semibold uppercase tracking-wider mb-1"
+                        style={{ color: activeInterest.accent }}
+                      >
+                        Fun Fact
+                      </p>
+                      <p className="text-sm text-[var(--foreground)] leading-relaxed">
+                        {activeInterest.funFact}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

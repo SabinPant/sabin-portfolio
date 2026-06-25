@@ -9,8 +9,8 @@ const experience = {
   company: "Leaflet Digital Solutions",
   monogram: "LD",
   location: "Kathmandu, Nepal",
-  period: "March 2026 — Present",
-  status: "current",
+  period: "March 2026 — June 2026",
+  status: "completed",
   color: "#6366f1",
   impact: [
     {
@@ -118,15 +118,10 @@ export default function Experience() {
             viewport={{ once: true }}
             className="relative pl-16 pb-14"
           >
-            {/* Timeline node — pulsing ring for current role */}
+            {/* Timeline node — solid, completed role */}
             <div className="absolute left-[18px] top-[18px] z-10">
-              {/* outer pulse ring */}
-              <span
-                className="absolute inset-0 rounded-full animate-ping opacity-30"
-                style={{ background: experience.color }}
-              />
               <div
-                className="relative w-[18px] h-[18px] rounded-full border-[3px] border-[var(--background)]"
+                className="w-[18px] h-[18px] rounded-full border-[3px] border-[var(--background)]"
                 style={{ background: experience.color }}
               />
             </div>
@@ -209,19 +204,24 @@ export default function Experience() {
                     >
                       {experience.period}
                     </span>
-                    {/* "Now" indicator */}
+                    {/* "Completed" indicator */}
                     <span
                       className="inline-flex items-center gap-1.5 text-[11px]
-                      font-medium text-emerald-400"
+                      font-medium text-[var(--muted-foreground)]"
                     >
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span
-                          className="animate-ping absolute inline-flex h-full w-full
-                          rounded-full bg-emerald-400 opacity-75"
-                        />
-                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
-                      </span>
-                      Currently here
+                      <svg
+                        width="11"
+                        height="11"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      Completed
                     </span>
                   </div>
                 </div>

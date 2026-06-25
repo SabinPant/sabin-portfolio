@@ -5,12 +5,12 @@ import { motion, type Variants } from "framer-motion";
    Data
 ───────────────────────────────────────── */
 const coreStack = [
+  "Java",
   "Node.js",
   "TypeScript",
   "PostgreSQL",
   "Next.js",
   "AWS",
-  "System Design",
 ];
 
 const skillGroups = [
