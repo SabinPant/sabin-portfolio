@@ -157,7 +157,7 @@ function AwsTile({
       transition={{ duration: 0.45, delay: index * 0.07 }}
       whileHover="hover"
       className="group relative flex items-center gap-4 rounded-xl
-        bg-[var(--card)] border border-[var(--border)]
+        bg-(--card) border border-(--border)
         px-4 py-4 overflow-hidden cursor-pointer
         transition-colors duration-300 hover:border-[#FF990066] flex-1"
     >
@@ -188,16 +188,16 @@ function AwsTile({
 
       <div className="relative z-10 flex-1 min-w-0">
         <p
-          className="text-sm font-semibold text-[var(--foreground)] leading-tight
+          className="text-sm font-semibold text-(--foreground) leading-tight
           group-hover:text-[#FF9900] transition-colors duration-200 truncate"
         >
           {cert.name}
         </p>
         {/* Description — was missing from tiles before */}
-        <p className="text-xs text-[var(--muted-foreground)] mt-0.5 leading-snug line-clamp-1">
+        <p className="text-xs text-(--muted-foreground) mt-0.5 leading-snug line-clamp-1">
           {cert.desc}
         </p>
-        <p className="text-xs text-[var(--muted-foreground)] mt-1.5 flex items-center gap-1.5">
+        <p className="text-xs text-(--muted-foreground) mt-1.5 flex items-center gap-1.5">
           <AwsIcon size={24} />
           <span>{cert.issuer}</span>
         </p>
@@ -238,7 +238,7 @@ function FeaturedAwsCard({ cert }: { cert: (typeof awsCerts)[0] }) {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
       whileHover="hover"
-      className="group relative rounded-2xl bg-[var(--card)] border border-[var(--border)]
+      className="group relative rounded-2xl bg-(--card) border border-(--border)
         p-8 overflow-hidden flex flex-col justify-between cursor-pointer
         hover:border-[#FF990066] transition-colors duration-300"
     >
@@ -292,12 +292,12 @@ function FeaturedAwsCard({ cert }: { cert: (typeof awsCerts)[0] }) {
         </div>
 
         <h3
-          className="text-xl font-bold text-[var(--foreground)] leading-tight mb-2
+          className="text-xl font-bold text-(--foreground) leading-tight mb-2
           group-hover:text-[#FF9900] transition-colors duration-300"
         >
           {cert.name}
         </h3>
-        <p className="text-sm text-[var(--muted-foreground)] leading-relaxed">
+        <p className="text-sm text-(--muted-foreground) leading-relaxed">
           {cert.desc}
         </p>
       </div>
@@ -305,12 +305,12 @@ function FeaturedAwsCard({ cert }: { cert: (typeof awsCerts)[0] }) {
       {/* Footer */}
       <div
         className="relative z-10 flex items-center justify-between mt-8 pt-5
-        border-t border-[var(--border)]"
+        border-t border-(--border)"
       >
         <div className="flex items-center gap-2">
           {/* Fixed: use AwsIcon with a proper size so the 's' never clips */}
           <AwsIcon size={32} />
-          <span className="text-xs font-semibold text-[var(--muted-foreground)]">
+          <span className="text-xs font-semibold text-(--muted-foreground)">
             {cert.issuer}
           </span>
         </div>
@@ -359,7 +359,7 @@ function SpecialtyCertCard({
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.12 }}
       whileHover="hover"
-      className="group relative rounded-2xl bg-[var(--card)] border border-[var(--border)]
+      className="group relative rounded-2xl bg-(--card) border border-(--border)
         p-6 overflow-hidden cursor-pointer transition-colors duration-300 flex flex-col gap-4"
       style={
         {
@@ -417,24 +417,24 @@ function SpecialtyCertCard({
 
       <div className="relative z-10">
         <h3
-          className="font-bold text-[var(--foreground)] leading-tight mb-1.5
+          className="font-bold text-(--foreground) leading-tight mb-1.5
             group-hover:transition-colors duration-200"
           style={{ "--hover-color": cert.accent } as React.CSSProperties}
         >
           {cert.name}
         </h3>
-        <p className="text-sm text-[var(--muted-foreground)] leading-relaxed">
+        <p className="text-sm text-(--muted-foreground) leading-relaxed">
           {cert.desc}
         </p>
       </div>
 
       <div
         className="relative z-10 flex items-center justify-between pt-4 mt-auto
-          border-t border-[var(--border)]"
+          border-t border-(--border)"
       >
         <div className="flex items-center gap-2">
           {icon}
-          <span className="text-xs font-semibold text-[var(--muted-foreground)]">
+          <span className="text-xs font-semibold text-(--muted-foreground)">
             {cert.issuer}
           </span>
         </div>
@@ -493,16 +493,16 @@ export default function Certifications() {
         >
           <span
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full
-              border border-[var(--border)] bg-[var(--secondary)]
-              text-[10px] text-[var(--primary)] mb-4 font-semibold tracking-[0.18em] uppercase"
+              border border-(--border) bg-(--secondary)
+              text-[10px] text-(--primary) mb-4 font-semibold tracking-[0.18em] uppercase"
           >
             Certifications
           </span>
           <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">
             Credentials I have{" "}
-            <span className="text-[var(--primary)]">earned.</span>
+            <span className="text-(--primary)">earned.</span>
           </h2>
-          <p className="mt-4 text-[var(--muted-foreground)] max-w-xl">
+          <p className="mt-4 text-(--muted-foreground) max-w-xl">
             Industry-recognised certifications across cloud architecture,
             machine learning, and product design — each linked to its verified
             credential.
@@ -530,7 +530,7 @@ export default function Certifications() {
               <AwsIcon size={30} />
               Academy Track · 5 Badges
             </div>
-            <div className="flex-1 h-px bg-[var(--border)]" />
+            <div className="flex-1 h-px bg-(--border)" />
           </motion.div>
 
           {/* Featured + tiles layout */}
@@ -566,7 +566,7 @@ export default function Certifications() {
             >
               Specialty
             </div>
-            <div className="flex-1 h-px bg-[var(--border)]" />
+            <div className="flex-1 h-px bg-(--border)" />
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

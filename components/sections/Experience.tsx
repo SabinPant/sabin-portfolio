@@ -86,13 +86,13 @@ export default function Experience() {
         >
           <span
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full
-            border border-[var(--border)] bg-[var(--secondary)]
-            text-[10px] text-[var(--primary)] mb-4 font-semibold tracking-[0.18em] uppercase"
+            border border-(--border) bg-(--secondary)
+            text-[10px] text-(--primary) mb-4 font-semibold tracking-[0.18em] uppercase"
           >
             Experience
           </span>
           <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">
-            Where I have <span className="text-[var(--primary)]">worked.</span>
+            Where I have <span className="text-(--primary)">worked.</span>
           </h2>
         </motion.div>
 
@@ -121,7 +121,7 @@ export default function Experience() {
             {/* Timeline node — solid, completed role */}
             <div className="absolute left-[18px] top-[18px] z-10">
               <div
-                className="w-[18px] h-[18px] rounded-full border-[3px] border-[var(--background)]"
+                className="w-[18px] h-[18px] rounded-full border-[3px] border-(--background)"
                 style={{ background: experience.color }}
               />
             </div>
@@ -135,8 +135,8 @@ export default function Experience() {
 
             {/* ── Card ── */}
             <div
-              className="bg-[var(--card)] border border-[var(--border)] rounded-2xl
-              overflow-hidden hover:border-[var(--primary)]/50 transition-colors duration-300"
+              className="bg-(--card) border border-(--border) rounded-2xl
+              overflow-hidden hover:border-(--primary)/50 transition-colors duration-300"
             >
               {/* Card header band */}
               <div
@@ -165,7 +165,7 @@ export default function Experience() {
 
                     <div>
                       {/* Role — primary visual weight */}
-                      <h3 className="text-lg font-bold text-[var(--foreground)] leading-tight">
+                      <h3 className="text-lg font-bold text-(--foreground) leading-tight">
                         {experience.role}
                       </h3>
                       {/* Company — accent coloured, secondary weight */}
@@ -176,7 +176,7 @@ export default function Experience() {
                         {experience.company}
                       </p>
                       {/* Location — muted, tertiary */}
-                      <p className="text-xs text-[var(--muted-foreground)] mt-0.5 flex items-center gap-1.5">
+                      <p className="text-xs text-(--muted-foreground) mt-0.5 flex items-center gap-1.5">
                         <svg
                           width="10"
                           height="10"
@@ -199,15 +199,15 @@ export default function Experience() {
                   <div className="flex flex-col items-start sm:items-end gap-1.5 flex-shrink-0">
                     <span
                       className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full
-                      bg-[var(--secondary)] border border-[var(--border)]
-                      text-xs text-[var(--secondary-foreground)] whitespace-nowrap"
+                      bg-(--secondary) border border-(--border)
+                      text-xs text-(--secondary-foreground) whitespace-nowrap"
                     >
                       {experience.period}
                     </span>
                     {/* "Completed" indicator */}
                     <span
                       className="inline-flex items-center gap-1.5 text-[11px]
-                      font-medium text-[var(--muted-foreground)]"
+                      font-medium text-(--muted-foreground)"
                     >
                       <svg
                         width="11"
@@ -227,7 +227,7 @@ export default function Experience() {
                 </div>
 
                 {/* Divider */}
-                <div className="h-px w-full bg-[var(--border)] mb-6" />
+                <div className="h-px w-full bg-(--border) mb-6" />
 
                 {/* Impact points — headline + detail structure */}
                 <ul className="space-y-5">
@@ -246,10 +246,10 @@ export default function Experience() {
                         style={{ background: experience.color }}
                       />
                       <div>
-                        <p className="text-sm font-semibold text-[var(--foreground)] leading-snug mb-0.5">
+                        <p className="text-sm font-semibold text-(--foreground) leading-snug mb-0.5">
                           {point.headline}
                         </p>
-                        <p className="text-sm text-[var(--muted-foreground)] leading-relaxed">
+                        <p className="text-sm text-(--muted-foreground) leading-relaxed">
                           {point.detail}
                         </p>
                       </div>
@@ -258,13 +258,13 @@ export default function Experience() {
                 </ul>
 
                 {/* Stack tags */}
-                <div className="flex flex-wrap gap-2 mt-7 pt-6 border-t border-[var(--border)]">
+                <div className="flex flex-wrap gap-2 mt-7 pt-6 border-t border-(--border)">
                   {experience.stack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-2.5 py-1 rounded-lg bg-[var(--secondary)] text-xs
-                        font-mono text-[var(--secondary-foreground)]
-                        border border-[var(--border)] hover:border-[var(--primary)]/40
+                      className="px-2.5 py-1 rounded-lg bg-(--secondary) text-xs
+                        font-mono text-(--secondary-foreground)
+                        border border-(--border) hover:border-(--primary)/40
                         transition-colors duration-150"
                     >
                       {tech}
@@ -288,14 +288,14 @@ export default function Experience() {
             {/* Timeline node — hollow, future */}
             <div
               className="absolute left-[18px] top-[18px] z-10 w-[18px] h-[18px] rounded-full
-                border-2 border-[var(--border)] bg-[var(--background)]"
+                border-2 border-(--border) bg-(--background)"
             />
 
             {/* CTA card */}
             <div
-              className="group bg-[var(--card)] border border-dashed border-[var(--border)]
+              className="group bg-(--card) border border-dashed border-(--border)
               rounded-2xl p-6 sm:p-8
-              hover:border-[var(--primary)]/40 hover:bg-[var(--primary)]/[0.03]
+              hover:border-(--primary)/40 hover:bg-(--primary)/[0.03]
               transition-all duration-300 cursor-default"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
@@ -303,8 +303,8 @@ export default function Experience() {
                   {/* Icon */}
                   <div
                     className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0
-                    bg-[var(--secondary)] border border-[var(--border)]
-                    text-[var(--primary)] group-hover:border-[var(--primary)]/40
+                    bg-(--secondary) border border-(--border)
+                    text-(--primary) group-hover:border-(--primary)/40
                     transition-colors duration-300"
                   >
                     <svg
@@ -323,10 +323,10 @@ export default function Experience() {
                   </div>
 
                   <div>
-                    <p className="text-sm font-bold text-[var(--foreground)]">
+                    <p className="text-sm font-bold text-(--foreground)">
                       Next chapter
                     </p>
-                    <p className="text-xs text-[var(--muted-foreground)] mt-0.5">
+                    <p className="text-xs text-(--muted-foreground) mt-0.5">
                       Open to full-time roles, internships &amp; freelance
                     </p>
                     {/* Interest areas */}
@@ -339,8 +339,8 @@ export default function Experience() {
                         <span
                           key={tag}
                           className="text-[10px] px-2 py-0.5 rounded-full
-                            bg-[var(--secondary)] border border-[var(--border)]
-                            text-[var(--muted-foreground)]"
+                            bg-(--secondary) border border-(--border)
+                            text-(--muted-foreground)"
                         >
                           {tag}
                         </span>
@@ -353,7 +353,7 @@ export default function Experience() {
                 <a
                   href="#contact"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg
-                    bg-[var(--primary)] text-white text-sm font-medium whitespace-nowrap
+                    bg-(--primary) text-white text-sm font-medium whitespace-nowrap
                     hover:opacity-90 active:scale-95 transition-all duration-150 flex-shrink-0"
                 >
                   Get in Touch

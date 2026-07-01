@@ -8,6 +8,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { ArrowDown, Download } from "lucide-react";
+import Image from "next/image";
 
 /* ─────────────── TYPEWRITER ─────────────── */
 function Typewriter({
@@ -45,7 +46,7 @@ function Typewriter({
                 <motion.span
                   animate={{ opacity: [1, 0, 1] }}
                   transition={{ duration: 1, repeat: Infinity }}
-                  className="inline-block w-2 h-4 bg-[var(--primary)]"
+                  className="inline-block w-2 h-4 bg-(--primary)"
                 />
               )}
             </motion.div>
@@ -232,13 +233,13 @@ function CounterBadge({
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay, duration: 0.5, type: "spring", stiffness: 200 }}
-      className="bg-[var(--card)] border border-[var(--border)] rounded-xl px-3 py-2 text-center backdrop-blur-sm"
+      className="bg-(--card) border border-(--border) rounded-xl px-3 py-2 text-center backdrop-blur-sm"
       style={{ minWidth: 72 }}
     >
-      <div className="text-lg font-bold text-[var(--primary)] leading-none">
+      <div className="text-lg font-bold text-(--primary) leading-none">
         {value}
       </div>
-      <div className="text-[10px] text-[var(--muted-foreground)] mt-0.5 font-medium uppercase tracking-wider">
+      <div className="text-[10px] text-(--muted-foreground) mt-0.5 font-medium uppercase tracking-wider">
         {label}
       </div>
     </motion.div>
@@ -370,7 +371,7 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="inline-flex items-center gap-2 self-start mb-8"
             >
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--border)] bg-[var(--secondary)]">
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-(--border) bg-(--secondary)">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
@@ -435,11 +436,11 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.55 }}
               className="flex items-center gap-3 mb-6"
             >
-              <div className="h-px w-8 bg-[var(--primary)]" />
-              <span className="text-base lg:text-lg font-mono text-[var(--secondary-foreground)] tracking-widest uppercase text-sm">
+              <div className="h-px w-8 bg-(--primary)" />
+              <span className="text-base lg:text-lg font-mono text-(--secondary-foreground) tracking-widest uppercase text-sm">
                 Full-Stack Engineer
               </span>
-              <div className="h-px flex-1 bg-[var(--border)]" />
+              <div className="h-px flex-1 bg-(--border)" />
             </motion.div>
 
             {/* Tagline */}
@@ -447,12 +448,12 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.65 }}
-              className="text-[var(--muted-foreground)] text-base lg:text-lg leading-relaxed max-w-md mb-8"
+              className="text-(--muted-foreground) text-base lg:text-lg leading-relaxed max-w-md mb-8"
             >
               An hour of planning saves a week of debugging. Before I even fire
-              up my IDE, I'm mapping out system flows, sketching schemas, and
-              predicting where things might break (hello, race conditions).{" "}
-              <span className="text-[var(--foreground)] font-medium">
+              up my IDE, I&apos;m mapping out system flows, sketching schemas,
+              and predicting where things might break (hello, race conditions).{" "}
+              <span className="text-(--foreground) font-medium">
                 For me, the design phase isn’t just prep work—it’s the actual
                 work.
               </span>
@@ -467,7 +468,7 @@ export default function Hero() {
             >
               <MagneticButton
                 href="#projects"
-                className="group relative px-7 py-3.5 rounded-xl bg-[var(--primary)] text-white font-semibold overflow-hidden cursor-pointer"
+                className="group relative px-7 py-3.5 rounded-xl bg-(--primary) text-white font-semibold overflow-hidden cursor-pointer"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   View my work
@@ -484,13 +485,13 @@ export default function Hero() {
               <MagneticButton
                 href="/SabinPant_CV.pdf"
                 download
-                className="group relative px-7 py-3.5 rounded-xl border border-[var(--border)] text-[var(--foreground)] font-semibold hover:border-[var(--primary)] transition-colors overflow-hidden cursor-pointer"
+                className="group relative px-7 py-3.5 rounded-xl border border-(--border) text-(--foreground) font-semibold hover:border-(--primary) transition-colors overflow-hidden cursor-pointer"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   <Download size={15} />
                   Download CV
                 </span>
-                <div className="absolute inset-0 bg-[var(--primary)]/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                <div className="absolute inset-0 bg-(--primary)/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
               </MagneticButton>
             </motion.div>
 
@@ -501,14 +502,14 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.9 }}
               className="flex items-center gap-3"
             >
-              <span className="text-xs text-[var(--muted-foreground)] font-mono uppercase tracking-wider">
+              <span className="text-xs text-(--muted-foreground) font-mono uppercase tracking-wider">
                 Find me on
               </span>
-              <div className="h-px w-4 bg-[var(--border)]" />
+              <div className="h-px w-4 bg-(--border)" />
               {[
                 {
                   label: "GitHub",
-                  href: "https://github.com/Sabinpabt23",
+                  href: "https://github.com/SabinPant",
                   icon: (
                     <svg
                       width="17"
@@ -540,7 +541,7 @@ export default function Hero() {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-[var(--muted-foreground)] hover:text-[var(--primary)] transition-colors text-sm font-mono"
+                  className="flex items-center gap-1.5 text-(--muted-foreground) hover:text-(--primary) transition-colors text-sm font-mono"
                 >
                   {s.icon}
                   <span className="text-xs">{s.label}</span>
@@ -597,10 +598,14 @@ export default function Hero() {
                       opacity: 0.5,
                     }}
                   />
-                  <img
+                  <Image
                     src="/images/sabinpant.jpg"
                     alt="Sabin Pant"
-                    className="relative z-10 w-full h-full object-cover border-4 border-[var(--secondary)]"
+                    fill
+                    sizes="320px"
+                    priority
+                    quality={85}
+                    className="z-10 object-cover border-4 border-(--secondary)"
                     style={{
                       borderRadius: "38% 62% 63% 37% / 41% 44% 56% 59%",
                     }}
@@ -622,7 +627,7 @@ export default function Hero() {
                 delay={1.8}
                 className="absolute top-[30%] -right-[60px] z-30"
               >
-                <div className="bg-[var(--card)] border border-[var(--border)] rounded-xl px-3 py-2 backdrop-blur-sm whitespace-nowrap">
+                <div className="bg-(--card) border border-(--border) rounded-xl px-3 py-2 backdrop-blur-sm whitespace-nowrap">
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
                     <span className="text-[11px] text-green-400 font-mono font-medium">
@@ -640,27 +645,27 @@ export default function Hero() {
               transition={{ duration: 0.7, delay: 0.95 }}
               className="flex gap-3 mt-6"
             >
-              <div className="bg-[var(--card)] border border-[var(--border)] rounded-xl px-4 py-3 text-center backdrop-blur-sm min-w-[80px]">
-                <div className="text-xl font-bold text-[var(--primary)] leading-none">
+              <div className="bg-(--card) border border-(--border) rounded-xl px-4 py-3 text-center backdrop-blur-sm min-w-[80px]">
+                <div className="text-xl font-bold text-(--primary) leading-none">
                   5×
                 </div>
-                <div className="text-[10px] text-[var(--muted-foreground)] mt-1 font-medium uppercase tracking-wider">
+                <div className="text-[10px] text-(--muted-foreground) mt-1 font-medium uppercase tracking-wider">
                   AWS Certs
                 </div>
               </div>
-              <div className="bg-[var(--card)] border border-[var(--border)] rounded-xl px-4 py-3 text-center backdrop-blur-sm min-w-[80px]">
-                <div className="text-xl font-bold text-[var(--primary)] leading-none">
+              <div className="bg-(--card) border border-(--border) rounded-xl px-4 py-3 text-center backdrop-blur-sm min-w-[80px]">
+                <div className="text-xl font-bold text-(--primary) leading-none">
                   3+
                 </div>
-                <div className="text-[10px] text-[var(--muted-foreground)] mt-1 font-medium uppercase tracking-wider">
+                <div className="text-[10px] text-(--muted-foreground) mt-1 font-medium uppercase tracking-wider">
                   Projects
                 </div>
               </div>
-              <div className="bg-[var(--card)] border border-[var(--border)] rounded-xl px-4 py-3 text-center backdrop-blur-sm min-w-[80px]">
-                <div className="text-xl font-bold text-[var(--primary)] leading-none">
+              <div className="bg-(--card) border border-(--border) rounded-xl px-4 py-3 text-center backdrop-blur-sm min-w-[80px]">
+                <div className="text-xl font-bold text-(--primary) leading-none">
                   1st
                 </div>
-                <div className="text-[10px] text-[var(--muted-foreground)] mt-1 font-medium uppercase tracking-wider">
+                <div className="text-[10px] text-(--muted-foreground) mt-1 font-medium uppercase tracking-wider">
                   Architecture
                 </div>
               </div>
@@ -671,15 +676,15 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.8 }}
-              className="relative z-10 mt-6 rounded-xl border border-[var(--border)] bg-[var(--card)] overflow-hidden w-full max-w-[380px]"
+              className="relative z-10 mt-6 rounded-xl border border-(--border) bg-(--card) overflow-hidden w-full max-w-[380px]"
               style={{ boxShadow: "0 0 40px rgba(99,102,241,0.06)" }}
             >
               {/* Terminal title bar */}
-              <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[var(--border)] bg-[var(--secondary)]/50">
+              <div className="flex items-center gap-2 px-4 py-2.5 border-b border-(--border) bg-(--secondary)/50">
                 <div className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
                 <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
                 <div className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
-                <span className="ml-2 text-xs text-[var(--muted-foreground)] font-mono">
+                <span className="ml-2 text-xs text-(--muted-foreground) font-mono">
                   sabin@portfolio: ~
                 </span>
               </div>
@@ -696,7 +701,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[var(--muted-foreground)] z-20"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-(--muted-foreground) z-20"
       >
         <span className="text-[10px] tracking-[0.3em] uppercase font-mono">
           Scroll
@@ -704,9 +709,9 @@ export default function Hero() {
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-          className="w-5 h-8 rounded-full border border-[var(--border)] flex items-start justify-center pt-1.5"
+          className="w-5 h-8 rounded-full border border-(--border) flex items-start justify-center pt-1.5"
         >
-          <div className="w-1 h-2 rounded-full bg-[var(--primary)] opacity-70" />
+          <div className="w-1 h-2 rounded-full bg-(--primary) opacity-70" />
         </motion.div>
       </motion.div>
     </section>

@@ -152,14 +152,14 @@ export default function Contact() {
   }
 
   const inputClass = (field: string) =>
-    `w-full px-4 py-3 rounded-lg bg-[var(--secondary)] border text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] focus:outline-none transition-colors ${
+    `w-full px-4 py-3 rounded-lg bg-(--secondary) border text-sm text-(--foreground) placeholder:text-(--muted-foreground) focus:outline-none transition-colors ${
       touched[field] && errors[field]
         ? "border-red-500 focus:border-red-500"
-        : "border-[var(--border)] focus:border-[var(--primary)]"
+        : "border-(--border) focus:border-(--primary)"
     }`;
 
   return (
-    <section id="contact" className="py-32 relative bg-[var(--secondary)]/20">
+    <section id="contact" className="py-32 relative bg-(--secondary)/20">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -167,13 +167,13 @@ export default function Contact() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--border)] bg-[var(--secondary)] text-xs text-[var(--primary)] mb-4 font-medium tracking-widest uppercase">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-(--border) bg-(--secondary) text-xs text-(--primary) mb-4 font-medium tracking-widest uppercase">
             Contact
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold">
-            Let us <span className="text-[var(--primary)]">connect.</span>
+            Let us <span className="text-(--primary)">connect.</span>
           </h2>
-          <p className="text-[var(--muted-foreground)] mt-4 max-w-lg mx-auto">
+          <p className="text-(--muted-foreground) mt-4 max-w-lg mx-auto">
             Whether you have a project in mind, a job opportunity, or just want
             to say hi my inbox is always open.
           </p>
@@ -190,7 +190,7 @@ export default function Contact() {
           >
             <div>
               <h3 className="text-xl font-semibold mb-2">Get in touch</h3>
-              <p className="text-[var(--muted-foreground)] leading-relaxed">
+              <p className="text-(--muted-foreground) leading-relaxed">
                 I am currently open to internship and full-time opportunities.
                 If you have a role that matches my profile or want to
                 collaborate on something exciting, reach out!
@@ -221,16 +221,16 @@ export default function Contact() {
                 <a
                   key={item.label}
                   href={item.href}
-                  className="flex items-center gap-4 p-4 rounded-xl bg-[var(--card)] border border-[var(--border)] hover:border-[var(--primary)] transition-all group"
+                  className="flex items-center gap-4 p-4 rounded-xl bg-(--card) border border-(--border) hover:border-(--primary) transition-all group"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-[var(--secondary)] flex items-center justify-center text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-white transition-all">
+                  <div className="w-10 h-10 rounded-lg bg-(--secondary) flex items-center justify-center text-(--primary) group-hover:bg-(--primary) group-hover:text-white transition-all">
                     <item.icon size={18} />
                   </div>
                   <div>
-                    <div className="text-xs text-[var(--muted-foreground)]">
+                    <div className="text-xs text-(--muted-foreground)">
                       {item.label}
                     </div>
-                    <div className="text-sm font-medium text-[var(--foreground)]">
+                    <div className="text-sm font-medium text-(--foreground)">
                       {item.value}
                     </div>
                   </div>
@@ -240,10 +240,10 @@ export default function Contact() {
 
             <div className="flex gap-3">
               <a
-                href="https://github.com/Sabinpabt23"
+                href="https://github.com/SabinPant"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-3 rounded-xl border border-[var(--border)] text-center text-sm text-[var(--secondary-foreground)] hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all"
+                className="flex-1 py-3 rounded-xl border border-(--border) text-center text-sm text-(--secondary-foreground) hover:border-(--primary) hover:text-(--primary) transition-all"
               >
                 GitHub
               </a>
@@ -251,7 +251,7 @@ export default function Contact() {
                 href="https://linkedin.com/in/sabinpant"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-3 rounded-xl border border-[var(--border)] text-center text-sm text-[var(--secondary-foreground)] hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all"
+                className="flex-1 py-3 rounded-xl border border-(--border) text-center text-sm text-(--secondary-foreground) hover:border-(--primary) hover:text-(--primary) transition-all"
               >
                 LinkedIn
               </a>
@@ -268,11 +268,11 @@ export default function Contact() {
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="space-y-4 bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6"
+              className="space-y-4 bg-(--card) border border-(--border) rounded-2xl p-6"
             >
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs text-[var(--muted-foreground)] mb-1.5 block">
+                  <label className="text-xs text-(--muted-foreground) mb-1.5 block">
                     Name
                   </label>
                   <input
@@ -289,7 +289,7 @@ export default function Contact() {
                   )}
                 </div>
                 <div>
-                  <label className="text-xs text-[var(--muted-foreground)] mb-1.5 block">
+                  <label className="text-xs text-(--muted-foreground) mb-1.5 block">
                     Email
                   </label>
                   <input
@@ -309,7 +309,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="text-xs text-[var(--muted-foreground)] mb-1.5 block">
+                <label className="text-xs text-(--muted-foreground) mb-1.5 block">
                   Subject
                 </label>
                 <input
@@ -328,11 +328,11 @@ export default function Contact() {
 
               <div>
                 <div className="flex justify-between mb-1.5">
-                  <label className="text-xs text-[var(--muted-foreground)]">
+                  <label className="text-xs text-(--muted-foreground)">
                     Message
                   </label>
                   <span
-                    className="text-xs text-[var(--muted-foreground)]"
+                    className="text-xs text-(--muted-foreground)"
                     id="msg-count"
                   />
                 </div>
@@ -359,7 +359,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 rounded-lg bg-[var(--primary)] text-white font-medium flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50"
+                className="w-full py-3 rounded-lg bg-(--primary) text-white font-medium flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50"
               >
                 {loading ? (
                   "Sending..."

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Code2 } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -116,7 +116,7 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-[#0a0a0f]/90 backdrop-blur-md border-b border-[var(--border)]"
+            ? "bg-[#0a0a0f]/90 backdrop-blur-md border-b border-(--border)"
             : "bg-transparent"
         }`}
       >
@@ -132,11 +132,13 @@ export default function Navbar() {
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >
-            <div className="w-8 h-8 rounded-lg bg-[var(--primary)] flex items-center justify-center">
-              <Code2 size={16} className="text-white" />
+            <div className="w-8 h-8 rounded-lg bg-(--primary) flex items-center justify-center">
+              <span className="text-white text-xs font-bold tracking-tight">
+                SP
+              </span>
             </div>
-            <span className="text-[var(--foreground)]">
-              Sabin<span className="text-[var(--primary)]">.</span>
+            <span className="text-(--foreground)">
+              Sabin<span className="text-(--primary)">.</span>
             </span>
           </motion.a>
 
@@ -154,10 +156,10 @@ export default function Navbar() {
                     e.preventDefault();
                     handleLinkClick(link.href);
                   }}
-                  className="text-sm text-[var(--secondary-foreground)] hover:text-[var(--foreground)] transition-colors duration-200 relative group cursor-pointer"
+                  className="text-sm text-(--secondary-foreground) hover:text-(--foreground) transition-colors duration-200 relative group cursor-pointer"
                 >
                   {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-[var(--primary)] transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-(--primary) transition-all duration-300 group-hover:w-full" />
                 </a>
               </li>
             ))}
@@ -165,7 +167,7 @@ export default function Navbar() {
 
           <button
             ref={buttonRef}
-            className="md:hidden text-[var(--foreground)] z-50 p-2 rounded-lg hover:bg-[var(--secondary)] transition-colors active:scale-95 transition-transform"
+            className="md:hidden text-(--foreground) z-50 p-2 rounded-lg hover:bg-(--secondary) transition-colors active:scale-95 transition-transform"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
@@ -194,7 +196,7 @@ export default function Navbar() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}
               transition={{ type: "tween", duration: 0.3 }}
-              className="fixed md:hidden top-0 right-0 bottom-0 w-full max-w-sm bg-[#0a0a0f]/95 backdrop-blur-lg border-l border-[var(--border)] z-40 shadow-2xl"
+              className="fixed md:hidden top-0 right-0 bottom-0 w-full max-w-sm bg-[#0a0a0f]/95 backdrop-blur-lg border-l border-(--border) z-40 shadow-2xl"
               style={{ top: 0 }}
             >
               <div className="flex flex-col h-full pt-20 px-6">
@@ -212,7 +214,7 @@ export default function Navbar() {
                           e.preventDefault();
                           handleLinkClick(link.href);
                         }}
-                        className="block text-xl font-medium text-[var(--secondary-foreground)] hover:text-[var(--primary)] transition-colors py-3 active:scale-95 transition-transform cursor-pointer"
+                        className="block text-xl font-medium text-(--secondary-foreground) hover:text-(--primary) transition-colors py-3 active:scale-95 transition-transform cursor-pointer"
                       >
                         {link.label}
                       </a>

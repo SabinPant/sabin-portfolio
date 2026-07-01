@@ -204,7 +204,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="py-28 relative overflow-hidden bg-[var(--background)]"
+      className="py-28 relative overflow-hidden bg-(--background)"
     >
       {/* Ambient glows */}
       <div
@@ -233,14 +233,14 @@ export default function About() {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-20"
         >
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--border)] bg-[var(--secondary)] text-[10px] text-[var(--primary)] mb-5 font-semibold tracking-[0.18em] uppercase">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-(--border) bg-(--secondary) text-[10px] text-(--primary) mb-5 font-semibold tracking-[0.18em] uppercase">
             About Me
           </span>
           <h2 className="text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
             The developer behind{" "}
-            <span className="text-[var(--primary)]">the architecture.</span>
+            <span className="text-(--primary)">the architecture.</span>
           </h2>
-          <p className="mt-4 text-[var(--muted-foreground)] max-w-xl mx-auto text-[0.95rem] leading-relaxed">
+          <p className="mt-4 text-(--muted-foreground) max-w-xl mx-auto text-[0.95rem] leading-relaxed">
             Backend-first. System-design obsessed. Built to handle what happens
             at scale.
           </p>
@@ -260,12 +260,12 @@ export default function About() {
             >
               <div
                 aria-hidden
-                className="absolute inset-0 translate-x-[10px] translate-y-[10px] rounded-2xl border border-[var(--primary)]/15 pointer-events-none"
+                className="absolute inset-0 translate-x-[10px] translate-y-[10px] rounded-2xl border border-(--primary)/15 pointer-events-none"
               />
-              <div className="relative rounded-2xl overflow-hidden border border-[var(--border)] bg-[var(--card)] shadow-sm">
+              <div className="relative rounded-2xl overflow-hidden border border-(--border) bg-(--card) shadow-sm">
                 <div
                   aria-hidden
-                  className="absolute inset-0 z-10 pointer-events-none rounded-2xl bg-gradient-to-b from-transparent via-transparent to-[var(--background)]/60"
+                  className="absolute inset-0 z-10 pointer-events-none rounded-2xl bg-gradient-to-b from-transparent via-transparent to-(--background)/60"
                 />
 
                 <div className="relative w-full aspect-[3/4]">
@@ -276,27 +276,27 @@ export default function About() {
                     sizes="(max-width: 768px) 100vw, 360px"
                     className="object-cover object-top transition-opacity duration-500 ease-out"
                     priority={true}
-                    quality={90}
+                    quality={85}
                     onLoad={() => setImageLoaded(true)}
                     style={{ opacity: imageLoaded ? 1 : 0 }}
                   />
                   {!imageLoaded && (
-                    <div className="absolute inset-0 bg-[var(--secondary)] animate-pulse" />
+                    <div className="absolute inset-0 bg-(--secondary) animate-pulse" />
                   )}
                 </div>
 
                 {/* Availability badge */}
                 <div className="absolute bottom-0 left-0 right-0 z-20 px-4 pb-4">
-                  <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[var(--background)]/70 backdrop-blur-md border border-[var(--border)]">
+                  <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-(--background)/70 backdrop-blur-md border border-(--border)">
                     <span className="relative flex-shrink-0">
                       <span className="block w-2 h-2 rounded-full bg-emerald-400" />
                       <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-60" />
                     </span>
                     <div>
-                      <p className="text-xs font-semibold text-[var(--foreground)] leading-snug">
+                      <p className="text-xs font-semibold text-(--foreground) leading-snug">
                         Available for opportunities
                       </p>
-                      <p className="text-[11px] text-[var(--muted-foreground)]">
+                      <p className="text-[11px] text-(--muted-foreground)">
                         Full-time · Internship · Freelance
                       </p>
                     </div>
@@ -318,7 +318,7 @@ export default function About() {
                   key={stat.label}
                   variants={childVariants}
                   style={{ "--local-accent": stat.accent } as CSSProperties}
-                  className="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 transition-all duration-300 ease-out cursor-default will-change-transform group hover:border-[var(--local-accent)]/40 hover:shadow-[0_4px_20px_-4px_rgba(var(--local-accent),0.1)] hover:-translate-y-0.5"
+                  className="bg-(--card) border border-(--border) rounded-xl p-4 transition-all duration-300 ease-out cursor-default will-change-transform group hover:border-(--local-accent)/40 hover:shadow-[0_4px_20px_-4px_rgba(var(--local-accent),0.1)] hover:-translate-y-0.5"
                 >
                   <div
                     className="text-2xl font-bold mb-0.5 tabular-nums transition-transform duration-300 group-hover:scale-105 origin-left"
@@ -330,7 +330,7 @@ export default function About() {
                       delay={150 + i * 80}
                     />
                   </div>
-                  <div className="text-[11px] text-[var(--muted-foreground)] font-medium tracking-wide">
+                  <div className="text-[11px] text-(--muted-foreground) font-medium tracking-wide">
                     {stat.label}
                   </div>
                 </motion.div>
@@ -354,7 +354,7 @@ export default function About() {
               ].map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 rounded-full text-[11px] font-medium tracking-wide bg-[var(--secondary)] border border-[var(--border)] text-[var(--secondary-foreground)] shadow-sm"
+                  className="px-3 py-1 rounded-full text-[11px] font-medium tracking-wide bg-(--secondary) border border-(--border) text-(--secondary-foreground) shadow-sm"
                 >
                   {tag}
                 </span>
@@ -362,10 +362,10 @@ export default function About() {
             </div>
 
             <div className="space-y-3">
-              <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--primary)]">
+              <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-(--primary)">
                 Origin Story
               </h3>
-              <p className="text-[var(--muted-foreground)] leading-[1.8] text-[0.95rem] font-normal text-justify lg:text-left">
+              <p className="text-(--muted-foreground) leading-[1.8] text-[0.95rem] font-normal text-justify lg:text-left">
                 It started with a game. I wanted to build one, so in high
                 school, I decided to pursue a Computer Science path. I began by
                 picking up C and C++, and that first taste of building a
@@ -379,15 +379,15 @@ export default function About() {
               </p>
             </div>
 
-            <div className="h-px w-full bg-[var(--border)] opacity-60" />
+            <div className="h-px w-full bg-(--border) opacity-60" />
 
             <div className="space-y-3">
-              <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--primary)]">
+              <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-(--primary)">
                 Why Backend & System Design
               </h3>
-              <p className="text-[var(--muted-foreground)] leading-[1.8] text-[0.95rem] font-normal text-justify lg:text-left">
+              <p className="text-(--muted-foreground) leading-[1.8] text-[0.95rem] font-normal text-justify lg:text-left">
                 Backend is where the abstract logic maps neatly to true systemic
-                resilience. I'm drawn to it because that's where the
+                resilience. I&apos;m drawn to it because that&apos;s where the
                 architectural complexity lives, handling race conditions,
                 ensuring transaction atomicity, designing robust relational
                 schemas, and preserving consistency across distributed layouts.
@@ -398,20 +398,20 @@ export default function About() {
               </p>
             </div>
 
-            <div className="h-px w-full bg-[var(--border)] opacity-60" />
+            <div className="h-px w-full bg-(--border) opacity-60" />
 
             <div className="space-y-3">
-              <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--primary)]">
-                Where I'm Headed
+              <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-(--primary)">
+                Where I&apos;m Headed
               </h3>
-              <p className="text-[var(--muted-foreground)] leading-[1.8] text-[0.95rem] font-normal text-justify lg:text-left">
+              <p className="text-(--muted-foreground) leading-[1.8] text-[0.95rem] font-normal text-justify lg:text-left">
                 My objective is to build enterprise-grade critical
                 infrastructure, the type that demands absolute zero-fault
                 execution: banking networks, high-reliability payment systems,
                 real-time transaction clearing environments, and low-latency
-                data pipelines. I operate best in environments where a bug isn't
-                just an interface flaw, but an engineering liability. That
-                high-stakes paradigm motivates me to design for predictable
+                data pipelines. I operate best in environments where a bug
+                isn&apos;t just an interface flaw, but an engineering liability.
+                That high-stakes paradigm motivates me to design for predictable
                 consistency, reliable correctness, and structural scale.
               </p>
             </div>
@@ -422,16 +422,16 @@ export default function About() {
         <div className="mt-16 w-full">
           {/* Section Header */}
           <div className="flex items-center gap-3 mb-6">
-            <span className="text-[var(--primary)] font-semibold text-sm uppercase tracking-wider">
+            <span className="text-(--primary) font-semibold text-sm uppercase tracking-wider">
               Outside the Code
             </span>
-            <div className="flex-1 h-px bg-gradient-to-r from-[var(--border)] to-transparent" />
+            <div className="flex-1 h-px bg-gradient-to-r from-(--border) to-transparent" />
           </div>
 
           {/* Interactive Interest Cards */}
-          <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)]/40 backdrop-blur-md overflow-hidden flex flex-col md:flex-row shadow-2xl relative">
+          <div className="rounded-2xl border border-(--border) bg-(--card)/40 backdrop-blur-md overflow-hidden flex flex-col md:flex-row shadow-2xl relative">
             {/* Left Sidebar (Navigation) */}
-            <div className="w-full md:w-[280px] bg-[var(--background)]/50 border-b md:border-b-0 md:border-r border-[var(--border)] flex flex-row md:flex-col p-3 gap-2 overflow-x-auto hide-scrollbar z-20">
+            <div className="w-full md:w-[280px] bg-(--background)/50 border-b md:border-b-0 md:border-r border-(--border) flex flex-row md:flex-col p-3 gap-2 overflow-x-auto hide-scrollbar z-20">
               {interests.map((item) => {
                 const isActive = activeInterest.id === item.id;
                 return (
@@ -498,13 +498,13 @@ export default function About() {
                     <div style={{ color: activeInterest.accent }}>
                       {activeInterest.icon}
                     </div>
-                    <h3 className="text-3xl font-bold text-[var(--foreground)] tracking-tight">
+                    <h3 className="text-3xl font-bold text-(--foreground) tracking-tight">
                       {activeInterest.label}
                     </h3>
                   </div>
 
                   {/* Description */}
-                  <p className="text-[var(--muted-foreground)] text-[0.95rem] leading-relaxed mb-8">
+                  <p className="text-(--muted-foreground) text-[0.95rem] leading-relaxed mb-8">
                     {activeInterest.desc}
                   </p>
 
@@ -542,7 +542,7 @@ export default function About() {
                       >
                         Fun Fact
                       </p>
-                      <p className="text-sm text-[var(--foreground)] leading-relaxed">
+                      <p className="text-sm text-(--foreground) leading-relaxed">
                         {activeInterest.funFact}
                       </p>
                     </div>

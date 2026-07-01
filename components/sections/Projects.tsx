@@ -20,7 +20,7 @@ const projects = [
       "Maven",
       "JSP/JSTL",
     ],
-    github: "https://github.com/Sabinpabt23/Hospital-Management-System.git",
+    github: "https://github.com/SabinPant/Hospital-Management-System.git",
     color: "from-blue-500/10 to-cyan-500/10",
     border: "hover:border-blue-500/50",
     accent: "#3b82f6",
@@ -57,7 +57,7 @@ const projects = [
       "Docker",
       "Zod",
     ],
-    github: "https://github.com/Sabinpabt23/nebula-chat",
+    github: "https://github.com/SabinPant/nebula-chat",
     demo: "https://nebula-chat-seven.vercel.app",
     color: "from-cyan-500/10 to-sky-500/10",
     border: "hover:border-cyan-500/50",
@@ -89,7 +89,7 @@ const projects = [
       "Jupyter",
     ],
     github:
-      "https://github.com/Sabinpabt23/Smart-Data---Network-Intrusion-Analysis-Python-.git",
+      "https://github.com/SabinPant/Smart-Data---Network-Intrusion-Analysis-Python-.git",
     color: "from-emerald-500/10 to-teal-500/10",
     border: "hover:border-emerald-500/50",
     accent: "#10b981",
@@ -248,7 +248,7 @@ function ArchDiagram({ nodes, accent }: { nodes: ArchNode[]; accent: string }) {
                   </svg>
                 )}
               </div>
-              <span className="text-xs text-[var(--muted-foreground)] font-medium text-center leading-tight">
+              <span className="text-xs text-(--muted-foreground) font-medium text-center leading-tight">
                 {node.label}
               </span>
             </motion.div>
@@ -285,7 +285,7 @@ function ArchDiagram({ nodes, accent }: { nodes: ArchNode[]; accent: string }) {
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-32 relative bg-[var(--secondary)]/20">
+    <section id="projects" className="py-32 relative bg-(--secondary)/20">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -293,13 +293,13 @@ export default function Projects() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--border)] bg-[var(--secondary)] text-xs text-[var(--primary)] mb-4 font-medium tracking-widest uppercase">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-(--border) bg-(--secondary) text-xs text-(--primary) mb-4 font-medium tracking-widest uppercase">
             Projects
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold">
-            Things I have <span className="text-[var(--primary)]">built.</span>
+            Things I have <span className="text-(--primary)">built.</span>
           </h2>
-          <p className="text-[var(--muted-foreground)] mt-4 max-w-lg mx-auto">
+          <p className="text-(--muted-foreground) mt-4 max-w-lg mx-auto">
             Every project starts with architecture. Here is what that looks like
             in practice.
           </p>
@@ -318,15 +318,15 @@ export default function Projects() {
               {/* Architecture visual */}
               <div className="flex-1 w-full">
                 <div
-                  className={`relative rounded-2xl border border-[var(--border)] bg-gradient-to-br ${project.color} ${project.border} transition-all duration-500 overflow-hidden`}
+                  className={`relative rounded-2xl border border-(--border) bg-gradient-to-br ${project.color} ${project.border} transition-all duration-500 overflow-hidden`}
                   style={{ minHeight: "280px" }}
                 >
                   {/* Top bar */}
-                  <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border)]/50">
+                  <div className="flex items-center gap-2 px-4 py-3 border-b border-(--border)/50">
                     <div className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
                     <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
                     <div className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
-                    <span className="ml-2 text-xs text-[var(--muted-foreground)] font-mono">
+                    <span className="ml-2 text-xs text-(--muted-foreground) font-mono">
                       {project.title.toLowerCase()}/architecture
                     </span>
                   </div>
@@ -351,12 +351,12 @@ export default function Projects() {
                   >
                     {project.subtitle}
                   </p>
-                  <h3 className="text-3xl lg:text-4xl font-bold text-[var(--foreground)]">
+                  <h3 className="text-3xl lg:text-4xl font-bold text-(--foreground)">
                     {project.title}
                   </h3>
                 </div>
 
-                <p className="text-[var(--muted-foreground)] leading-relaxed">
+                <p className="text-(--muted-foreground) leading-relaxed">
                   {project.description}
                 </p>
 
@@ -368,7 +368,7 @@ export default function Projects() {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: j * 0.1 }}
-                      className="flex gap-3 text-sm text-[var(--secondary-foreground)]"
+                      className="flex gap-3 text-sm text-(--secondary-foreground)"
                     >
                       <span
                         className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0"
@@ -383,7 +383,7 @@ export default function Projects() {
                   {project.stack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-2.5 py-1 rounded-md bg-[var(--secondary)] text-xs font-mono text-[var(--secondary-foreground)] border border-[var(--border)] hover:border-[var(--primary)] transition-colors"
+                      className="px-2.5 py-1 rounded-md bg-(--secondary) text-xs font-mono text-(--secondary-foreground) border border-(--border) hover:border-(--primary) transition-colors"
                     >
                       {tech}
                     </span>
@@ -395,7 +395,7 @@ export default function Projects() {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[var(--border)] text-sm text-[var(--foreground)] hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all duration-200"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-(--border) text-sm text-(--foreground) hover:border-(--primary) hover:text-(--primary) transition-all duration-200"
                   >
                     <svg
                       width="16"

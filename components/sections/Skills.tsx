@@ -191,7 +191,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="py-28 relative bg-[var(--secondary)]/20 overflow-hidden"
+      className="py-28 relative bg-(--secondary)/20 overflow-hidden"
     >
       {/* subtle grid texture */}
       <div
@@ -217,23 +217,23 @@ export default function Skills() {
             <div>
               <span
                 className="inline-flex items-center gap-2 px-3 py-1 rounded-full
-                border border-[var(--border)] bg-[var(--secondary)]
-                text-[10px] text-[var(--primary)] mb-4 font-semibold tracking-[0.18em] uppercase"
+                border border-(--border) bg-(--secondary)
+                text-[10px] text-(--primary) mb-4 font-semibold tracking-[0.18em] uppercase"
               >
                 Technical Skills
               </span>
               <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">
-                What I work <span className="text-[var(--primary)]">with.</span>
+                What I work <span className="text-(--primary)">with.</span>
               </h2>
             </div>
             {/* legend */}
-            <div className="flex items-center gap-5 text-xs text-[var(--muted-foreground)] pb-1">
+            <div className="flex items-center gap-5 text-xs text-(--muted-foreground) pb-1">
               <span className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--foreground)] opacity-100 inline-block" />
+                <span className="w-1.5 h-1.5 rounded-full bg-(--foreground) opacity-100 inline-block" />
                 Advanced
               </span>
               <span className="flex items-center gap-1.5 opacity-55">
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--foreground)] inline-block" />
+                <span className="w-1.5 h-1.5 rounded-full bg-(--foreground) inline-block" />
                 Intermediate
               </span>
               <span className="flex items-center gap-1.5">
@@ -250,16 +250,16 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55, delay: 0.1 }}
-          className="mb-12 p-5 rounded-2xl border border-[var(--primary)]/25
-            bg-[var(--primary)]/5 flex flex-col sm:flex-row sm:items-center gap-4"
+          className="mb-12 p-5 rounded-2xl border border-(--primary)/25
+            bg-(--primary)/5 flex flex-col sm:flex-row sm:items-center gap-4"
         >
           <span
             className="text-[10px] font-bold tracking-[0.2em] uppercase
-            text-[var(--primary)] whitespace-nowrap flex-shrink-0"
+            text-(--primary) whitespace-nowrap flex-shrink-0"
           >
             Core Stack
           </span>
-          <div className="h-px w-full sm:w-auto sm:h-4 sm:w-px bg-[var(--primary)]/20 flex-shrink-0" />
+          <div className="h-px w-full sm:w-auto sm:h-4 sm:w-px bg-(--primary)/20 flex-shrink-0" />
           <div className="flex flex-wrap gap-2">
             {coreStack.map((tech, i) => (
               <motion.span
@@ -269,8 +269,8 @@ export default function Skills() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.15 + i * 0.07 }}
                 className="px-3 py-1 rounded-lg text-sm font-semibold
-                  text-[var(--primary)] bg-[var(--primary)]/10
-                  border border-[var(--primary)]/20"
+                  text-(--primary) bg-(--primary)/10
+                  border border-(--primary)/20"
               >
                 {tech}
               </motion.span>
@@ -279,7 +279,7 @@ export default function Skills() {
         </motion.div>
 
         {/* ── Skill rows — spec-sheet layout ── */}
-        <div className="divide-y divide-[var(--border)]">
+        <div className="divide-y divide-(--border)">
           {skillGroups.map((group, i) => (
             <motion.div
               key={group.category}
@@ -292,7 +292,7 @@ export default function Skills() {
             >
               {/* Category label */}
               <div className="flex items-center gap-3">
-                <span className="text-[11px] font-mono text-[var(--muted-foreground)] opacity-50 select-none w-6 flex-shrink-0">
+                <span className="text-[11px] font-mono text-(--muted-foreground) opacity-50 select-none w-6 flex-shrink-0">
                   {group.index}
                 </span>
                 <div
@@ -311,7 +311,7 @@ export default function Skills() {
                   >
                     {group.category}
                   </h3>
-                  <p className="text-[10px] text-[var(--muted-foreground)] mt-0.5">
+                  <p className="text-[10px] text-(--muted-foreground) mt-0.5">
                     {group.skills.length} skills
                   </p>
                 </div>
@@ -333,12 +333,12 @@ export default function Skills() {
                         inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm
                         border transition-all duration-200 cursor-default
                         ${sty.opacity} ${sty.weight}
-                        bg-[var(--card)] text-[var(--foreground)]
-                        hover:opacity-100 hover:border-[var(--primary)]/40
+                        bg-(--card) text-(--foreground)
+                        hover:opacity-100 hover:border-(--primary)/40
                         ${
                           isCertified
                             ? "border-[#f59e0b]/30 hover:border-[#f59e0b]/60"
-                            : "border-[var(--border)]"
+                            : "border-(--border)"
                         }
                       `}
                     >
@@ -365,7 +365,7 @@ export default function Skills() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="mt-10 text-[11px] text-[var(--muted-foreground)] text-right"
+          className="mt-10 text-[11px] text-(--muted-foreground) text-right"
         >
           * AWS Certified: Cloud Practitioner, Solutions Architect, Developer,
           SysOps, ML Specialty
