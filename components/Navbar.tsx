@@ -43,33 +43,35 @@ export default function Navbar() {
 
     if (mobileOpen) {
       // Small delay to prevent immediate closing on open
-      setTimeout(() => {
+      const listenerTimeout = setTimeout(() => {
         document.addEventListener("mousedown", handleClickOutside);
         document.addEventListener("touchstart", handleClickOutside);
       }, 100);
 
-      // Prevent body scroll when menu is open (works on iOS too)
-      document.body.style.position = "fixed";
-      document.body.style.width = "100%";
-      document.body.style.top = `-${window.scrollY}px`;
-    } else {
-      // Restore scroll position (iOS fix)
-      const scrollY = document.body.style.top;
-      document.body.style.position = "";
-      document.body.style.width = "";
-      document.body.style.top = "";
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || "0") * -1);
+      // Prevent body scroll while the menu is open. Plain overflow:hidden
+      // (rather than the position:fixed + top-offset trick) means the
+      // page never actually moves, so there's nothing to restore and no
+      // flash back to the top when the menu closes.
+      const scrollBarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+      // Compensate for the scrollbar disappearing so content doesn't
+      // shift sideways when the lock engages (desktop browsers only —
+      // scrollBarWidth is 0 on mobile where scrollbars are overlaid).
+      if (scrollBarWidth > 0) {
+        document.body.style.paddingRight = `${scrollBarWidth}px`;
       }
-    }
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("touchstart", handleClickOutside);
-      document.body.style.position = "";
-      document.body.style.width = "";
-      document.body.style.top = "";
-    };
+      return () => {
+        clearTimeout(listenerTimeout);
+        document.removeEventListener("mousedown", handleClickOutside);
+        document.removeEventListener("touchstart", handleClickOutside);
+        document.documentElement.style.overflow = "";
+        document.body.style.overflow = "";
+        document.body.style.paddingRight = "";
+      };
+    }
   }, [mobileOpen]);
 
   // Close menu on window resize
@@ -167,7 +169,7 @@ export default function Navbar() {
 
           <button
             ref={buttonRef}
-            className="md:hidden text-(--foreground) z-50 p-2 rounded-lg hover:bg-(--secondary) transition-colors active:scale-95 transition-transform"
+            className="md:hidden text-(--foreground) z-50 p-2 rounded-lg hover:bg-(--secondary) transition-colors active:scale-95"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
@@ -214,7 +216,7 @@ export default function Navbar() {
                           e.preventDefault();
                           handleLinkClick(link.href);
                         }}
-                        className="block text-xl font-medium text-(--secondary-foreground) hover:text-(--primary) transition-colors py-3 active:scale-95 transition-transform cursor-pointer"
+                        className="block text-xl font-medium text-(--secondary-foreground) hover:text-(--primary) transition-colors py-3 active:scale-95 cursor-pointer"
                       >
                         {link.label}
                       </a>

@@ -104,7 +104,7 @@ const projects = [
 
 type ArchNode = { label: string; icon: string; color: string };
 
-function ArchDiagram({ nodes, accent }: { nodes: ArchNode[]; accent: string }) {
+function ArchDiagram({ nodes }: { nodes: ArchNode[] }) {
   return (
     <div className="w-full h-full flex items-center justify-center p-6">
       <div className="flex items-center gap-2 flex-wrap justify-center">
@@ -318,7 +318,7 @@ export default function Projects() {
               {/* Architecture visual */}
               <div className="flex-1 w-full">
                 <div
-                  className={`relative rounded-2xl border border-(--border) bg-gradient-to-br ${project.color} ${project.border} transition-all duration-500 overflow-hidden`}
+                  className={`relative rounded-2xl border border-(--border) bg-linear-to-br ${project.color} ${project.border} transition-all duration-500 overflow-hidden`}
                   style={{ minHeight: "280px" }}
                 >
                   {/* Top bar */}
@@ -332,7 +332,7 @@ export default function Projects() {
                   </div>
 
                   {/* Arch diagram */}
-                  <ArchDiagram nodes={project.arch} accent={project.accent} />
+                  <ArchDiagram nodes={project.arch} />
 
                   {/* Glow */}
                   <div
@@ -371,7 +371,7 @@ export default function Projects() {
                       className="flex gap-3 text-sm text-(--secondary-foreground)"
                     >
                       <span
-                        className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0"
+                        className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"
                         style={{ background: project.accent }}
                       />
                       {h}

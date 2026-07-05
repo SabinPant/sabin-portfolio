@@ -71,7 +71,7 @@ export default function Experience() {
       <div
         aria-hidden
         className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-          w-[600px] h-[400px] rounded-full blur-[140px] opacity-[0.035]"
+          w-150 h-100 rounded-full blur-[140px] opacity-[0.035]"
         style={{ background: "#6366f1" }}
       />
 
@@ -101,7 +101,7 @@ export default function Experience() {
           {/* Vertical rail — gradient so it fades out at bottom */}
           <div
             aria-hidden
-            className="absolute left-[27px] top-2 bottom-0 w-px"
+            className="absolute left-6.75 top-2 bottom-0 w-px"
             style={{
               background:
                 "linear-gradient(to bottom, var(--primary) 0%, var(--border) 40%, transparent 100%)",
@@ -119,9 +119,9 @@ export default function Experience() {
             className="relative pl-16 pb-14"
           >
             {/* Timeline node — solid, completed role */}
-            <div className="absolute left-[18px] top-[18px] z-10">
+            <div className="absolute left-4.5 top-4.5 z-10">
               <div
-                className="w-[18px] h-[18px] rounded-full border-[3px] border-(--background)"
+                className="w-4.5 h-4.5 rounded-full border-[3px] border-(--background)"
                 style={{ background: experience.color }}
               />
             </div>
@@ -129,7 +129,7 @@ export default function Experience() {
             {/* Connector tick */}
             <div
               aria-hidden
-              className="absolute left-[36px] top-[26px] w-6 h-px opacity-30"
+              className="absolute left-9 top-6.5 w-6 h-px opacity-30"
               style={{ background: experience.color }}
             />
 
@@ -140,7 +140,7 @@ export default function Experience() {
             >
               {/* Card header band */}
               <div
-                className="h-[3px] w-full"
+                className="h-0.75 w-full"
                 style={{
                   background: `linear-gradient(90deg, ${experience.color}, transparent)`,
                 }}
@@ -153,7 +153,7 @@ export default function Experience() {
                     {/* Monogram avatar */}
                     <div
                       className="w-12 h-12 rounded-xl flex items-center justify-center
-                        text-sm font-bold tracking-wider flex-shrink-0 border"
+                        text-sm font-bold tracking-wider shrink-0 border"
                       style={{
                         background: experience.color + "18",
                         borderColor: experience.color + "35",
@@ -196,7 +196,7 @@ export default function Experience() {
                   </div>
 
                   {/* Period badge */}
-                  <div className="flex flex-col items-start sm:items-end gap-1.5 flex-shrink-0">
+                  <div className="flex flex-col items-start sm:items-end gap-1.5 shrink-0">
                     <span
                       className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full
                       bg-(--secondary) border border-(--border)
@@ -242,7 +242,7 @@ export default function Experience() {
                       className="flex gap-3"
                     >
                       <div
-                        className="mt-[7px] w-1.5 h-1.5 rounded-full flex-shrink-0"
+                        className="mt-1.75 w-1.5 h-1.5 rounded-full shrink-0"
                         style={{ background: experience.color }}
                       />
                       <div>
@@ -287,7 +287,7 @@ export default function Experience() {
           >
             {/* Timeline node — hollow, future */}
             <div
-              className="absolute left-[18px] top-[18px] z-10 w-[18px] h-[18px] rounded-full
+              className="absolute left-4.5 top-4.5 z-10 w-4.5 h-4.5 rounded-full
                 border-2 border-(--border) bg-(--background)"
             />
 
@@ -295,14 +295,14 @@ export default function Experience() {
             <div
               className="group bg-(--card) border border-dashed border-(--border)
               rounded-2xl p-6 sm:p-8
-              hover:border-(--primary)/40 hover:bg-(--primary)/[0.03]
+              hover:border-(--primary)/40 hover:bg-(--primary)/3
               transition-all duration-300 cursor-default"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
                 <div className="flex items-center gap-4">
                   {/* Icon */}
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0
+                    className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0
                     bg-(--secondary) border border-(--border)
                     text-(--primary) group-hover:border-(--primary)/40
                     transition-colors duration-300"
@@ -354,7 +354,7 @@ export default function Experience() {
                   href="#contact"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg
                     bg-(--primary) text-white text-sm font-medium whitespace-nowrap
-                    hover:opacity-90 active:scale-95 transition-all duration-150 flex-shrink-0"
+                    hover:opacity-90 active:scale-95 transition-all duration-150 shrink-0"
                 >
                   Get in Touch
                   <svg

@@ -209,7 +209,7 @@ export default function About() {
       {/* Ambient glows */}
       <div
         aria-hidden
-        className="pointer-events-none absolute top-[-80px] right-[-80px] w-[520px] h-[520px] will-change-transform"
+        className="pointer-events-none absolute -top-20 -right-20 w-130 h-130 will-change-transform"
         style={{
           background:
             "radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%)",
@@ -217,7 +217,7 @@ export default function About() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-[-60px] left-[-60px] w-[380px] h-[380px] will-change-transform"
+        className="pointer-events-none absolute -bottom-15 -left-15 w-95 h-95 will-change-transform"
         style={{
           background:
             "radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%)",
@@ -249,7 +249,7 @@ export default function About() {
         {/* Main layout grid */}
         <div className="grid lg:grid-cols-[360px_1fr] gap-14 xl:gap-20 items-start mb-20">
           {/* LEFT: Image + Stats */}
-          <div className="lg:sticky lg:top-28 flex flex-col gap-6 self-start w-full max-w-[360px] mx-auto lg:mx-0">
+          <div className="lg:sticky lg:top-28 flex flex-col gap-6 self-start w-full max-w-90 mx-auto lg:mx-0">
             {/* Photo card */}
             <motion.div
               initial={{ opacity: 0, x: -16 }}
@@ -260,15 +260,15 @@ export default function About() {
             >
               <div
                 aria-hidden
-                className="absolute inset-0 translate-x-[10px] translate-y-[10px] rounded-2xl border border-(--primary)/15 pointer-events-none"
+                className="absolute inset-0 translate-x-2.5 translate-y-2.5 rounded-2xl border border-(--primary)/15 pointer-events-none"
               />
               <div className="relative rounded-2xl overflow-hidden border border-(--border) bg-(--card) shadow-sm">
                 <div
                   aria-hidden
-                  className="absolute inset-0 z-10 pointer-events-none rounded-2xl bg-gradient-to-b from-transparent via-transparent to-(--background)/60"
+                  className="absolute inset-0 z-10 pointer-events-none rounded-2xl bg-linear-to-b from-transparent via-transparent to-(--background)/60"
                 />
 
-                <div className="relative w-full aspect-[3/4]">
+                <div className="relative w-full aspect-3/4">
                   <Image
                     src="/images/sabinpanta.jpg"
                     alt="Sabin Pant"
@@ -288,7 +288,7 @@ export default function About() {
                 {/* Availability badge */}
                 <div className="absolute bottom-0 left-0 right-0 z-20 px-4 pb-4">
                   <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-(--background)/70 backdrop-blur-md border border-(--border)">
-                    <span className="relative flex-shrink-0">
+                    <span className="relative shrink-0">
                       <span className="block w-2 h-2 rounded-full bg-emerald-400" />
                       <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-60" />
                     </span>
@@ -425,20 +425,20 @@ export default function About() {
             <span className="text-(--primary) font-semibold text-sm uppercase tracking-wider">
               Outside the Code
             </span>
-            <div className="flex-1 h-px bg-gradient-to-r from-(--border) to-transparent" />
+            <div className="flex-1 h-px bg-linear-to-r from-(--border) to-transparent" />
           </div>
 
           {/* Interactive Interest Cards */}
           <div className="rounded-2xl border border-(--border) bg-(--card)/40 backdrop-blur-md overflow-hidden flex flex-col md:flex-row shadow-2xl relative">
             {/* Left Sidebar (Navigation) */}
-            <div className="w-full md:w-[280px] bg-(--background)/50 border-b md:border-b-0 md:border-r border-(--border) flex flex-row md:flex-col p-3 gap-2 overflow-x-auto hide-scrollbar z-20">
+            <div className="w-full md:w-70 bg-(--background)/50 border-b md:border-b-0 md:border-r border-(--border) flex flex-row md:flex-col p-3 gap-2 overflow-x-auto hide-scrollbar z-20">
               {interests.map((item) => {
                 const isActive = activeInterest.id === item.id;
                 return (
                   <button
                     key={item.id}
                     onClick={() => setActiveInterest(item)}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-out flex-shrink-0 md:flex-shrink"
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-out shrink-0 md:shrink"
                     style={{
                       backgroundColor: isActive
                         ? item.accent + "15"
@@ -474,7 +474,7 @@ export default function About() {
             </div>
 
             {/* Right Content Display */}
-            <div className="flex-1 relative p-8 md:p-12 min-h-[380px] flex flex-col justify-center">
+            <div className="flex-1 relative p-8 md:p-12 min-h-95 flex flex-col justify-center">
               {/* Subtle background pattern */}
               <div
                 className="absolute inset-0 pointer-events-none opacity-[0.08] dark:opacity-[0.04]"
