@@ -255,11 +255,11 @@ export default function Skills() {
         >
           <span
             className="text-[10px] font-bold tracking-[0.2em] uppercase
-            text-(--primary) whitespace-nowrap flex-shrink-0"
+            text-(--primary) whitespace-nowrap shrink-0"
           >
             Core Stack
           </span>
-          <div className="h-px w-full sm:w-auto sm:h-4 sm:w-px bg-(--primary)/20 flex-shrink-0" />
+          <div className="h-px w-full sm:w-auto sm:h-4 bg-(--primary)/20 shrink-0" />
           <div className="flex flex-wrap gap-2">
             {coreStack.map((tech, i) => (
               <motion.span
@@ -292,11 +292,11 @@ export default function Skills() {
             >
               {/* Category label */}
               <div className="flex items-center gap-3">
-                <span className="text-[11px] font-mono text-(--muted-foreground) opacity-50 select-none w-6 flex-shrink-0">
+                <span className="text-[11px] font-mono text-(--muted-foreground) opacity-50 select-none w-6 shrink-0">
                   {group.index}
                 </span>
                 <div
-                  className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
+                  className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
                   style={{
                     background: group.accent + "18",
                     border: `1px solid ${group.accent}30`,
@@ -343,7 +343,7 @@ export default function Skills() {
                       `}
                     >
                       {isCertified && (
-                        <span className="w-1 h-1 rounded-full bg-[#f59e0b] flex-shrink-0" />
+                        <span className="w-1 h-1 rounded-full bg-[#f59e0b] shrink-0" />
                       )}
                       {skill.name}
                       {sty.suffix && (

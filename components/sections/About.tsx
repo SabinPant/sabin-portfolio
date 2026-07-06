@@ -68,9 +68,9 @@ function CountUp({
 }
 
 const stats = [
-  { value: 2, suffix: "+", label: "Years Coding", accent: "#6366f1" },
+  { value: 4, suffix: "+", label: "Years Coding", accent: "#6366f1" },
   { value: 5, suffix: "x", label: "AWS Certified", accent: "#f59e0b" },
-  { value: 3, suffix: "", label: "Major Projects", accent: "#06b6d4" },
+  { value: 4, suffix: "+", label: "Major Projects", accent: "#06b6d4" },
   { value: 20, suffix: "+", label: "Technologies", accent: "#10b981" },
 ];
 

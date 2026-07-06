@@ -176,7 +176,7 @@ function AwsTile({
       {/* Code badge */}
       <div
         className="relative z-10 w-12 h-12 rounded-lg flex items-center justify-center
-          text-[10px] font-black tracking-wider flex-shrink-0 border"
+          text-[10px] font-black tracking-wider shrink-0 border"
         style={{
           background: "#FF990014",
           borderColor: "#FF990040",
@@ -207,7 +207,7 @@ function AwsTile({
       <motion.div
         variants={{ hover: { x: 2, opacity: 1 } }}
         initial={{ opacity: 0 }}
-        className="relative z-10 flex-shrink-0 text-[#FF9900]"
+        className="relative z-10 shrink-0 text-[#FF9900]"
       >
         <svg
           width="14"
@@ -255,7 +255,7 @@ function FeaturedAwsCard({ cert }: { cert: (typeof awsCerts)[0] }) {
 
       {/* Top accent stripe */}
       <div
-        className="absolute top-0 left-0 right-0 h-[2px]"
+        className="absolute top-0 left-0 right-0 h-0.5"
         style={{ background: "linear-gradient(90deg, #FF9900, transparent)" }}
       />
 
@@ -381,7 +381,7 @@ function SpecialtyCertCard({
       />
       {/* top stripe */}
       <div
-        className="absolute top-0 left-0 right-0 h-[2px] transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+        className="absolute top-0 left-0 right-0 h-0.5 transition-opacity duration-300 opacity-0 group-hover:opacity-100"
         style={{
           background: `linear-gradient(90deg, ${cert.accent}, transparent)`,
         }}
@@ -389,7 +389,7 @@ function SpecialtyCertCard({
 
       <div className="relative z-10 flex items-start justify-between">
         <div
-          className="w-12 h-12 rounded-xl flex items-center justify-center border text-[11px] font-black tracking-wide flex-shrink-0"
+          className="w-12 h-12 rounded-xl flex items-center justify-center border text-[11px] font-black tracking-wide shrink-0"
           style={{
             background: cert.glow,
             borderColor: cert.accent + "40",
@@ -473,12 +473,12 @@ export default function Certifications() {
       {/* Ambient background glows */}
       <div
         aria-hidden
-        className="pointer-events-none absolute top-1/3 left-0 w-[500px] h-[500px] rounded-full blur-[140px] opacity-[0.04]"
+        className="pointer-events-none absolute top-1/3 left-0 w-125 h-125 rounded-full blur-[140px] opacity-[0.04]"
         style={{ background: "#FF9900" }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-1/4 right-0 w-[400px] h-[400px] rounded-full blur-[120px] opacity-[0.04]"
+        className="pointer-events-none absolute bottom-1/4 right-0 w-100 h-100 rounded-full blur-[120px] opacity-[0.04]"
         style={{ background: "#a855f7" }}
       />
 
@@ -499,8 +499,7 @@ export default function Certifications() {
             Certifications
           </span>
           <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">
-            Credentials I have{" "}
-            <span className="text-(--primary)">earned.</span>
+            Credentials I have <span className="text-(--primary)">earned.</span>
           </h2>
           <p className="mt-4 text-(--muted-foreground) max-w-xl">
             Industry-recognised certifications across cloud architecture,

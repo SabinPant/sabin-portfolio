@@ -359,7 +359,7 @@ export default function Hero() {
   const statBadges = useMemo(
     () => [
       { value: "5×", label: "AWS Certs" },
-      { value: "3+", label: "Projects" },
+      { value: "4+", label: "Projects" },
       { value: "1st", label: "Architecture" },
     ],
     [],
