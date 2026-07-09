@@ -151,7 +151,7 @@ function ArchDiagram({ nodes }: { nodes: ArchNode[] }) {
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="sm:w-[22px] sm:h-[22px]"
+                    className="sm:w-5.5 sm:h-5.5"
                   >
                     <rect x="2" y="3" width="20" height="18" rx="2" />
                     <line x1="2" y1="8" x2="22" y2="8" />
@@ -170,7 +170,7 @@ function ArchDiagram({ nodes }: { nodes: ArchNode[] }) {
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="sm:w-[22px] sm:h-[22px]"
+                    className="sm:w-5.5 sm:h-5.5"
                   >
                     <rect x="2" y="2" width="20" height="8" rx="2" />
                     <rect x="2" y="14" width="20" height="8" rx="2" />
@@ -188,7 +188,7 @@ function ArchDiagram({ nodes }: { nodes: ArchNode[] }) {
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="sm:w-[22px] sm:h-[22px]"
+                    className="sm:w-5.5 sm:h-5.5"
                   >
                     <polygon points="12 2 2 7 12 12 22 7 12 2" />
                     <polyline points="2 17 12 22 22 17" />
@@ -205,7 +205,7 @@ function ArchDiagram({ nodes }: { nodes: ArchNode[] }) {
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="sm:w-[22px] sm:h-[22px]"
+                    className="sm:w-5.5 sm:h-5.5"
                   >
                     <ellipse cx="12" cy="5" rx="9" ry="3" />
                     <path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5" />
@@ -222,7 +222,7 @@ function ArchDiagram({ nodes }: { nodes: ArchNode[] }) {
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="sm:w-[22px] sm:h-[22px]"
+                    className="sm:w-5.5 sm:h-5.5"
                   >
                     <rect x="3" y="3" width="18" height="18" rx="2" />
                     <line x1="3" y1="9" x2="21" y2="9" />
@@ -239,7 +239,7 @@ function ArchDiagram({ nodes }: { nodes: ArchNode[] }) {
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="sm:w-[22px] sm:h-[22px]"
+                    className="sm:w-5.5 sm:h-5.5"
                   >
                     <line x1="18" y1="20" x2="18" y2="10" />
                     <line x1="12" y1="20" x2="12" y2="4" />
@@ -257,14 +257,14 @@ function ArchDiagram({ nodes }: { nodes: ArchNode[] }) {
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="sm:w-[22px] sm:h-[22px]"
+                    className="sm:w-5.5 sm:h-5.5"
                   >
                     <path d="M9 3h6M9 3v7l-4 8a1 1 0 0 0 .9 1.5h12.2A1 1 0 0 0 19 18l-4-8V3" />
                     <line x1="7.5" y1="15" x2="16.5" y2="15" />
                   </svg>
                 )}
               </div>
-              <span className="text-[11px] sm:text-xs text-(--muted-foreground) font-medium text-center leading-tight max-w-[80px] sm:max-w-none">
+              <span className="text-[11px] sm:text-xs text-(--muted-foreground) font-medium text-center leading-tight max-w-20 sm:max-w-none">
                 {node.label}
               </span>
             </motion.div>
@@ -349,7 +349,7 @@ export default function Projects() {
             >
               {/* Architecture visual */}
               <div className="flex-1 w-full">
-                <div className="relative rounded-2xl border border-(--border) bg-(--secondary)/30 hover:border-(--primary)/40 transition-colors duration-300 overflow-hidden min-h-[220px] sm:min-h-[280px]">
+                <div className="relative rounded-2xl border border-(--border) bg-(--secondary)/30 hover:border-(--primary)/40 transition-colors duration-300 overflow-hidden min-h-55 sm:min-h-70">
                   {/* Top bar */}
                   <div className="flex items-center gap-2 px-4 py-3 border-b border-(--border)/50">
                     <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
