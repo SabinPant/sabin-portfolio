@@ -17,7 +17,6 @@ const skillGroups = [
   {
     category: "Backend",
     index: "01",
-    accent: "#6366f1",
     icon: "server",
     skills: [
       { name: "Node.js", level: "advanced" },
@@ -31,7 +30,6 @@ const skillGroups = [
   {
     category: "Frontend",
     index: "02",
-    accent: "#3b82f6",
     icon: "layout",
     skills: [
       { name: "React", level: "advanced" },
@@ -44,12 +42,11 @@ const skillGroups = [
   {
     category: "Databases",
     index: "03",
-    accent: "#06b6d4",
     icon: "database",
     skills: [
       { name: "PostgreSQL", level: "advanced" },
       { name: "MySQL", level: "advanced" },
-      { name: "Prisma ORM", level: "advanced" },
+      { name: "Prisma/Type ORM", level: "advanced" },
       { name: "MongoDB", level: "intermediate" },
       { name: "Redis", level: "intermediate" },
       { name: "Oracle", level: "intermediate" },
@@ -58,7 +55,6 @@ const skillGroups = [
   {
     category: "Cloud & Infra",
     index: "04",
-    accent: "#f59e0b",
     icon: "cloud",
     skills: [
       { name: "AWS EC2", level: "certified" },
@@ -72,21 +68,17 @@ const skillGroups = [
   {
     category: "Architecture",
     index: "05",
-    accent: "#ec4899",
     icon: "layers",
     skills: [
       { name: "System Design", level: "advanced" },
       { name: "REST API", level: "advanced" },
       { name: "JWT Auth", level: "advanced" },
       { name: "RBAC", level: "advanced" },
-      { name: "Event-Driven", level: "intermediate" },
-      { name: "BullMQ", level: "intermediate" },
     ],
   },
   {
     category: "Tools & Workflow",
     index: "06",
-    accent: "#10b981",
     icon: "tools",
     skills: [
       { name: "Git / GitHub", level: "advanced" },
@@ -113,13 +105,13 @@ const levelStyle: Record<
 /* ─────────────────────────────────────────
    Icons — inline SVG only
 ───────────────────────────────────────── */
-function Icon({ type, color }: { type: string; color: string }) {
+function Icon({ type }: { type: string }) {
   const p = {
     width: 16,
     height: 16,
     viewBox: "0 0 24 24",
     fill: "none",
-    stroke: color,
+    stroke: "currentColor",
     strokeWidth: 1.6,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
@@ -237,7 +229,7 @@ export default function Skills() {
                 Intermediate
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#f59e0b] inline-block" />
+                <span className="w-1.5 h-1.5 rounded-full bg-(--primary) inline-block" />
                 Certified*
               </span>
             </div>
@@ -296,19 +288,13 @@ export default function Skills() {
                   {group.index}
                 </span>
                 <div
-                  className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-                  style={{
-                    background: group.accent + "18",
-                    border: `1px solid ${group.accent}30`,
-                  }}
+                  className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0
+                    bg-(--secondary) border border-(--border) text-(--foreground)"
                 >
-                  <Icon type={group.icon} color={group.accent} />
+                  <Icon type={group.icon} />
                 </div>
                 <div>
-                  <h3
-                    className="text-sm font-semibold leading-tight"
-                    style={{ color: group.accent }}
-                  >
+                  <h3 className="text-sm font-semibold leading-tight text-(--foreground)">
                     {group.category}
                   </h3>
                   <p className="text-[10px] text-(--muted-foreground) mt-0.5">
@@ -337,17 +323,17 @@ export default function Skills() {
                         hover:opacity-100 hover:border-(--primary)/40
                         ${
                           isCertified
-                            ? "border-[#f59e0b]/30 hover:border-[#f59e0b]/60"
+                            ? "border-(--primary)/30 hover:border-(--primary)/60"
                             : "border-(--border)"
                         }
                       `}
                     >
                       {isCertified && (
-                        <span className="w-1 h-1 rounded-full bg-[#f59e0b] shrink-0" />
+                        <span className="w-1 h-1 rounded-full bg-(--primary) shrink-0" />
                       )}
                       {skill.name}
                       {sty.suffix && (
-                        <span className="text-[#f59e0b] text-[10px] font-bold ml-0.5">
+                        <span className="text-(--primary) text-[10px] font-bold ml-0.5">
                           {sty.suffix}
                         </span>
                       )}

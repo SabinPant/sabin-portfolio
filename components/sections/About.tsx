@@ -212,7 +212,7 @@ export default function About() {
         className="pointer-events-none absolute -top-20 -right-20 w-130 h-130 will-change-transform"
         style={{
           background:
-            "radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(99,102,241,0.035) 0%, transparent 70%)",
         }}
       />
       <div
@@ -220,7 +220,7 @@ export default function About() {
         className="pointer-events-none absolute -bottom-15 -left-15 w-95 h-95 will-change-transform"
         style={{
           background:
-            "radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(59,130,246,0.025) 0%, transparent 70%)",
         }}
       />
 
@@ -241,8 +241,8 @@ export default function About() {
             <span className="text-(--primary)">the architecture.</span>
           </h2>
           <p className="mt-4 text-(--muted-foreground) max-w-xl mx-auto text-[0.95rem] leading-relaxed">
-            Backend-first. System-design obsessed. Built to handle what happens
-            at scale.
+            Backend-focused developer who genuinely enjoys figuring out how
+            complex systems fit together.
           </p>
         </motion.div>
 
@@ -362,57 +362,57 @@ export default function About() {
             </div>
 
             <div className="space-y-3">
-              <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-(--primary)">
+              <h3 className="flex items-center gap-2 text-xs font-semibold tracking-[0.15em] uppercase text-(--primary)">
+                <span className="h-3 w-0.5 rounded-full bg-(--primary)" />
                 Origin Story
               </h3>
               <p className="text-(--muted-foreground) leading-[1.8] text-[0.95rem] font-normal text-justify lg:text-left">
-                It started with a game. I wanted to build one, so in high
-                school, I decided to pursue a Computer Science path. I began by
-                picking up C and C++, and that first taste of building a
-                powerful foundation in programming paradigms, Data Structures,
-                and Algorithms (DSA) was addictive. As my curiosity deepened, my
-                interests naturally shifted from games to real-world
-                applications. Every layer I pulled back revealed something more
-                interesting underneath, leading me from foundational systems
-                into backend architecture, robust data pipelines, and scalable
-                cloud infrastructure.
+                Honestly? It started because I wanted to make my own game. That
+                sent me down the Computer Science path in high school, where I
+                picked up C and C++ and got hooked almost immediately,
+                there&apos;s something satisfying about a program finally
+                running the way it&apos;s supposed to. Somewhere along the way,
+                my curiosity drifted from &quot;how do I build a game&quot; to
+                &quot;how do real systems actually work,&quot; and I ended up
+                falling for backend architecture, data pipelines, and cloud
+                infrastructure instead.
               </p>
             </div>
 
             <div className="h-px w-full bg-(--border) opacity-60" />
 
             <div className="space-y-3">
-              <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-(--primary)">
+              <h3 className="flex items-center gap-2 text-xs font-semibold tracking-[0.15em] uppercase text-(--primary)">
+                <span className="h-3 w-0.5 rounded-full bg-(--primary)" />
                 Why Backend & System Design
               </h3>
               <p className="text-(--muted-foreground) leading-[1.8] text-[0.95rem] font-normal text-justify lg:text-left">
-                Backend is where the abstract logic maps neatly to true systemic
-                resilience. I&apos;m drawn to it because that&apos;s where the
-                architectural complexity lives, handling race conditions,
-                ensuring transaction atomicity, designing robust relational
-                schemas, and preserving consistency across distributed layouts.
-                I live for mapping actor interactions, visualizing
-                cross-functional data flows, and stress-testing edge cases on
-                paper long before opening an IDE. The frontend captures
-                attention, but the backend earns trust.
+                I like backend because that&apos;s where the real puzzle is.
+                Figuring out how to handle race conditions, keep data consistent
+                across services, and design a schema that won&apos;t fall apart
+                six months from now, that stuff genuinely interests me.
+                I&apos;ll happily spend an hour sketching out how different
+                parts of a system talk to each other before writing a single
+                line of code. Frontend gets the spotlight, but backend is what
+                keeps the lights on.
               </p>
             </div>
 
             <div className="h-px w-full bg-(--border) opacity-60" />
 
             <div className="space-y-3">
-              <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-(--primary)">
+              <h3 className="flex items-center gap-2 text-xs font-semibold tracking-[0.15em] uppercase text-(--primary)">
+                <span className="h-3 w-0.5 rounded-full bg-(--primary)" />
                 Where I&apos;m Headed
               </h3>
               <p className="text-(--muted-foreground) leading-[1.8] text-[0.95rem] font-normal text-justify lg:text-left">
-                My objective is to build enterprise-grade critical
-                infrastructure, the type that demands absolute zero-fault
-                execution: banking networks, high-reliability payment systems,
-                real-time transaction clearing environments, and low-latency
-                data pipelines. I operate best in environments where a bug
-                isn&apos;t just an interface flaw, but an engineering liability.
-                That high-stakes paradigm motivates me to design for predictable
-                consistency, reliable correctness, and structural scale.
+                Long term, I want to work on the kind of infrastructure where
+                there&apos;s zero room for error, think banking systems, payment
+                processing, real-time transactions. The stuff where a bug
+                isn&apos;t just annoying, it&apos;s a real problem for real
+                people. That pressure is exactly what pulls me in. I want to be
+                the person building systems people can trust without even
+                thinking about it.
               </p>
             </div>
           </motion.div>

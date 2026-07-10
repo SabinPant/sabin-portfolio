@@ -131,7 +131,7 @@ export default function Certifications() {
                     >
                       {/* Left tick — the one signature detail, replaces per-row code chips */}
                       <span
-                        className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-[2px] rounded-full
+                        className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-0.5 rounded-full
                           bg-(--border) transition-colors duration-200 group-hover:bg-(--foreground)"
                       />
 
