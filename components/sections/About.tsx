@@ -137,7 +137,7 @@ const interests = [
         strokeLinejoin="round"
       >
         <circle cx="12" cy="12" r="10" />
-        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+        <path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" />
       </svg>
     ),
     desc: "I love exploring new places, especially nature spots with lots of greenery and peaceful vibes. There's nothing better than discovering a quiet trail, a hidden waterfall, or just sitting somewhere with a beautiful view. Travel clears my mind and gives me fresh energy.",
@@ -438,33 +438,27 @@ export default function About() {
                   <button
                     key={item.id}
                     onClick={() => setActiveInterest(item)}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-out shrink-0 md:shrink"
-                    style={{
-                      backgroundColor: isActive
-                        ? item.accent + "15"
-                        : "transparent",
-                      borderLeft: isActive
-                        ? `3px solid ${item.accent}`
-                        : "3px solid transparent",
-                    }}
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl border-l-2 transition-all duration-300 ease-out shrink-0 md:shrink ${
+                      isActive
+                        ? "bg-(--secondary) border-(--primary)"
+                        : "border-transparent hover:bg-(--secondary)/50"
+                    }`}
                   >
                     <div
-                      className="transition-colors duration-300"
-                      style={{
-                        color: isActive
-                          ? item.accent
-                          : "var(--muted-foreground)",
-                      }}
+                      className={`transition-colors duration-300 ${
+                        isActive
+                          ? "text-(--primary)"
+                          : "text-(--muted-foreground)"
+                      }`}
                     >
                       {item.icon}
                     </div>
                     <span
-                      className="text-sm font-semibold tracking-wide whitespace-nowrap"
-                      style={{
-                        color: isActive
-                          ? "var(--foreground)"
-                          : "var(--muted-foreground)",
-                      }}
+                      className={`text-sm font-semibold tracking-wide whitespace-nowrap transition-colors duration-300 ${
+                        isActive
+                          ? "text-(--foreground)"
+                          : "text-(--muted-foreground)"
+                      }`}
                     >
                       {item.label}
                     </span>

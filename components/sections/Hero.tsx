@@ -606,8 +606,8 @@ export default function Hero() {
                     startAngle={90}
                     badgeSize={36 * orbitScale}
                     reduceMotion={!!prefersReducedMotion}
-                    iconText="AWS"
-                    color="#f59e0b"
+                    iconText="JAVA"
+                    color="#b07219"
                   />
                 </div>
               )}
