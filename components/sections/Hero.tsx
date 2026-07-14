@@ -5,7 +5,6 @@ import {
   motion,
   useMotionValue,
   useSpring,
-  useTransform,
   useReducedMotion,
   AnimatePresence,
 } from "framer-motion";
@@ -142,28 +141,6 @@ function MagneticButton({
   );
 }
 
-/* ─────────────── FLOATING BADGE ─────────────── */
-function FloatingBadge({
-  children,
-  className,
-  delay = 0,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  delay?: number;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20, scale: 0.9 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.6, delay, ease: "easeOut" }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
 /* ─────────────── NOISE GRAIN LAYER ─────────────── */
 function GrainOverlay() {
   return (
@@ -283,22 +260,6 @@ export default function Hero() {
   const prefersReducedMotion = useReducedMotion();
   const bp = useBreakpoint();
 
-  // Mouse position drives only a CSS background-position via motion values,
-  // so moving the mouse never triggers a React re-render of the whole tree.
-  const mx = useMotionValue(50);
-  const my = useMotionValue(50);
-  const gradientBackground = useTransform([mx, my], ([x, y]) => {
-    return `radial-gradient(ellipse 80% 60% at ${x}% ${y}%, rgba(99, 102, 241, 0.08) 0%, transparent 70%)`;
-  });
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (prefersReducedMotion) return;
-    const rect = containerRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    mx.set(((e.clientX - rect.left) / rect.width) * 100);
-    my.set(((e.clientY - rect.top) / rect.height) * 100);
-  };
-
   // Responsive photo/orbit sizing — scales down smoothly instead of only
   // flipping at the single `lg` breakpoint the grid uses.
   const photoSize =
@@ -369,39 +330,11 @@ export default function Hero() {
     <section
       id="hero"
       ref={containerRef}
-      onMouseMove={handleMouseMove}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* ── Background layers ── */}
       <GrainOverlay />
       <Scanline />
-
-      {/* Deep mesh gradient that tracks mouse (skipped on touch/reduced-motion) */}
-      {!prefersReducedMotion && (
-        <motion.div
-          aria-hidden
-          className="absolute inset-0 pointer-events-none hidden md:block"
-          style={{ background: gradientBackground }}
-        />
-      )}
-
-      {/* Static ambient glow */}
-      <div
-        aria-hidden
-        className="absolute top-1/4 right-1/4 w-60 h-60 sm:w-80 sm:h-80 lg:w-125 lg:h-125 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="absolute bottom-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-100 lg:h-100 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(139,92,246,0.04) 0%, transparent 70%)",
-        }}
-      />
 
       {/* Grid lines */}
       <div
@@ -409,7 +342,7 @@ export default function Hero() {
         className="absolute inset-0 pointer-events-none opacity-[0.025]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(99,102,241,1) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,1) 1px, transparent 1px)",
+            "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
           backgroundSize: "80px 80px",
         }}
       />
@@ -419,24 +352,6 @@ export default function Hero() {
         <div className="grid lg:grid-cols-2 gap-10 sm:gap-8 lg:gap-16 items-center min-h-screen py-20 sm:py-24">
           {/* ── LEFT: Text side ── */}
           <div className="flex flex-col justify-center items-center text-center lg:items-start lg:text-left order-2 lg:order-1">
-            {/* Status pill */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-flex items-center gap-2 self-center lg:self-start mb-6 sm:mb-8"
-            >
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-(--border) bg-(--secondary)">
-                <span className="relative flex h-2 w-2 shrink-0">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
-                </span>
-                <span className="text-[10px] sm:text-xs text-green-400 font-medium font-mono whitespace-nowrap">
-                  AVAILABLE FOR OPPORTUNITIES
-                </span>
-              </div>
-            </motion.div>
-
             {/* Name — big, editorial. Real heading is visually hidden;
                 the two animated lines below are presentational only, so
                 screen readers/SEO see one clean <h1> instead of two. */}
@@ -662,23 +577,6 @@ export default function Hero() {
                   />
                 </div>
               </motion.div>
-
-              {/* Open to hire badge - anchored to the photo wrapper.
-                  Offset scales down with the photo so it never pushes
-                  past the viewport edge on small screens. */}
-              <FloatingBadge
-                delay={1.8}
-                className="absolute top-[28%] right-0 translate-x-[70%] sm:translate-x-[75%] lg:-right-15 lg:translate-x-0 z-30"
-              >
-                <div className="bg-(--card) border border-(--border) rounded-xl px-2.5 py-1.5 sm:px-3 sm:py-2 backdrop-blur-sm whitespace-nowrap">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse shrink-0" />
-                    <span className="text-[10px] sm:text-[11px] text-green-400 font-mono font-medium">
-                      Open to hire
-                    </span>
-                  </div>
-                </div>
-              </FloatingBadge>
             </div>
 
             {/* Stat badges row - below photo */}
@@ -709,7 +607,6 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.8 }}
               className="relative z-10 mt-6 rounded-xl border border-(--border) bg-(--card) overflow-hidden w-full max-w-95"
-              style={{ boxShadow: "0 0 40px rgba(99,102,241,0.06)" }}
             >
               {/* Terminal title bar */}
               <div className="flex items-center gap-2 px-3 sm:px-4 py-2.5 border-b border-(--border) bg-(--secondary)/50">

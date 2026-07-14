@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { useState, useRef } from "react";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, MapPin, Send } from "lucide-react";
 
 // ── Validation helpers ──────────────────────────────────────────────────────
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -55,6 +55,7 @@ export default function Contact() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [submitCount, setSubmitCount] = useState(0);
+  const [messageLength, setMessageLength] = useState(0);
   const lastSubmitTime = useRef<number>(0);
 
   function handleBlur(
@@ -141,6 +142,7 @@ export default function Contact() {
         form.reset();
         setTouched({});
         setErrors({});
+        setMessageLength(0);
       } else {
         setStatus("error");
       }
@@ -167,13 +169,13 @@ export default function Contact() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-(--border) bg-(--secondary) text-xs text-(--primary) mb-4 font-medium tracking-widest uppercase">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-(--border) bg-(--secondary) text-[10px] text-(--primary) mb-5 font-semibold tracking-[0.18em] uppercase">
             Contact
-          </div>
-          <h2 className="text-4xl lg:text-5xl font-bold">
+          </span>
+          <h2 className="text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
             Let us <span className="text-(--primary)">connect.</span>
           </h2>
-          <p className="text-(--muted-foreground) mt-4 max-w-lg mx-auto">
+          <p className="mt-4 text-(--muted-foreground) max-w-xl mx-auto text-[0.95rem] leading-relaxed">
             Whether you have a project in mind, a job opportunity, or just want
             to say hi my inbox is always open.
           </p>
@@ -204,12 +206,6 @@ export default function Contact() {
                   label: "Email",
                   value: "sabinpant100@gmail.com",
                   href: "mailto:sabinpant100@gmail.com",
-                },
-                {
-                  icon: Phone,
-                  label: "Phone",
-                  value: "+977 9845943810",
-                  href: "tel:+9779845943810",
                 },
                 {
                   icon: MapPin,
@@ -270,7 +266,7 @@ export default function Contact() {
               noValidate
               className="space-y-4 bg-(--card) border border-(--border) rounded-2xl p-6"
             >
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs text-(--muted-foreground) mb-1.5 block">
                     Name
@@ -331,10 +327,9 @@ export default function Contact() {
                   <label className="text-xs text-(--muted-foreground)">
                     Message
                   </label>
-                  <span
-                    className="text-xs text-(--muted-foreground)"
-                    id="msg-count"
-                  />
+                  <span className="text-xs text-(--muted-foreground)">
+                    {messageLength}/2000
+                  </span>
                 </div>
                 <textarea
                   name="message"
@@ -345,9 +340,7 @@ export default function Contact() {
                   onBlur={handleBlur}
                   onChange={(e) => {
                     handleChange(e);
-                    const counter = document.getElementById("msg-count");
-                    if (counter)
-                      counter.textContent = `${e.target.value.length}/2000`;
+                    setMessageLength(e.target.value.length);
                   }}
                   className={`${inputClass("message")} resize-none`}
                 />

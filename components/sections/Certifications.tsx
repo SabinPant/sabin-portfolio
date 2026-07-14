@@ -71,13 +71,14 @@ export default function Certifications() {
           transition={{ duration: 0.5 }}
           className="mb-20 md:mb-24 text-center flex flex-col items-center"
         >
-          <p className="text-xs font-medium tracking-[0.14em] uppercase text-(--muted-foreground) mb-4">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-(--border) bg-(--secondary) text-[10px] text-(--primary) mb-5 font-semibold tracking-[0.18em] uppercase">
             Certifications
-          </p>
-          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-(--foreground)">
-            Credentials
+          </span>
+          <h2 className="text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
+            Credentials that back{" "}
+            <span className="text-(--primary)">the work.</span>
           </h2>
-          <p className="mt-4 text-(--muted-foreground) max-w-md leading-relaxed">
+          <p className="mt-4 text-(--muted-foreground) max-w-xl mx-auto text-[0.95rem] leading-relaxed">
             Seven certifications across cloud infrastructure, machine learning,
             and product design, each verifiable at the source.
           </p>

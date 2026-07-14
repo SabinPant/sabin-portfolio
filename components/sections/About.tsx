@@ -206,24 +206,6 @@ export default function About() {
       id="about"
       className="py-28 relative overflow-hidden bg-(--background)"
     >
-      {/* Ambient glows */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-20 -right-20 w-130 h-130 will-change-transform"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(99,102,241,0.035) 0%, transparent 70%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-15 -left-15 w-95 h-95 will-change-transform"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(59,130,246,0.025) 0%, transparent 70%)",
-        }}
-      />
-
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         {/* Section header */}
         <motion.div
@@ -284,24 +266,6 @@ export default function About() {
                     <div className="absolute inset-0 bg-(--secondary) animate-pulse" />
                   )}
                 </div>
-
-                {/* Availability badge */}
-                <div className="absolute bottom-0 left-0 right-0 z-20 px-4 pb-4">
-                  <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-(--background)/70 backdrop-blur-md border border-(--border)">
-                    <span className="relative shrink-0">
-                      <span className="block w-2 h-2 rounded-full bg-emerald-400" />
-                      <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-60" />
-                    </span>
-                    <div>
-                      <p className="text-xs font-semibold text-(--foreground) leading-snug">
-                        Available for opportunities
-                      </p>
-                      <p className="text-[11px] text-(--muted-foreground)">
-                        Full-time · Internship · Freelance
-                      </p>
-                    </div>
-                  </div>
-                </div>
               </div>
             </motion.div>
 
@@ -346,21 +310,6 @@ export default function About() {
             transition={{ duration: 0.5 }}
             className="flex flex-col gap-8 pt-1"
           >
-            <div className="flex flex-wrap gap-2">
-              {[
-                "Full-Stack Developer",
-                "BSc Computing · London Met",
-                "5× AWS Certified",
-              ].map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 rounded-full text-[11px] font-medium tracking-wide bg-(--secondary) border border-(--border) text-(--secondary-foreground) shadow-sm"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
             <div className="space-y-3">
               <h3 className="flex items-center gap-2 text-xs font-semibold tracking-[0.15em] uppercase text-(--primary)">
                 <span className="h-3 w-0.5 rounded-full bg-(--primary)" />
