@@ -1,10 +1,12 @@
 "use client";
-import { motion, type Variants } from "framer-motion";
+
+import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { ArrowDown, ArrowRight, MapPin } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 
-/* ─────────────────────────────────────────
+/* =========================================
    Data
-───────────────────────────────────────── */
+========================================= */
 const experiences = [
   {
     role: "Developer Intern",
@@ -53,164 +55,203 @@ const experiences = [
   },
 ];
 
-/* ─────────────────────────────────────────
-   Variants
-───────────────────────────────────────── */
-const cardVariant: Variants = {
-  hidden: { opacity: 0, y: 32 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.65, ease: "easeOut" as const },
-  },
-};
-
-const itemVariant: Variants = {
-  hidden: { opacity: 0, x: -12 },
-  show: (i: number) => ({
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.4, delay: i * 0.1, ease: "easeOut" as const },
-  }),
-};
-
-/* ─────────────────────────────────────────
+/* =========================================
    Component
-───────────────────────────────────────── */
+========================================= */
 export default function Experience() {
+  const reduce = useReducedMotion();
+
+  /* An entry rises, then its own lines follow. Motion is dropped
+     entirely when the visitor asks for less of it. */
+  const entry: Variants = reduce
+    ? { hidden: { opacity: 1 }, show: { opacity: 1 } }
+    : {
+        hidden: { opacity: 0, y: 24 },
+        show: {
+          opacity: 1,
+          y: 0,
+          transition: {
+            duration: 0.5,
+            ease: "easeOut" as const,
+            when: "beforeChildren",
+            staggerChildren: 0.07,
+          },
+        },
+      };
+
+  const line: Variants = reduce
+    ? { hidden: { opacity: 1 }, show: { opacity: 1 } }
+    : {
+        hidden: { opacity: 0, x: -10 },
+        show: {
+          opacity: 1,
+          x: 0,
+          transition: { duration: 0.35, ease: "easeOut" as const },
+        },
+      };
+
   return (
-    <section id="experience" className="py-28 relative overflow-hidden">
-      <div className="relative z-10 max-w-3xl mx-auto px-6">
-        <div className="mb-12">
-          <SectionHeader title="Experience" />
-        </div>
+    <section id="experience" className="bg-background py-24 sm:py-28">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6">
+        <SectionHeader
+          title="Experience"
+          description="Two internships so far, one still running. Listed newest first."
+        />
 
-        {/* ══════════════════════════
-            Role cards
-        ══════════════════════════ */}
-        <div className="space-y-6">
-          {experiences.map((experience) => (
-            <motion.div
-              key={experience.company}
-              variants={cardVariant}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="bg-card border border-(--border) rounded-xl overflow-hidden"
-            >
-              <div className="p-6 sm:p-8">
-                {/* Role identity row */}
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-7 pb-7 border-b border-(--border)">
-                  <div>
-                    <h3 className="text-lg font-semibold text-foreground leading-tight">
-                      {experience.role}
-                    </h3>
-                    <p className="text-sm font-medium text-muted-foreground mt-1">
-                      {experience.company}
-                    </p>
-                    <p className="text-xs text-muted-foreground/80 mt-2 flex items-center gap-1.5">
-                      <svg
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                        <circle cx="12" cy="10" r="3" />
-                      </svg>
-                      {experience.location}
-                    </p>
-                  </div>
+        {/* A drawn axis: one continuous hairline, a node per role, the
+            present at the top, the rule capped where the record ends. */}
+        <div className="relative mt-12 sm:mt-14">
+          <span
+            aria-hidden="true"
+            className="absolute bottom-0 left-3 top-3 w-px -translate-x-1/2 bg-border"
+          />
+          <span
+            aria-hidden="true"
+            className="absolute bottom-0 left-3 h-px w-2.5 -translate-x-1/2 bg-border"
+          />
 
-                  {/* Period + status */}
-                  <div className="flex flex-col items-start sm:items-end gap-1.5 shrink-0">
-                    <span className="text-xs text-muted-foreground whitespace-nowrap tabular-nums">
-                      {experience.period}
-                    </span>
-                    {!experience.completed && (
-                      <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-muted-foreground">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+          <ol className="space-y-12 pb-6 sm:space-y-14">
+            {experiences.map((experience, index) => {
+              const current = !experience.completed;
+              /* Counted from the earliest role up, because the order here
+                 is a real chronology and not a ranking. */
+              const ordinal = String(experiences.length - index).padStart(
+                2,
+                "0",
+              );
+
+              return (
+                <motion.li
+                  key={experience.company}
+                  variants={entry}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, margin: "-80px" }}
+                  className="relative pl-9 sm:pl-12"
+                >
+                  {/* Node marker, sitting on the rule */}
+                  <span
+                    aria-hidden="true"
+                    className={`tnum absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full border bg-background font-mono text-[10px] ${
+                      current
+                        ? "border-primary text-primary ring-[3px] ring-signal-haze"
+                        : "border-border-strong text-faint-foreground"
+                    }`}
+                  >
+                    {ordinal}
+                    {current && (
+                      <span className="absolute -right-0.5 -top-0.5 flex h-2 w-2">
+                        {!reduce && (
+                          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-signal-lit opacity-60" />
+                        )}
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-signal-lit ring-2 ring-background" />
+                      </span>
+                    )}
+                  </span>
+
+                  {/* Dates lead, the way a timeline reads */}
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <span className="label-micro tnum">{experience.period}</span>
+                    {current && (
+                      <span className="font-mono text-[0.66rem] uppercase tracking-[0.13em] text-primary">
                         Current
                       </span>
                     )}
                   </div>
-                </div>
 
-                {/* Impact points */}
-                <ul className="space-y-5">
-                  {experience.impact.map((point, i) => (
-                    <motion.li
-                      key={i}
-                      custom={i}
-                      variants={itemVariant}
-                      initial="hidden"
-                      whileInView="show"
-                      viewport={{ once: true }}
-                      className="flex gap-3"
-                    >
-                      <div className="mt-2 w-1.5 h-1.5 rounded-full shrink-0 bg-muted-foreground" />
-                      <div>
-                        <p className="text-sm font-semibold text-foreground leading-snug mb-0.5">
-                          {point.headline}
-                        </p>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          {point.detail}
-                        </p>
-                      </div>
-                    </motion.li>
-                  ))}
-                </ul>
+                  <h3 className="display mt-2 text-xl text-foreground sm:text-2xl">
+                    {experience.role}
+                  </h3>
+                  <p className="mt-1 text-sm font-medium text-secondary-foreground">
+                    {experience.company}
+                  </p>
+                  <p className="mt-1.5 flex items-center gap-1.5 text-xs text-muted-foreground">
+                    <MapPin size={12} aria-hidden="true" className="shrink-0" />
+                    {experience.location}
+                  </p>
 
-                {/* Stack tags */}
-                <div className="flex flex-wrap gap-2 mt-7 pt-6 border-t border-(--border)">
-                  {experience.stack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2.5 py-1 rounded-md bg-secondary text-xs font-mono text-secondary-foreground border border-(--border)"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+                  {/* What the role actually consisted of */}
+                  <ul className="mt-6 space-y-4">
+                    {experience.impact.map((point) => (
+                      <motion.li
+                        key={point.headline}
+                        variants={line}
+                        className="flex gap-3"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="mt-[0.6rem] h-px w-3 shrink-0 bg-border-strong"
+                        />
+                        <div className="min-w-0">
+                          <p className="text-[13px] font-semibold leading-snug text-foreground">
+                            {point.headline}
+                          </p>
+                          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                            {point.detail}
+                          </p>
+                        </div>
+                      </motion.li>
+                    ))}
+                  </ul>
+
+                  <motion.div
+                    variants={line}
+                    className="mt-6 flex flex-wrap gap-1.5"
+                  >
+                    {experience.stack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="rounded-sm border border-border bg-secondary px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </motion.div>
+                </motion.li>
+              );
+            })}
+          </ol>
         </div>
 
-        {/* Availability note */}
+        {/* Availability, as a status line rather than one more card */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={reduce ? undefined : { opacity: 0, y: 16 }}
+          whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.45, delay: 0.1 }}
-          className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-card border border-(--border) rounded-xl p-6 sm:p-7"
+          transition={{ duration: 0.45 }}
+          className="mt-12 flex flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between"
         >
-          <p className="text-sm text-muted-foreground">
+          <p className="flex items-center gap-2.5 text-sm text-muted-foreground">
+            <span
+              aria-hidden="true"
+              className="h-1.5 w-1.5 shrink-0 rounded-full bg-good"
+            />
             Currently open to full-time roles and internships.
           </p>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-(--border) text-sm font-medium hover:bg-secondary transition-colors whitespace-nowrap shrink-0"
+            data-touch-target
+            className="inline-flex w-fit items-center gap-2 rounded-lg border border-border-strong px-4 py-2 text-sm font-medium transition-colors hover:bg-secondary"
           >
             Get in touch
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
+            <ArrowRight size={14} aria-hidden="true" />
           </a>
         </motion.div>
+
+        {/* Hands the reader forward */}
+        <a
+          href="#projects"
+          className="group mt-12 flex w-fit items-center gap-3"
+        >
+          <span className="label-micro transition-colors group-hover:text-primary">
+            Next: what I built
+          </span>
+          <ArrowDown
+            size={13}
+            aria-hidden="true"
+            className="text-faint-foreground transition-all group-hover:translate-y-0.5 group-hover:text-primary"
+          />
+        </a>
       </div>
     </section>
   );

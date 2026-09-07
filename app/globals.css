@@ -3,39 +3,83 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ═══════════════════════════════════════════════════════════
+   Palette: signal amber on a cool slate chassis.
+   Amber phosphor is what monochrome terminals actually used,
+   so the accent earns the terminal motif instead of decorating it.
+   Warm signal, cool ground: instrumentation, not decoration.
+   ═══════════════════════════════════════════════════════════ */
 :root {
-  --background: #ffffff;
-  --foreground: #18181b;
-  --card: #fafafa;
-  --card-foreground: #18181b;
-  --primary: #2563eb;
+  /* Surfaces: ground is recessed, cards sit above it */
+  --background: #edf0f4;
+  --card: #fbfcfd;
+  --card-foreground: #0e1217;
+  --secondary: #e3e8ef;
+  --muted: #e3e8ef;
+  --elevated: #ffffff;
+
+  /* Ink */
+  --foreground: #0e1217;
+  --secondary-foreground: #3a4450;
+  --muted-foreground: #5a6572;
+  --faint-foreground: #8a94a1;
+
+  /* Signal: the one accent, spent deliberately */
+  --primary: #a8500a;
   --primary-foreground: #ffffff;
-  --secondary: #f4f4f5;
-  --secondary-foreground: #3f3f46;
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
-  --accent: #2563eb;
+  --accent: #a8500a;
   --accent-foreground: #ffffff;
-  --border: #e4e4e7;
-  --ring: #2563eb;
+  --signal-lit: #e08a16;
+  --signal-haze: rgb(224 138 22 / 0.13);
+
+  /* Structure */
+  --border: #d3dae3;
+  --border-strong: #bfc8d4;
+  --ring: #a8500a;
   --radius: 0.5rem;
+
+  /* Status */
+  --good: #1f6f52;
+  --warn: #9a6206;
+  --bad: #b42318;
+
+  /* Elevation: by role, not stamped on everything */
+  --lift-1: 0 1px 2px rgb(14 18 23 / 0.05);
+  --lift-2:
+    0 1px 2px rgb(14 18 23 / 0.05), 0 8px 24px -12px rgb(14 18 23 / 0.18);
 }
 
 .dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --card: #141414;
-  --card-foreground: #ededed;
-  --primary: #3b82f6;
-  --primary-foreground: #ffffff;
-  --secondary: #1a1a1a;
-  --secondary-foreground: #d4d4d8;
-  --muted: #171717;
-  --muted-foreground: #a1a1aa;
-  --accent: #3b82f6;
-  --accent-foreground: #ffffff;
-  --border: #27272a;
-  --ring: #3b82f6;
+  --background: #0c1014;
+  --card: #141a21;
+  --card-foreground: #e9eef3;
+  --secondary: #1a222b;
+  --muted: #161d25;
+  --elevated: #1a222b;
+
+  --foreground: #e9eef3;
+  --secondary-foreground: #c3cdd8;
+  --muted-foreground: #8d9aa9;
+  --faint-foreground: #67737f;
+
+  /* Amber inverts its text pairing: bright accent needs dark ink on top */
+  --primary: #fbbf24;
+  --primary-foreground: #0c1014;
+  --accent: #fbbf24;
+  --accent-foreground: #0c1014;
+  --signal-lit: #fbbf24;
+  --signal-haze: rgb(251 191 36 / 0.12);
+
+  --border: #222b35;
+  --border-strong: #2e3945;
+  --ring: #fbbf24;
+
+  --good: #4bbf8e;
+  --warn: #e0a53b;
+  --bad: #f27a72;
+
+  --lift-1: 0 1px 2px rgb(0 0 0 / 0.4);
+  --lift-2: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -16px rgb(0 0 0 / 0.7);
 }
 
 @theme inline {
@@ -43,40 +87,69 @@
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  --color-elevated: var(--elevated);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-faint-foreground: var(--faint-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: #ef4444;
+  --color-signal-lit: var(--signal-lit);
+  --color-signal-haze: var(--signal-haze);
+  --color-destructive: var(--bad);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-input: var(--border);
   --color-ring: var(--ring);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  --shadow-lift-1: var(--lift-1);
+  --shadow-lift-2: var(--lift-2);
+
+  /* Type roles: condensed display, plain body, mono for data */
+  --font-display:
+    var(--font-plex-condensed), var(--font-plex-sans), ui-sans-serif, system-ui,
+    sans-serif;
+  --font-sans:
+    var(--font-plex-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
 }
 
-* {
-  border-color: var(--border);
+/* ═══════════════════════════════════════════════════════════
+   Base
+   ═══════════════════════════════════════════════════════════ */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+  border-color: var(--border);
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), sans-serif;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  font-family: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 h1,
@@ -90,18 +163,45 @@ p {
   text-wrap: pretty;
 }
 
-.hide-scrollbar {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+/* Display headings: condensed grotesque, tightened. Reads like an
+   engineering drawing label rather than a generic sans heading. */
+.display {
+  font-family: var(--font-plex-condensed), var(--font-plex-sans), sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
 }
 
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
+/* Uppercase micro-label used for eyebrows and plate text */
+.label-micro {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--faint-foreground);
 }
 
+/* Digits that sit in columns or get compared should always line up */
+.tnum,
+[data-numeric] {
+  font-variant-numeric: tabular-nums;
+}
 
+/* ═══════════════════════════════════════════════════════════
+   Focus: one visible, consistent state everywhere
+   ═══════════════════════════════════════════════════════════ */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Scrollbar & selection
+   ═══════════════════════════════════════════════════════════ */
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -109,7 +209,7 @@ p {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: var(--border-strong);
   border-radius: 5px;
   border: 2px solid var(--background);
 }
@@ -119,64 +219,83 @@ p {
 }
 
 ::selection {
-  background: color-mix(in oklch, var(--primary) 22%, transparent);
+  background: var(--signal-haze);
   color: inherit;
 }
 
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 
-/* Better touch targets on mobile */
-@media (max-width: 768px) {
-  button, 
-  a,
-  [role="button"] {
-    min-height: 44px;
-    min-width: 44px;
+/* ═══════════════════════════════════════════════════════════
+   Terminal caret
+   ═══════════════════════════════════════════════════════════ */
+@keyframes caret-blink {
+  0%,
+  45% {
+    opacity: 1;
   }
-  
-  /* Improve scrolling on mobile */
-  .overflow-auto {
-    -webkit-overflow-scrolling: touch;
+  55%,
+  100% {
+    opacity: 0.15;
   }
 }
 
-/* Prevent zoom on input focus on iOS */
+.caret-blink {
+  animation: caret-blink 1.1s steps(1, end) infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Mobile
+   ═══════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  input, 
-  textarea, 
+  /* Touch targets on controls only. Applying this to every <a> would
+     break inline links inside running prose. */
+  button,
+  [role="button"],
+  a[data-touch-target] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .overflow-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* iOS zooms the viewport when a focused input is under 16px */
+  input,
+  textarea,
   select {
     font-size: 16px !important;
   }
 }
 
-/* Smooth backdrop blur performance */
-.backdrop-blur-lg {
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-/* Better tap highlight removal */
-* {
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* iOS specific fixes */
 @supports (padding: max(0px)) {
-  .fixed {
+  .safe-inset {
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
   }
 }
 
-/* Improve performance on mobile */
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+/* ═══════════════════════════════════════════════════════════
+   Reduced motion: kill decorative movement, keep everything readable
+   ═══════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-/* Prevent pull-to-refresh on iOS when menu is open */
-body.menu-open {
-  position: fixed;
-  width: 100%;
-  overflow: hidden;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

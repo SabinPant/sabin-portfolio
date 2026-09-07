@@ -14,20 +14,32 @@ export default function ThemeToggle() {
     () => false,
   );
 
+  const isDark = resolvedTheme === "dark";
+
   const toggleTheme = () => {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+    setTheme(isDark ? "light" : "dark");
   };
 
   return (
     <button
       type="button"
       onClick={toggleTheme}
-      aria-label="Toggle theme"
-      className="relative p-2 rounded-lg text-secondary-foreground hover:text-foreground hover:bg-secondary transition-colors duration-200 cursor-pointer"
+      // Server and first client render both fall back to the generic label,
+      // so the state-aware wording cannot cause a hydration mismatch.
+      aria-label={
+        !mounted
+          ? "Toggle theme"
+          : isDark
+            ? "Switch to light theme"
+            : "Switch to dark theme"
+      }
+      // The global :focus-visible ring is amber, which reads clearly against
+      // both the light and the dark ground, so it is left to do the work.
+      className="relative p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors duration-200 cursor-pointer"
     >
       {!mounted ? (
         <span className="block w-4.5 h-4.5" />
-      ) : resolvedTheme === "dark" ? (
+      ) : isDark ? (
         <Sun size={18} />
       ) : (
         <Moon size={18} />

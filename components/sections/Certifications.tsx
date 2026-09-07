@@ -1,5 +1,6 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowDown } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 
 /* ─────────────────────────────────────────
@@ -59,12 +60,27 @@ const groups = [
 
 /* ─────────────────────────────────────────
    Component
+   A compact ledger: narrow measure, tight rows, plain ground.
+   The only accent is the tick on the hovered row, which reads
+   like a live selection in an instrument list.
 ───────────────────────────────────────── */
 export default function Certifications() {
+  const reduce = useReducedMotion();
+
+  const row = (delay: number) =>
+    reduce
+      ? {}
+      : {
+          initial: { opacity: 0, y: 6 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: "-40px" as const },
+          transition: { duration: 0.35, delay },
+        };
+
   return (
-    <section id="certifications" className="py-24 md:py-32">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="mb-16 md:mb-20">
+    <section id="certifications" className="py-16 md:py-20">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="mb-9 md:mb-11">
           <SectionHeader
             title="Certifications"
             description="Seven certifications across cloud infrastructure, machine learning, and product design. Each links to the verification source."
@@ -72,77 +88,65 @@ export default function Certifications() {
         </div>
 
         {/* Groups */}
-        <div className="space-y-14 md:space-y-16">
+        <div className="space-y-9 md:space-y-11">
           {groups.map((group) => (
             <div key={group.issuer}>
-              {/* Group header */}
+              {/* Group head: the column heading of the ledger */}
               <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.45 }}
-                className="flex items-center justify-between gap-4 mb-4"
+                {...row(0)}
+                className="flex items-baseline justify-between gap-4 pb-2 border-b border-border-strong"
               >
-                <div className="flex items-center gap-2.5">
-                  <span className="text-[13px] font-semibold text-foreground">
+                <div className="flex items-baseline gap-3 min-w-0">
+                  <h3 className="display text-base sm:text-lg text-foreground">
                     {group.issuer}
-                  </span>
-                  <span className="text-(--border)">·</span>
-                  <span className="text-[13px] text-muted-foreground">
+                  </h3>
+                  <span className="text-[13px] text-muted-foreground truncate">
                     {group.note}
                   </span>
                 </div>
-                <span className="shrink-0 text-xs tabular-nums text-(--muted-foreground)">
+                <span className="tnum shrink-0 font-mono text-xs text-faint-foreground">
                   {String(group.items.length).padStart(2, "0")}
                 </span>
               </motion.div>
 
-              <div className="border-t border-(--border) mb-1" />
-
               {/* Rows */}
-              <ul className="divide-y divide-(--border)">
+              <ul className="divide-y divide-border">
                 {group.items.map((item, i) => (
-                  <motion.li
-                    key={item.name}
-                    initial={{ opacity: 0, y: 8 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-40px" }}
-                    transition={{ duration: 0.4, delay: i * 0.04 }}
-                  >
+                  <motion.li key={item.name} {...row(i * 0.03)}>
                     <a
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative flex items-start sm:items-center gap-4 py-5
-                        pl-4 -mx-4 pr-4 rounded-lg
-                        transition-colors duration-200 hover:bg-(--secondary)/60"
+                      className="group relative flex items-start sm:items-center gap-4 py-3.5
+                        pl-4 -mx-4 pr-4 rounded-md
+                        transition-colors duration-200 hover:bg-secondary/60"
                     >
-                      {/* Left tick — the one signature detail, replaces per-row code chips */}
+                      {/* The tick: amber only while this row is the live one */}
                       <span
-                        className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-0.5 rounded-full
-                          bg-(--border) transition-colors duration-200 group-hover:bg-(--foreground)"
+                        className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-0.5 rounded-full
+                          bg-border transition-colors duration-200 group-hover:bg-primary"
                       />
 
                       <span className="flex-1 min-w-0">
                         <span className="flex flex-col sm:flex-row sm:items-baseline sm:gap-3">
-                          <span className="font-medium text-(--foreground) leading-snug">
+                          <span className="text-[15px] font-medium text-foreground leading-snug">
                             {item.name}
                           </span>
                           {"meta" in item && item.meta && (
-                            <span className="text-xs text-(--muted-foreground) shrink-0">
+                            <span className="label-micro shrink-0 mt-1 sm:mt-0">
                               {item.meta}
                             </span>
                           )}
                         </span>
-                        <span className="block text-sm text-(--muted-foreground) leading-relaxed mt-1 sm:mt-0.5 sm:max-w-md">
+                        <span className="block text-[13px] text-muted-foreground leading-relaxed mt-1 sm:mt-0.5 sm:max-w-lg">
                           {item.desc}
                         </span>
                       </span>
 
                       {/* Arrow */}
                       <span
-                        className="shrink-0 self-center text-(--muted-foreground) transition-all duration-200
-                          group-hover:text-(--foreground) group-hover:translate-x-0.5"
+                        className="shrink-0 self-center text-faint-foreground transition-all duration-200
+                          group-hover:text-foreground group-hover:translate-x-0.5"
                       >
                         <svg
                           width="15"
@@ -153,6 +157,7 @@ export default function Certifications() {
                           strokeWidth="1.75"
                           strokeLinecap="round"
                           strokeLinejoin="round"
+                          aria-hidden="true"
                         >
                           <path d="M7 17L17 7M17 7H7M17 7v10" />
                         </svg>
@@ -164,6 +169,22 @@ export default function Certifications() {
             </div>
           ))}
         </div>
+
+        {/* Hands the reader to the next section instead of ending flat */}
+        <motion.a
+          {...row(0.06)}
+          href="#contact"
+          className="mt-10 md:mt-12 flex items-center gap-3 group w-fit"
+        >
+          <span className="label-micro group-hover:text-primary transition-colors">
+            Next: start a conversation
+          </span>
+          <ArrowDown
+            size={13}
+            aria-hidden="true"
+            className="text-faint-foreground group-hover:text-primary group-hover:translate-y-0.5 transition-all"
+          />
+        </motion.a>
       </div>
     </section>
   );

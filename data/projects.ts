@@ -1,6 +1,12 @@
 export interface ArchNode {
   label: string;
   icon: string;
+  note?: string;
+}
+
+export interface Metric {
+  value: string;
+  label: string;
 }
 
 export interface Project {
@@ -14,6 +20,7 @@ export interface Project {
   github?: string;
   demo?: string;
   arch: ArchNode[];
+  metrics?: Metric[];
   featured?: boolean;
 }
 
@@ -47,10 +54,32 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/SabinPant/Nebula.git",
     arch: [
-      { label: "React Client", icon: "browser" },
-      { label: "NestJS Server", icon: "server" },
-      { label: "Simulation Engine", icon: "layers" },
-      { label: "PostgreSQL & Redis", icon: "database" },
+      {
+        label: "React Client",
+        icon: "browser",
+        note: "Renders the trader, broker and admin portals and holds the 15-minute access token in memory only, never talking to the engine directly.",
+      },
+      {
+        label: "NestJS Server",
+        icon: "server",
+        note: "Sole authority on business rules and financial state: every trading action, price update and notification passes through it.",
+      },
+      {
+        label: "Simulation Engine",
+        icon: "layers",
+        note: "Knows nothing about users, wallets or Prisma. Generates prices with Geometric Brownian Motion and speaks only Redis pub/sub.",
+      },
+      {
+        label: "PostgreSQL & Redis",
+        icon: "database",
+        note: "Postgres stores money as integer paise behind a CHECK constraint against negative balances; Redis holds the order book and the wallet locks.",
+      },
+    ],
+    metrics: [
+      { value: "3", label: "deployable processes" },
+      { value: "4", label: "server layers" },
+      { value: "15", label: "minute access tokens" },
+      { value: "10%", label: "circuit breaker band" },
     ],
     featured: true,
   },
@@ -88,10 +117,32 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/SabinPant/skillswap",
     arch: [
-      { label: "Next.js UI", icon: "browser" },
-      { label: "Laravel API", icon: "server" },
-      { label: "Service Layer", icon: "layers" },
-      { label: "PostgreSQL & Redis", icon: "database" },
+      {
+        label: "Next.js UI",
+        icon: "browser",
+        note: "Next.js 16 client on the custom copper and verdigris design system, running cursor-paginated chat history and the real-time notification bell.",
+      },
+      {
+        label: "Laravel API",
+        icon: "server",
+        note: "Controllers route and nothing else, with Sanctum authentication and role middleware standing in front of every admin path.",
+      },
+      {
+        label: "Service Layer",
+        icon: "layers",
+        note: "Owns all business logic, including the six-state request machine and the seven server-side guards that police its transitions.",
+      },
+      {
+        label: "PostgreSQL & Redis",
+        icon: "database",
+        note: "Repositories hold every Eloquent query here, and Redis caches average ratings so reputation reads never touch the review tables.",
+      },
+    ],
+    metrics: [
+      { value: "105", label: "automated tests" },
+      { value: "241", label: "assertions" },
+      { value: "6", label: "request states" },
+      { value: "8", label: "Docker services" },
     ],
     featured: true,
   },
@@ -125,10 +176,32 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/SabinPant/Hospital-Management-System.git",
     arch: [
-      { label: "JSP Frontend", icon: "browser" },
-      { label: "Servlet API", icon: "server" },
-      { label: "Service Layer", icon: "layers" },
-      { label: "DAO + MySQL", icon: "database" },
+      {
+        label: "JSP Frontend",
+        icon: "browser",
+        note: "JSP and JSTL views handle display only across the admin, doctor and patient portals plus the public doctor portfolio pages.",
+      },
+      {
+        label: "Servlet API",
+        icon: "server",
+        note: "Servlets route only, with filters in front of them enforcing session authentication and role-based access for all three roles.",
+      },
+      {
+        label: "Service Layer",
+        icon: "layers",
+        note: "Owns all business logic and validation: the doctor approval workflow, both booking flows and every notification trigger.",
+      },
+      {
+        label: "DAO + MySQL",
+        icon: "database",
+        note: "The DAO layer owns every database query, so no servlet or JSP ever issues SQL of its own.",
+      },
+    ],
+    metrics: [
+      { value: "3", label: "access roles" },
+      { value: "6", label: "MVC layers" },
+      { value: "2", label: "booking flows" },
+      { value: "7", label: "notification events" },
     ],
     featured: true,
   },
@@ -150,10 +223,32 @@ export const projects: Project[] = [
     stack: ["Java 25", "Swing", "CSV", "IntelliJ IDEA", "Git", "Java AWT"],
     github: "https://github.com/SabinPant/GymManagerJava.git",
     arch: [
-      { label: "Swing UI", icon: "browser" },
-      { label: "Controller", icon: "layout" },
-      { label: "Service Layer", icon: "layers" },
-      { label: "CSV Storage", icon: "database" },
+      {
+        label: "Swing UI",
+        icon: "browser",
+        note: "Nimbus-themed views with an Actions menu and a member table filterable by Active, Removed or All, holding no business logic at all.",
+      },
+      {
+        label: "Controller",
+        icon: "layout",
+        note: "Orchestrates between the Swing views and the services, which is what keeps the UI from reaching into the rules directly.",
+      },
+      {
+        label: "Service Layer",
+        icon: "layers",
+        note: "Owns the rules: loyalty accrual per visit, the Basic to Standard to Deluxe upgrade gate, and discounting on full payment.",
+      },
+      {
+        label: "CSV Storage",
+        icon: "database",
+        note: "Saves and loads complete member state across sessions, including soft-deleted members whose history stays intact and restorable.",
+      },
+    ],
+    metrics: [
+      { value: "4", label: "MVC layers" },
+      { value: "30", label: "visits to upgrade" },
+      { value: "10%", label: "premium discount" },
+      { value: "+5/+10", label: "loyalty per visit" },
     ],
     featured: true,
   },
@@ -189,10 +284,32 @@ export const projects: Project[] = [
     github: "https://github.com/SabinPant/nebula-chat",
     demo: "https://nebula-chat-seven.vercel.app",
     arch: [
-      { label: "React UI", icon: "browser" },
-      { label: "Express + Socket.IO", icon: "server" },
-      { label: "TypeORM", icon: "layers" },
-      { label: "PostgreSQL & Redis", icon: "database" },
+      {
+        label: "React UI",
+        icon: "browser",
+        note: "React and Vite on Vercel, driving one JWT-authenticated singleton SocketManager that keeps every signed-in device in sync.",
+      },
+      {
+        label: "Express + Socket.IO",
+        icon: "server",
+        note: "Controllers route only, with Zod validating every API boundary and a single global error middleware catching typed HttpExceptions.",
+      },
+      {
+        label: "TypeORM",
+        icon: "layers",
+        note: "Repositories own all data access, so services stay free of query code and no route reads the schema on its own terms.",
+      },
+      {
+        label: "PostgreSQL & Redis",
+        icon: "database",
+        note: "Neon holds the 3NF schema with composite keys and soft-delete participant tracking; Upstash Redis pub/sub fans events across instances.",
+      },
+    ],
+    metrics: [
+      { value: "8", label: "schema tables" },
+      { value: "15", label: "minute access tokens" },
+      { value: "5", label: "deployed services" },
+      { value: "2", label: "auth flows" },
     ],
     featured: true,
   },
@@ -221,10 +338,32 @@ export const projects: Project[] = [
     github:
       "https://github.com/SabinPant/Smart-Data---Network-Intrusion-Analysis-Python-.git",
     arch: [
-      { label: "Raw IDS CSV", icon: "database" },
-      { label: "Pandas EDA", icon: "layers" },
-      { label: "Stats & Viz", icon: "chart" },
-      { label: "Hypothesis", icon: "flask" },
+      {
+        label: "Raw IDS CSV",
+        icon: "database",
+        note: "488,000 real network traffic records across 80 features, of which 28.56% arrived as duplicates.",
+      },
+      {
+        label: "Pandas EDA",
+        icon: "layers",
+        note: "The wrangling pass: NaN removal, duplicate handling, and narrowing 80 columns to the 16 most relevant to classification.",
+      },
+      {
+        label: "Stats & Viz",
+        icon: "chart",
+        note: "The Pearson correlation heatmap that surfaced a 0.9951 overlap between Packet Length Mean and Average Packet Size, before any modelling began.",
+      },
+      {
+        label: "Hypothesis",
+        icon: "flask",
+        note: "Welch's t-test on Flow Duration returned p=0.4736, ruling out any single-feature threshold rule and forcing a multi-feature approach.",
+      },
+    ],
+    metrics: [
+      { value: "488K", label: "records analysed" },
+      { value: "80", label: "raw features" },
+      { value: "0.9951", label: "peak correlation" },
+      { value: "28.56%", label: "duplicate rows" },
     ],
     featured: true,
   },

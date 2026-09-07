@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import ScrollRail from "@/components/ScrollRail";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Skills from "@/components/sections/Skills";
@@ -12,6 +13,7 @@ export default function Home() {
   return (
     <main className="bg-background text-foreground">
       <Navbar />
+      <ScrollRail />
       <Hero />
       <About />
       <Skills />

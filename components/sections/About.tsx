@@ -1,9 +1,21 @@
 "use client";
-import { motion, AnimatePresence, type Variants } from "framer-motion";
+
+import {
+  motion,
+  AnimatePresence,
+  useReducedMotion,
+  type Variants,
+} from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { ArrowDown } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 
+/* ═══════════════════════════════════════════════════════════
+   CountUp: a readout that settles on its value.
+   With prefers-reduced-motion the figure renders at its target
+   immediately instead of counting up to it.
+   ═══════════════════════════════════════════════════════════ */
 function CountUp({
   target,
   suffix = "",
@@ -13,12 +25,17 @@ function CountUp({
   suffix?: string;
   delay?: number;
 }) {
-  const [count, setCount] = useState(0);
+  const reduce = useReducedMotion();
+  const [count, setCount] = useState(reduce ? target : 0);
   const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);
   const animationRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
+    // Already rendered at target via the initial state above, so there is
+    // nothing left to synchronize here.
+    if (reduce) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !started.current) {
@@ -34,8 +51,7 @@ function CountUp({
               const elapsed = currentTime - startTime;
               const progress = Math.min(1, elapsed / duration);
               const easeOutCubic = 1 - Math.pow(1 - progress, 3);
-              const currentCount = Math.floor(target * easeOutCubic);
-              setCount(currentCount);
+              setCount(Math.floor(target * easeOutCubic));
 
               if (progress < 1) {
                 animationRef.current = requestAnimationFrame(animate);
@@ -58,7 +74,7 @@ function CountUp({
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [target, delay]);
+  }, [target, delay, reduce]);
 
   return (
     <span ref={ref}>
@@ -68,11 +84,30 @@ function CountUp({
   );
 }
 
+/* ═══════════════════════════════════════════════════════════
+   Content
+   ═══════════════════════════════════════════════════════════ */
+
 const stats = [
   { value: 4, suffix: "+", label: "Years coding" },
   { value: 5, suffix: "", label: "AWS certifications" },
   { value: 6, suffix: "", label: "Projects" },
   { value: 20, suffix: "+", label: "Technologies" },
+];
+
+const story = [
+  {
+    title: "How I got here",
+    body: "It started because I wanted to build my own game. That took me into Computer Science in high school, where I picked up C and C++. Over time my interest shifted from building games to understanding how real systems work, and I moved toward backend architecture, data pipelines, and cloud infrastructure.",
+  },
+  {
+    title: "Why backend and system design",
+    body: "Backend is where the harder problems tend to be: handling race conditions, keeping data consistent across services, and designing a schema that still holds up months later. I usually spend time mapping out how the parts of a system talk to each other before writing much code.",
+  },
+  {
+    title: "Where I'm headed",
+    body: "Longer term, I want to work on infrastructure where correctness really matters, such as banking systems, payment processing, and real-time transactions. I want to build systems people can rely on without thinking about them.",
+  },
 ];
 
 const interests = [
@@ -167,183 +202,187 @@ const interests = [
   },
 ];
 
-/* Animation Variants */
-const containerVariants: Variants = {
+/* Stagger belongs to the readout rows only. The prose fades as one block. */
+const readoutContainer: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+    transition: { staggerChildren: 0.07, delayChildren: 0.08 },
   },
 };
 
-const childVariants: Variants = {
-  hidden: { opacity: 0, y: 12 },
+const readoutRow: Variants = {
+  hidden: { opacity: 0, y: 8 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.45, ease: [0.215, 0.61, 0.355, 1.0] },
+    transition: { duration: 0.4, ease: [0.215, 0.61, 0.355, 1.0] },
   },
 };
 
 export default function About() {
+  const reduce = useReducedMotion();
   const [imageLoaded, setImageLoaded] = useState(false);
   const [activeInterest, setActiveInterest] = useState(interests[0]);
 
-  return (
-    <section
-      id="about"
-      className="py-28 relative overflow-hidden bg-background"
-    >
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
-        <div className="mb-16">
-          <SectionHeader
-            title="About"
-            description="Backend-focused developer who enjoys figuring out how complex systems fit together."
-          />
-        </div>
+  /* One motion contract for the section, dropped wholesale when the
+     visitor asks for less movement. */
+  const rise = reduce
+    ? {}
+    : {
+        initial: { opacity: 0, y: 14 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: "-80px" },
+      };
 
-        {/* Main layout grid */}
-        <div className="grid lg:grid-cols-[360px_1fr] gap-14 xl:gap-20 items-start mb-20">
-          {/* LEFT: Image + Stats */}
-          <div className="lg:sticky lg:top-28 flex flex-col gap-6 self-start w-full max-w-90 mx-auto lg:mx-0">
-            {/* Photo card */}
+  return (
+    <section id="about" className="bg-background py-24 sm:py-28">
+      {/* Narrower than the hero: this section is meant to be read, not scanned */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <SectionHeader
+          title="About"
+          description="Backend-focused developer who enjoys figuring out how complex systems fit together."
+        />
+
+        <div className="mt-14 grid lg:grid-cols-[280px_1fr] gap-10 xl:gap-16 items-start">
+          {/* ── LEFT: portrait plate and stat readout, pinned while the story scrolls ── */}
+          <div className="lg:sticky lg:top-24 self-start w-full max-w-sm mx-auto lg:mx-0 flex flex-col gap-4">
             <motion.div
-              initial={{ opacity: 0, x: -16 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              {...(reduce
+                ? {}
+                : {
+                    initial: { opacity: 0, y: 14 },
+                    whileInView: { opacity: 1, y: 0 },
+                    viewport: { once: true, margin: "-60px" },
+                  })}
               transition={{ duration: 0.5 }}
-              className="relative w-full"
+              className="rounded-lg border border-border-strong bg-card overflow-hidden shadow-lift-2"
             >
-              <div className="relative rounded-xl overflow-hidden border border-(--border) bg-card">
-                <div className="relative w-full aspect-3/4">
-                  <Image
-                    src="/images/sabinpanta.jpg"
-                    alt="Sabin Pant"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 360px"
-                    className="object-cover object-top transition-opacity duration-500 ease-out"
-                    loading="lazy"
-                    quality={85}
-                    onLoad={() => setImageLoaded(true)}
-                    style={{ opacity: imageLoaded ? 1 : 0 }}
-                  />
-                  {!imageLoaded && (
-                    <div className="absolute inset-0 bg-secondary animate-pulse" />
-                  )}
-                </div>
+              {/* The same equipment plate the terminal wears, so the two read as one kit */}
+              <div className="flex items-center justify-between gap-3 px-3.5 py-2 border-b border-border bg-secondary">
+                <span className="font-mono text-[11px] text-muted-foreground truncate">
+                  portrait.jpg
+                </span>
+                <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-primary shrink-0">
+                  <span className="w-1.5 h-1.5 rounded-full bg-signal-lit" />
+                  on file
+                </span>
+              </div>
+
+              <div className="relative w-full aspect-3/4">
+                <Image
+                  src="/images/sabinpanta.jpg"
+                  alt="Sabin Pant"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 280px"
+                  className="object-cover object-top transition-opacity duration-500 ease-out"
+                  loading="lazy"
+                  quality={85}
+                  onLoad={() => setImageLoaded(true)}
+                  style={{ opacity: imageLoaded ? 1 : 0 }}
+                />
+                {!imageLoaded && (
+                  <div className="absolute inset-0 bg-secondary animate-pulse" />
+                )}
               </div>
             </motion.div>
 
-            {/* Stats grid */}
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-40px" }}
-              className="grid grid-cols-2 gap-3 w-full"
+            {/* Stat readout: one bordered strip with internal dividers, the
+                vertical cousin of the facts strip under the terminal */}
+            <motion.dl
+              {...(reduce
+                ? {}
+                : {
+                    variants: readoutContainer,
+                    initial: "hidden",
+                    whileInView: "show",
+                    viewport: { once: true, margin: "-40px" },
+                  })}
+              className="rounded-lg border border-border bg-card divide-y divide-border overflow-hidden"
             >
               {stats.map((stat, i) => (
                 <motion.div
                   key={stat.label}
-                  variants={childVariants}
-                  className="bg-card border border-(--border) rounded-lg p-4"
+                  variants={reduce ? undefined : readoutRow}
+                  className="flex items-baseline justify-between gap-4 px-4 py-3"
                 >
-                  <div className="text-2xl font-semibold mb-0.5 tabular-nums">
+                  <dt className="text-[12px] text-muted-foreground">
+                    {stat.label}
+                  </dt>
+                  <dd className="display tnum text-xl text-foreground">
                     <CountUp
                       target={stat.value}
                       suffix={stat.suffix}
                       delay={150 + i * 80}
                     />
-                  </div>
-                  <div className="text-[11px] text-muted-foreground font-medium tracking-wide">
-                    {stat.label}
-                  </div>
+                  </dd>
                 </motion.div>
               ))}
-            </motion.div>
+            </motion.dl>
           </div>
 
-          {/* RIGHT: Story blocks */}
+          {/* ── RIGHT: the story, held to an article measure ── */}
           <motion.div
-            initial={{ opacity: 0, x: 16 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col gap-8 pt-1"
+            {...rise}
+            transition={{ duration: 0.5, delay: 0.05 }}
+            className="flex flex-col"
           >
-            <div className="space-y-3">
-              <h3 className="text-sm font-semibold text-foreground">
-                How I got here
-              </h3>
-              <p className="text-muted-foreground leading-[1.8] text-[0.95rem]">
-                It started because I wanted to build my own game. That took me
-                into Computer Science in high school, where I picked up C and
-                C++. Over time my interest shifted from building games to
-                understanding how real systems work, and I moved toward backend
-                architecture, data pipelines, and cloud infrastructure.
-              </p>
-            </div>
-
-            <div className="h-px w-full bg-(--border)" />
-
-            <div className="space-y-3">
-              <h3 className="text-sm font-semibold text-foreground">
-                Why backend and system design
-              </h3>
-              <p className="text-muted-foreground leading-[1.8] text-[0.95rem]">
-                Backend is where the harder problems tend to be: handling race
-                conditions, keeping data consistent across services, and
-                designing a schema that still holds up months later. I usually
-                spend time mapping out how the parts of a system talk to each
-                other before writing much code.
-              </p>
-            </div>
-
-            <div className="h-px w-full bg-(--border)" />
-
-            <div className="space-y-3">
-              <h3 className="text-sm font-semibold text-foreground">
-                Where I&apos;m headed
-              </h3>
-              <p className="text-muted-foreground leading-[1.8] text-[0.95rem]">
-                Longer term, I want to work on infrastructure where correctness
-                really matters, such as banking systems, payment processing, and
-                real-time transactions. I want to build systems people can rely
-                on without thinking about them.
-              </p>
-            </div>
+            {story.map((block, i) => (
+              <div
+                key={block.title}
+                className={
+                  i > 0 ? "mt-8 pt-8 border-t border-border" : undefined
+                }
+              >
+                <div className="flex gap-4 sm:gap-6">
+                  <span className="label-micro tnum pt-2 shrink-0">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="min-w-0">
+                    <h3 className="display text-xl sm:text-2xl text-foreground">
+                      {block.title}
+                    </h3>
+                    <p className="mt-3 max-w-[64ch] text-[0.95rem] leading-[1.8] text-muted-foreground">
+                      {block.body}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </motion.div>
         </div>
 
-        {/* Interests & Hobbies */}
-        <div className="mt-20 w-full">
-          <h3 className="text-sm font-semibold text-foreground mb-5">
-            Outside work
+        {/* ── Outside work: wider than the prose, to break the column rhythm ── */}
+        <div className="mt-20">
+          <p className="label-micro">Outside work</p>
+          <h3 className="display mt-3 text-2xl sm:text-3xl text-foreground">
+            What I do when I close the laptop
           </h3>
 
-          {/* Interactive Interest Cards */}
-          <div className="rounded-xl border border-(--border) bg-card overflow-hidden flex flex-col md:flex-row relative">
-            {/* Left Sidebar (Navigation) */}
-            <div className="w-full md:w-64 bg-secondary border-b md:border-b-0 md:border-r border-(--border) flex flex-row md:flex-col p-3 gap-1 overflow-x-auto hide-scrollbar z-20">
+          <div className="mt-6 rounded-lg border border-border bg-card overflow-hidden flex flex-col md:flex-row">
+            {/* Selector */}
+            <div className="w-full md:w-60 bg-secondary border-b md:border-b-0 md:border-r border-border flex flex-row md:flex-col p-2 gap-1 overflow-x-auto hide-scrollbar">
               {interests.map((item) => {
                 const isActive = activeInterest.id === item.id;
                 return (
                   <button
                     key={item.id}
+                    type="button"
+                    aria-pressed={isActive}
                     onClick={() => setActiveInterest(item)}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-lg border-l-2 transition-colors duration-200 shrink-0 md:shrink ${
+                    className={`flex items-center gap-3 px-3.5 py-3 rounded-md border-l-2 text-left shrink-0 md:shrink transition-colors duration-200 ${
                       isActive
-                        ? "bg-background border-foreground"
-                        : "border-transparent hover:bg-background/60"
+                        ? "bg-card border-primary"
+                        : "border-transparent hover:bg-card/60"
                     }`}
                   >
-                    <div
+                    <span
                       className={`transition-colors duration-200 ${
-                        isActive ? "text-foreground" : "text-muted-foreground"
+                        isActive ? "text-primary" : "text-muted-foreground"
                       }`}
                     >
                       {item.icon}
-                    </div>
+                    </span>
                     <span
                       className={`text-sm font-medium whitespace-nowrap transition-colors duration-200 ${
                         isActive ? "text-foreground" : "text-muted-foreground"
@@ -356,31 +395,29 @@ export default function About() {
               })}
             </div>
 
-            {/* Right Content Display */}
-            <div className="flex-1 relative p-8 md:p-12 min-h-80 flex flex-col justify-center">
+            {/* Panel */}
+            <div className="flex-1 p-7 sm:p-9 md:p-11 min-h-72 flex flex-col justify-center">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeInterest.id}
-                  initial={{ opacity: 0, y: 8 }}
+                  initial={reduce ? false : { opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="relative z-10 w-full max-w-2xl"
+                  exit={reduce ? { opacity: 1 } : { opacity: 0, y: -8 }}
+                  transition={{ duration: reduce ? 0 : 0.25, ease: "easeOut" }}
+                  className="w-full max-w-[62ch]"
                 >
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="text-muted-foreground">
-                      {activeInterest.icon}
-                    </div>
-                    <h4 className="text-2xl font-semibold text-foreground tracking-tight">
+                  <div className="flex items-center gap-3">
+                    <span className="text-primary">{activeInterest.icon}</span>
+                    <h4 className="display text-2xl text-foreground">
                       {activeInterest.label}
                     </h4>
                   </div>
 
-                  <p className="text-muted-foreground text-[0.95rem] leading-relaxed mb-6">
+                  <p className="mt-4 text-[0.95rem] leading-[1.8] text-muted-foreground">
                     {activeInterest.desc}
                   </p>
 
-                  <div className="inline-flex items-start gap-3 px-4 py-3 rounded-lg bg-secondary border border-(--border)">
+                  <div className="mt-6 flex items-start gap-3 border-l-2 border-border-strong pl-4">
                     <svg
                       width="16"
                       height="16"
@@ -390,13 +427,14 @@ export default function About() {
                       strokeWidth="1.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="text-muted-foreground mt-0.5 shrink-0"
+                      className="text-faint-foreground mt-0.5 shrink-0"
+                      aria-hidden="true"
                     >
                       <circle cx="12" cy="12" r="10" />
                       <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
                       <path d="M12 17h.01" />
                     </svg>
-                    <p className="text-sm text-foreground leading-relaxed">
+                    <p className="text-sm leading-relaxed text-secondary-foreground">
                       {activeInterest.funFact}
                     </p>
                   </div>
@@ -405,6 +443,23 @@ export default function About() {
             </div>
           </div>
         </div>
+
+        {/* Hands the reader forward instead of ending on a flat edge */}
+        <motion.a
+          {...rise}
+          transition={{ duration: 0.45 }}
+          href="#skills"
+          className="mt-16 flex items-center gap-3 group w-fit"
+        >
+          <span className="label-micro group-hover:text-primary transition-colors">
+            Next: what I build with
+          </span>
+          <ArrowDown
+            size={13}
+            aria-hidden="true"
+            className="text-faint-foreground group-hover:text-primary group-hover:translate-y-0.5 transition-all"
+          />
+        </motion.a>
       </div>
     </section>
   );

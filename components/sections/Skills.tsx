@@ -1,5 +1,6 @@
 "use client";
-import { motion, type Variants } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 
 /* ─────────────────────────────────────────
@@ -17,7 +18,6 @@ const coreStack = [
 const skillGroups = [
   {
     category: "Backend",
-    index: "01",
     icon: "server",
     skills: [
       { name: "Spring Boot / Java EE", level: "advanced" },
@@ -30,7 +30,6 @@ const skillGroups = [
   },
   {
     category: "Frontend",
-    index: "02",
     icon: "layout",
     skills: [
       { name: "React", level: "advanced" },
@@ -43,7 +42,6 @@ const skillGroups = [
   },
   {
     category: "Databases",
-    index: "03",
     icon: "database",
     skills: [
       { name: "PostgreSQL", level: "advanced" },
@@ -55,7 +53,6 @@ const skillGroups = [
   },
   {
     category: "Cloud & Infra",
-    index: "04",
     icon: "cloud",
     skills: [
       { name: "AWS", level: "certified" },
@@ -66,7 +63,6 @@ const skillGroups = [
   },
   {
     category: "Architecture",
-    index: "05",
     icon: "layers",
     skills: [
       { name: "System Design", level: "advanced" },
@@ -77,7 +73,6 @@ const skillGroups = [
   },
   {
     category: "Tools & Workflow",
-    index: "06",
     icon: "tools",
     skills: [
       { name: "Git / GitHub", level: "advanced" },
@@ -88,14 +83,19 @@ const skillGroups = [
   },
 ];
 
+const totalSkills = skillGroups.reduce((n, g) => n + g.skills.length, 0);
+
+/* Depth is carried by ground and ink rather than opacity: daily tools sit
+   raised on card, occasional ones sit flush with the recessed section ground,
+   and the one certified entry is the only lit thing on the sheet. */
 const levelStyle: Record<string, string> = {
-  advanced: "opacity-100 font-medium",
-  intermediate: "opacity-60 font-normal",
-  certified: "opacity-100 font-medium",
+  advanced: "bg-card border-border text-foreground font-medium",
+  intermediate: "bg-transparent border-border text-muted-foreground font-normal",
+  certified: "bg-signal-haze border-primary/50 text-foreground font-medium",
 };
 
 /* ─────────────────────────────────────────
-   Icons — inline SVG only
+   Icons: inline SVG only
 ───────────────────────────────────────── */
 function Icon({ type }: { type: string }) {
   const p = {
@@ -156,23 +156,34 @@ function Icon({ type }: { type: string }) {
   return null;
 }
 
-const rowVariant: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" as const },
-  },
-};
-
 /* ─────────────────────────────────────────
    Component
 ───────────────────────────────────────── */
 export default function Skills() {
+  const reduce = useReducedMotion();
+
+  const rowVariant: Variants = {
+    hidden: { opacity: 0, y: reduce ? 0 : 18 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: reduce ? 0 : 0.5, ease: "easeOut" as const },
+    },
+  };
+
+  const panelReveal = reduce
+    ? {}
+    : {
+        initial: { opacity: 0, y: 12 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true },
+        transition: { duration: 0.45 },
+      };
+
   return (
     <section
       id="skills"
-      className="py-28 relative bg-(--secondary)/30 border-y border-(--border)"
+      className="py-28 relative bg-secondary/30 border-y border-border"
     >
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         <div className="mb-12 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
@@ -181,29 +192,29 @@ export default function Skills() {
             description="What I work with day to day. Dimmed items are ones I use less often."
           />
           {/* legend */}
-          <div className="flex items-center gap-2 text-xs text-muted-foreground pb-1 shrink-0">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
-            AWS certified
+          <div className="flex items-center gap-4 shrink-0 lg:pb-1">
+            <span className="label-micro tnum">{totalSkills} entries</span>
+            <span className="flex items-center gap-2 text-xs text-muted-foreground">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
+              AWS certified
+            </span>
           </div>
         </div>
 
         {/* ── Core stack ── */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45 }}
-          className="mb-12 p-5 rounded-lg border border-(--border) bg-card flex flex-col sm:flex-row sm:items-center gap-4"
+          {...panelReveal}
+          className="mb-12 p-5 rounded-lg border border-border-strong bg-card flex flex-col sm:flex-row sm:items-center gap-4"
         >
-          <span className="text-xs font-medium text-muted-foreground whitespace-nowrap shrink-0">
+          <span className="label-micro whitespace-nowrap shrink-0">
             Core stack
           </span>
-          <div className="hidden sm:block h-4 w-px bg-(--border) shrink-0" />
+          <div className="hidden sm:block h-4 w-px bg-border shrink-0" />
           <div className="flex flex-wrap gap-2">
             {coreStack.map((tech) => (
               <span
                 key={tech}
-                className="px-3 py-1 rounded-md text-sm font-medium text-foreground bg-secondary border border-(--border)"
+                className="px-3 py-1 rounded-md text-sm font-medium text-foreground bg-secondary border border-border"
               >
                 {tech}
               </span>
@@ -211,8 +222,18 @@ export default function Skills() {
           </div>
         </motion.div>
 
-        {/* ── Skill rows — spec-sheet layout ── */}
-        <div className="divide-y divide-(--border)">
+        {/* Column plate. Names the figure on each row so the number is data,
+            not decoration. */}
+        <div className="hidden lg:grid grid-cols-[220px_1fr] gap-8 pb-2.5 border-b border-border-strong">
+          <div className="flex items-center justify-between">
+            <span className="label-micro">Domain</span>
+            <span className="label-micro">Count</span>
+          </div>
+          <span className="label-micro">Tools and frameworks</span>
+        </div>
+
+        {/* ── Skill rows, spec-sheet layout ── */}
+        <div className="divide-y divide-border border-t border-border lg:border-t-0">
           {skillGroups.map((group, i) => (
             <motion.div
               key={group.category}
@@ -220,44 +241,45 @@ export default function Skills() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ delay: i * 0.07 }}
+              transition={{ delay: reduce ? 0 : i * 0.07 }}
               className="py-6 grid grid-cols-[1fr] lg:grid-cols-[220px_1fr] gap-4 lg:gap-8 items-start"
             >
               {/* Category label */}
               <div className="flex items-center gap-3">
-                <span className="text-[11px] font-mono text-muted-foreground opacity-50 select-none w-6 shrink-0">
-                  {group.index}
-                </span>
-                <div className="w-7 h-7 rounded-md flex items-center justify-center shrink-0 bg-secondary border border-(--border) text-muted-foreground">
+                <div className="w-7 h-7 rounded-md flex items-center justify-center shrink-0 bg-secondary border border-border text-muted-foreground">
                   <Icon type={group.icon} />
                 </div>
-                <div>
-                  <h3 className="text-sm font-semibold leading-tight text-foreground">
-                    {group.category}
-                  </h3>
-                  <p className="text-[10px] text-muted-foreground mt-0.5">
-                    {group.skills.length} skills
-                  </p>
-                </div>
+                <h3 className="text-sm font-semibold leading-tight text-foreground">
+                  {group.category}
+                </h3>
+                <span className="label-micro tnum ml-auto shrink-0">
+                  {group.skills.length}
+                  <span className="sr-only"> entries</span>
+                </span>
               </div>
 
-              {/* Skills — inline tag flow */}
-              <div className="flex flex-wrap gap-2 pl-9 lg:pl-0">
+              {/* Skills, inline tag flow */}
+              <div className="flex flex-wrap gap-2 pl-10 lg:pl-0">
                 {group.skills.map((skill, j) => {
                   const isCertified = skill.level === "certified";
+                  const chipReveal = reduce
+                    ? {}
+                    : {
+                        initial: { opacity: 0 },
+                        whileInView: { opacity: 1 },
+                        viewport: { once: true },
+                        transition: { delay: i * 0.05 + j * 0.03 },
+                      };
                   return (
                     <motion.span
                       key={skill.name}
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.05 + j * 0.03 }}
-                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm border bg-card text-foreground ${
+                      {...chipReveal}
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm border ${
                         levelStyle[skill.level]
-                      } ${isCertified ? "border-(--primary)/40" : "border-(--border)"}`}
+                      }`}
                     >
                       {isCertified && (
-                        <span className="w-1 h-1 rounded-full bg-primary shrink-0" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
                       )}
                       {skill.name}
                     </motion.span>
@@ -268,9 +290,22 @@ export default function Skills() {
           ))}
         </div>
 
-        <p className="mt-10 text-[11px] text-muted-foreground text-right">
-          Full certification list in the Certifications section below.
-        </p>
+        {/* Hands the reader to the credential behind the one lit entry */}
+        <div className="mt-10 pt-6 border-t border-border flex justify-end">
+          <a
+            href="#certifications"
+            className="inline-flex items-center gap-3 group"
+          >
+            <span className="label-micro group-hover:text-primary transition-colors">
+              Next: the 5 AWS certifications behind that mark
+            </span>
+            <ArrowRight
+              size={13}
+              aria-hidden="true"
+              className="text-faint-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all"
+            />
+          </a>
+        </div>
       </div>
     </section>
   );
