@@ -260,12 +260,9 @@ export default function About() {
             >
               {/* The same equipment plate the terminal wears, so the two read as one kit */}
               <div className="flex items-center justify-between gap-3 px-3.5 py-2 border-b border-border bg-secondary">
-                <span className="font-mono text-[11px] text-muted-foreground truncate">
-                  portrait.jpg
-                </span>
+                <span className="font-mono text-[11px] text-muted-foreground truncate"></span>
                 <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-primary shrink-0">
                   <span className="w-1.5 h-1.5 rounded-full bg-signal-lit" />
-                  on file
                 </span>
               </div>
 
