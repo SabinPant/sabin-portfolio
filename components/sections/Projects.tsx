@@ -31,7 +31,7 @@ export default function Projects() {
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-10 sm:mb-14">
           <SectionHeader
             title="Projects"
-            description="Every project leads with the architecture it actually runs. Hover a stage to see what that layer owns, then open the write-up for the decisions behind it."
+            description="Every project leads with the architecture it actually runs. Pick a stage to see what that layer owns, then open the write-up for the decisions behind it."
           />
           <p className="label-micro inline-flex items-center gap-2 shrink-0 sm:pb-1.5">
             <span
@@ -77,7 +77,7 @@ export default function Projects() {
                 {/* Identity in a narrow spec column, the diagram in the wide one.
                     On small screens the diagram jumps ahead of the prose. */}
                 <div className="grid gap-6 lg:gap-x-8 lg:gap-y-6 p-4 sm:p-6 lg:p-8 lg:grid-cols-[19rem_minmax(0,1fr)] xl:grid-cols-[23rem_minmax(0,1fr)]">
-                  <div className="order-1 lg:col-start-1 lg:row-start-1">
+                  <div className="order-1 min-w-0 lg:col-start-1 lg:row-start-1">
                     <h3 className="display text-2xl sm:text-3xl text-foreground">
                       {project.title}
                     </h3>
@@ -87,20 +87,20 @@ export default function Projects() {
                   </div>
 
                   {/* Inset panel: the diagram reads as a screen set into the card */}
-                  <div className="order-2 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-stretch flex flex-col justify-center rounded-md border border-border bg-background overflow-hidden">
+                  <div className="order-2 min-w-0 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-stretch flex flex-col justify-center rounded-md border border-border bg-background overflow-hidden">
                     <ArchDiagram
                       nodes={project.arch}
                       caption={project.subtitle}
                     />
                   </div>
 
-                  <div className="order-3 lg:order-none lg:col-start-1 lg:row-start-2 flex flex-col gap-5">
+                  <div className="order-3 min-w-0 lg:order-none lg:col-start-1 lg:row-start-2 flex flex-col gap-5">
                     <p className="text-sm leading-relaxed text-muted-foreground">
                       {project.description}
                     </p>
 
                     {metrics.length > 0 && (
-                      <dl className="grid grid-cols-2 gap-x-5 gap-y-4 border-y border-border py-4">
+                      <dl className="grid grid-cols-1 min-[400px]:grid-cols-2 gap-x-5 gap-y-4 border-y border-border py-4">
                         {metrics.map((metric) => (
                           <div
                             key={metric.label}
@@ -154,6 +154,7 @@ export default function Projects() {
           {...rise}
           transition={{ duration: 0.5, ease: "easeOut" }}
           href="#certifications"
+          data-touch-target
           className="mt-12 sm:mt-16 flex w-fit items-center gap-3 group"
         >
           <span className="label-micro group-hover:text-primary transition-colors">

@@ -42,7 +42,7 @@ export default function Hero() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-28 sm:pt-32 lg:pt-36 pb-16 sm:pb-20">
         <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-14 items-start">
           {/* ── Identity ── */}
-          <div className="lg:pt-6">
+          <div className="min-w-0 lg:pt-6">
             <motion.p
               {...fade}
               transition={{ duration: 0.5 }}
@@ -105,6 +105,7 @@ export default function Hero() {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-touch-target
                   className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {s.icon}
@@ -118,18 +119,18 @@ export default function Hero() {
           <motion.div
             {...fade}
             transition={{ duration: 0.5, delay: 0.12 }}
-            className="flex flex-col gap-4 w-full"
+            className="flex w-full min-w-0 flex-col gap-4"
           >
             <Terminal />
 
             <dl className="grid grid-cols-3 divide-x divide-border border border-border rounded-lg bg-card overflow-hidden">
               {facts.map((f) => (
-                <div key={f.label} className="px-3 py-3.5 text-center">
+                <div key={f.label} className="min-w-0 px-2 sm:px-3 py-3.5 text-center">
                   <dt className="sr-only">{f.label}</dt>
                   <dd className="display text-2xl tnum text-foreground">
                     {f.value}
                   </dd>
-                  <dd className="mt-1 text-[11px] text-muted-foreground leading-tight">
+                  <dd className="mt-1 text-[10.5px] sm:text-[11px] text-muted-foreground leading-tight hyphens-auto">
                     {f.label}
                   </dd>
                 </div>
@@ -143,6 +144,7 @@ export default function Hero() {
           {...fade}
           transition={{ duration: 0.5, delay: 0.3 }}
           href="#about"
+          data-touch-target
           className="mt-14 sm:mt-16 flex items-center gap-3 group w-fit"
         >
           <span className="label-micro group-hover:text-primary transition-colors">

@@ -174,6 +174,7 @@ export default function Certifications() {
         <motion.a
           {...row(0.06)}
           href="#contact"
+          data-touch-target
           className="mt-10 md:mt-12 flex items-center gap-3 group w-fit"
         >
           <span className="label-micro group-hover:text-primary transition-colors">

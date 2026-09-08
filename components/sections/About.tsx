@@ -236,7 +236,7 @@ export default function About() {
       };
 
   return (
-    <section id="about" className="bg-background py-24 sm:py-28">
+    <section id="about" className="bg-background py-20 sm:py-28">
       {/* Narrower than the hero: this section is meant to be read, not scanned */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <SectionHeader
@@ -246,7 +246,7 @@ export default function About() {
 
         <div className="mt-14 grid lg:grid-cols-[280px_1fr] gap-10 xl:gap-16 items-start">
           {/* ── LEFT: portrait plate and stat readout, pinned while the story scrolls ── */}
-          <div className="lg:sticky lg:top-24 self-start w-full max-w-sm mx-auto lg:mx-0 flex flex-col gap-4">
+          <div className="lg:sticky lg:top-24 self-start w-full min-w-0 max-w-sm mx-auto lg:mx-0 flex flex-col gap-4">
             <motion.div
               {...(reduce
                 ? {}
@@ -358,7 +358,7 @@ export default function About() {
 
           <div className="mt-6 rounded-lg border border-border bg-card overflow-hidden flex flex-col md:flex-row">
             {/* Selector */}
-            <div className="w-full md:w-60 bg-secondary border-b md:border-b-0 md:border-r border-border flex flex-row md:flex-col p-2 gap-1 overflow-x-auto hide-scrollbar">
+            <div className="w-full md:w-60 bg-secondary border-b md:border-b-0 md:border-r border-border grid grid-cols-2 md:flex md:flex-col p-2 gap-1">
               {interests.map((item) => {
                 const isActive = activeInterest.id === item.id;
                 return (
@@ -367,21 +367,21 @@ export default function About() {
                     type="button"
                     aria-pressed={isActive}
                     onClick={() => setActiveInterest(item)}
-                    className={`flex items-center gap-3 px-3.5 py-3 rounded-md border-l-2 text-left shrink-0 md:shrink transition-colors duration-200 ${
+                    className={`flex min-w-0 items-center gap-2.5 sm:gap-3 px-2.5 sm:px-3.5 py-3 rounded-md border-l-2 text-left transition-colors duration-200 ${
                       isActive
                         ? "bg-card border-primary"
                         : "border-transparent hover:bg-card/60"
                     }`}
                   >
                     <span
-                      className={`transition-colors duration-200 ${
+                      className={`shrink-0 transition-colors duration-200 ${
                         isActive ? "text-primary" : "text-muted-foreground"
                       }`}
                     >
                       {item.icon}
                     </span>
                     <span
-                      className={`text-sm font-medium whitespace-nowrap transition-colors duration-200 ${
+                      className={`min-w-0 text-[13px] sm:text-sm font-medium leading-tight md:whitespace-nowrap transition-colors duration-200 ${
                         isActive ? "text-foreground" : "text-muted-foreground"
                       }`}
                     >
@@ -393,7 +393,7 @@ export default function About() {
             </div>
 
             {/* Panel */}
-            <div className="flex-1 p-7 sm:p-9 md:p-11 min-h-72 flex flex-col justify-center">
+            <div className="flex-1 min-w-0 p-5 sm:p-9 md:p-11 min-h-64 sm:min-h-72 flex flex-col justify-center">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeInterest.id}
@@ -446,6 +446,7 @@ export default function About() {
           {...rise}
           transition={{ duration: 0.45 }}
           href="#skills"
+          data-touch-target
           className="mt-16 flex items-center gap-3 group w-fit"
         >
           <span className="label-micro group-hover:text-primary transition-colors">

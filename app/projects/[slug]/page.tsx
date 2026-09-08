@@ -106,7 +106,7 @@ export default async function ProjectDetailPage({
   const metrics = project.metrics ?? [];
 
   return (
-    <main className="bg-background text-foreground min-h-screen">
+    <main className="bg-background text-foreground min-h-dvh">
       {/* ═══ Nameplate: raised ground, identity first, instruments below ═══ */}
       <header className="border-b border-border bg-card">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-9 sm:pb-12">
@@ -195,9 +195,9 @@ export default async function ProjectDetailPage({
         {/* Readout strip: the figures that back up the write-up */}
         {metrics.length > 0 && (
           <div className="border-t border-border bg-secondary">
-            <dl className="max-w-5xl mx-auto px-4 sm:px-6 py-5 flex flex-wrap gap-x-10 sm:gap-x-14 gap-y-5">
+            <dl className="max-w-5xl mx-auto px-4 sm:px-6 py-5 grid grid-cols-2 gap-x-6 gap-y-5 sm:flex sm:flex-wrap sm:gap-x-14">
               {metrics.map((metric) => (
-                <div key={metric.label}>
+                <div key={metric.label} className="min-w-0">
                   <dt className="sr-only">{metric.label}</dt>
                   <dd className="display tnum text-2xl sm:text-3xl text-foreground">
                     {metric.value}
@@ -213,7 +213,7 @@ export default async function ProjectDetailPage({
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-14 sm:py-20 space-y-14 sm:space-y-20">
         {/* ═══ Architecture: full width, the diagram needs the room ═══ */}
         <section aria-labelledby="architecture">
-          <div className="flex items-baseline justify-between gap-4 mb-4">
+          <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-4">
             <h2 id="architecture" className="display text-xl sm:text-2xl">
               Architecture
             </h2>
@@ -320,7 +320,8 @@ export default async function ProjectDetailPage({
 
             <Link
               href="/#projects"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              data-touch-target
+              className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               All projects
             </Link>

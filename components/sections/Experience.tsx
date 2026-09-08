@@ -241,6 +241,7 @@ export default function Experience() {
         {/* Hands the reader forward */}
         <a
           href="#projects"
+          data-touch-target
           className="group mt-12 flex w-fit items-center gap-3"
         >
           <span className="label-micro transition-colors group-hover:text-primary">

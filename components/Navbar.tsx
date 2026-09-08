@@ -257,7 +257,7 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/55 z-40 md:hidden"
+              className="fixed inset-0 bg-black/55 z-40 md:hidden touch-none"
               onClick={() => setMobileOpen(false)}
             />
 
@@ -270,17 +270,17 @@ export default function Navbar() {
               animate={{ opacity: 1, x: 0 }}
               exit={reduce ? { opacity: 0 } : { opacity: 0, x: "100%" }}
               transition={{ type: "tween", duration: reduce ? 0.12 : 0.3 }}
-              className="fixed md:hidden top-0 right-0 bottom-0 w-full max-w-sm bg-background border-l border-border-strong z-40 shadow-lift-2"
+              className="fixed md:hidden top-0 right-0 bottom-0 w-full max-w-sm bg-background border-l border-border-strong z-40 shadow-lift-2 overscroll-contain"
               style={{ top: 0 }}
             >
-              <div className="flex flex-col h-full pt-20 px-6">
+              <div className="flex flex-col h-full pt-20 px-6 pb-[env(safe-area-inset-bottom)]">
                 <p className="label-micro pb-4 border-b border-border">
                   Sections
                 </p>
 
                 {/* Scrolls on short viewports so the position readout below
                     is never pushed off the bottom of the panel. */}
-                <ul className="flex flex-col pt-2 min-h-0 overflow-y-auto">
+                <ul className="flex flex-col pt-2 min-h-0 overflow-y-auto overscroll-contain">
                   {navLinks.map((link, index) => {
                     const isActive = link.href.slice(1) === activeId;
                     return (

@@ -183,9 +183,9 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="py-28 relative bg-secondary/30 border-y border-border"
+      className="py-20 sm:py-28 relative bg-secondary/30 border-y border-border"
     >
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <div className="mb-12 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
           <SectionHeader
             title="Skills"
@@ -294,6 +294,7 @@ export default function Skills() {
         <div className="mt-10 pt-6 border-t border-border flex justify-end">
           <a
             href="#certifications"
+            data-touch-target
             className="inline-flex items-center gap-3 group"
           >
             <span className="label-micro group-hover:text-primary transition-colors">

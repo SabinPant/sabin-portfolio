@@ -34,6 +34,19 @@ const toneClass: Record<Tone, string> = {
 /* Fixed-width first column keeps the output reading like a spec sheet */
 const pad = (s: string, n = 13) => s.padEnd(n, " ");
 
+/* Spacing is preserved, but a line that outruns the pane wraps instead of
+   widening it. The pane used to size to its widest line, and that width
+   propagated all the way up to the document, so phones got a page wider
+   than the screen that panned sideways while typing. */
+const LINE = "whitespace-pre-wrap [overflow-wrap:anywhere]";
+
+/* Touch devices have no keyboard worth opening, and focusing an input there
+   raises the on-screen keyboard and scrolls the page under it. */
+const isCoarsePointer = () =>
+  typeof window !== "undefined" &&
+  typeof window.matchMedia === "function" &&
+  window.matchMedia("(pointer: coarse)").matches;
+
 /* ═══════════════════════════════════════════════════════════
    Sections the terminal can navigate to
    ═══════════════════════════════════════════════════════════ */
@@ -99,6 +112,7 @@ export default function Terminal({ className = "" }: { className?: string }) {
     (id: string) => {
       const el = document.getElementById(id);
       if (!el) return false;
+      if (isCoarsePointer()) inputRef.current?.blur();
       const top = el.getBoundingClientRect().top + window.scrollY - 80;
       window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
       return true;
@@ -408,7 +422,7 @@ export default function Terminal({ className = "" }: { className?: string }) {
 
   return (
     <div
-      className={`rounded-lg border border-border-strong bg-card overflow-hidden shadow-lift-2 ${className}`}
+      className={`w-full min-w-0 max-w-full rounded-lg border border-border-strong bg-card overflow-hidden shadow-lift-2 ${className}`}
     >
       {/* Equipment plate */}
       <div className="flex items-center justify-between gap-3 px-3.5 py-2 border-b border-border bg-secondary">
@@ -424,14 +438,14 @@ export default function Terminal({ className = "" }: { className?: string }) {
       {/* Output */}
       <div
         ref={bodyRef}
-        className="px-4 pt-3.5 pb-1 font-mono text-[12.5px] leading-[1.75] h-64 sm:h-72 overflow-y-auto overflow-x-auto"
+        className="px-3.5 sm:px-4 pt-3.5 pb-1 font-mono text-[12px] sm:text-[12.5px] leading-[1.7] sm:leading-[1.75] h-56 sm:h-72 [@media(max-height:520px)]:h-36 overflow-y-auto overflow-x-hidden overscroll-contain"
         role="log"
         aria-live={demoDone ? "polite" : "off"}
         aria-label="Terminal output"
       >
-        <div className="min-w-max">
+        <div className="min-w-0">
           {lines.map((l) => (
-            <div key={l.id} className="whitespace-pre">
+            <div key={l.id} className={LINE}>
               {l.segs.length === 1 && l.segs[0].t === "" ? (
                 " "
               ) : (
@@ -444,7 +458,7 @@ export default function Terminal({ className = "" }: { className?: string }) {
             </div>
           ))}
           {ghost && (
-            <div className="whitespace-pre" aria-hidden="true">
+            <div className={LINE} aria-hidden="true">
               <span className={toneClass.ps}>$ </span>
               <span className={toneClass.cmd}>{ghost}</span>
               <span className="caret-blink text-signal-lit">▌</span>
@@ -458,10 +472,10 @@ export default function Terminal({ className = "" }: { className?: string }) {
         Run a command. Type help for the list.
       </label>
       <div
-        className="flex items-center gap-2 px-4 py-2.5 border-t border-border cursor-text focus-within:bg-signal-haze"
+        className="flex items-center gap-2 px-3.5 sm:px-4 py-2.5 border-t border-border cursor-text focus-within:bg-signal-haze"
         onClick={() => inputRef.current?.focus()}
       >
-        <span className="font-mono text-[12.5px] text-good shrink-0">$</span>
+        <span className="font-mono text-[13px] md:text-[12.5px] text-good shrink-0">$</span>
         <input
           id={inputId}
           ref={inputRef}
@@ -475,18 +489,18 @@ export default function Terminal({ className = "" }: { className?: string }) {
           autoCorrect="off"
           spellCheck={false}
           placeholder={demoDone ? "try: projects" : ""}
-          className="flex-1 min-w-0 bg-transparent border-0 outline-none p-0 font-mono text-[12.5px] text-foreground placeholder:text-faint-foreground"
+          className="flex-1 min-w-0 bg-transparent border-0 outline-none p-0 font-mono text-[16px] md:text-[12.5px] text-foreground placeholder:text-faint-foreground"
           style={{ caretColor: "var(--signal-lit)" }}
         />
         {!focused && !value && demoDone && (
-          <span aria-hidden="true" className="caret-blink text-signal-lit font-mono text-[12.5px]">
+          <span aria-hidden="true" className="caret-blink text-signal-lit font-mono text-[13px] md:text-[12.5px]">
             ▌
           </span>
         )}
       </div>
 
       {/* Tap targets: this carries the whole feature where there is no keyboard */}
-      <div className="flex flex-wrap gap-1.5 px-4 pb-3.5">
+      <div className="flex flex-wrap gap-1.5 px-3.5 sm:px-4 pb-3.5">
         {CHIPS.map((c) => (
           <button
             key={c}
@@ -494,9 +508,9 @@ export default function Terminal({ className = "" }: { className?: string }) {
             onClick={() => {
               runCommand(c);
               setDemoDone(true);
-              inputRef.current?.focus();
+              if (!isCoarsePointer()) inputRef.current?.focus();
             }}
-            className="font-mono text-[11px] px-2 py-1 rounded border border-border bg-secondary text-muted-foreground hover:text-primary hover:border-primary transition-colors"
+            className="font-mono text-[11px] px-2.5 py-1.5 rounded border border-border bg-secondary text-muted-foreground hover:text-primary hover:border-primary transition-colors"
           >
             {c}
           </button>
