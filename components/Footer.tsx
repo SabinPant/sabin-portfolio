@@ -31,10 +31,8 @@ export default function Footer() {
           </nav>
         </div>
 
-        {/* Row 2: the build plate, and a way back up */}
-        <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-          <p className="label-micro">Built with Next.js, TypeScript, Tailwind CSS</p>
-
+        {/* Row 2: a way back up */}
+        <div className="mt-4 flex sm:justify-end">
           <a
             href="#hero"
             data-touch-target

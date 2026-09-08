@@ -231,8 +231,8 @@ export default function Contact() {
           >
             <h3 className="display text-xl">Get in touch</h3>
             <p className="mt-3 text-sm text-muted-foreground leading-relaxed max-w-[46ch]">
-              If you have something that matches my profile, or want to
-              collaborate, get in touch.
+              If you have a role, a project, or just want to ask something,
+              send it over. I read everything that comes through here.
             </p>
 
             <ul className="mt-7 rounded-lg border border-border bg-card divide-y divide-border overflow-hidden">

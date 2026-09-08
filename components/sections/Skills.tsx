@@ -189,7 +189,7 @@ export default function Skills() {
         <div className="mb-12 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
           <SectionHeader
             title="Skills"
-            description="What I work with day to day. Dimmed items are ones I use less often."
+            description="What I use day to day. The dimmed ones are things I reach for less often."
           />
           {/* legend */}
           <div className="flex items-center gap-4 shrink-0 lg:pb-1">
@@ -298,7 +298,7 @@ export default function Skills() {
             className="inline-flex items-center gap-3 group"
           >
             <span className="label-micro group-hover:text-primary transition-colors">
-              Next: the 5 AWS certifications behind that mark
+              Next: the certifications I have done
             </span>
             <ArrowRight
               size={13}

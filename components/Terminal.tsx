@@ -161,7 +161,7 @@ export default function Terminal({ className = "" }: { className?: string }) {
         case "whoami":
           out.push(
             [{ t: "sabin_pant", c: "hi" }, { t: " :: full-stack and backend developer", c: "out" }],
-            [{ t: "architecture first. code second.", c: "out" }],
+            [{ t: "i mostly do backend and system design.", c: "out" }],
             [{ t: "based in Kathmandu, Nepal", c: "out" }],
             [{ t: "" }],
             [{ t: "status: ", c: "out" }, { t: "open to opportunities", c: "good" }],
@@ -315,7 +315,7 @@ export default function Terminal({ className = "" }: { className?: string }) {
           return;
 
         case "uptime":
-          out.push([{ t: "6 projects. 2 internships. 7 certifications. still shipping.", c: "out" }]);
+          out.push([{ t: "6 projects. 2 internships. 7 certifications. still building.", c: "out" }]);
           break;
 
         case "sudo":

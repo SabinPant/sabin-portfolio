@@ -64,10 +64,10 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="mt-5 text-base sm:text-[17px] text-muted-foreground leading-relaxed max-w-[46ch]"
             >
-              Forever curious, always tinkering, never standing still. I&apos;m a
-              backend developer who cares about getting the architecture right
-              before writing code, building systems and APIs that stay clean as
-              they grow.
+              I&apos;m a backend developer based in Kathmandu. I like working out
+              how a system should fit together before I start writing code, so it
+              still makes sense a few months later. Mostly APIs, databases, and
+              the parts nobody sees.
             </motion.p>
 
             <motion.div

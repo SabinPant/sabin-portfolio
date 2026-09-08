@@ -279,8 +279,12 @@ export default function Navbar() {
                 </p>
 
                 {/* Scrolls on short viewports so the position readout below
-                    is never pushed off the bottom of the panel. */}
-                <ul className="flex flex-col pt-2 min-h-0 overflow-y-auto overscroll-contain">
+                    is never pushed off the bottom of the panel. overflow-x is
+                    pinned because CSS would otherwise compute it to `auto` to
+                    match the y axis, and the items enter from translateX(16px):
+                    that briefly overflows sideways and flashes a horizontal
+                    scrollbar under the last row. */}
+                <ul className="flex flex-col pt-2 min-h-0 overflow-y-auto overflow-x-hidden overscroll-contain">
                   {navLinks.map((link, index) => {
                     const isActive = link.href.slice(1) === activeId;
                     return (

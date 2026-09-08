@@ -234,8 +234,8 @@ export default function ArchDiagram({
 
   const hasNotes = nodes.some((n) => n.note);
   const hint = coarse
-    ? "Tap a stage to see what it owns."
-    : "Hover a stage to see what it owns.";
+    ? "Tap a stage to see what it does."
+    : "Hover a stage to see what it does.";
   const readout =
     active !== null && nodes[active]?.note
       ? nodes[active].note

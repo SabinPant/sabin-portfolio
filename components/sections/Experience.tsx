@@ -16,17 +16,17 @@ const experiences = [
     completed: false,
     impact: [
       {
-        headline: "Requirements and design",
+        headline: "Working out what to build",
         detail:
-          "Working with development teams and stakeholders on requirements gathering, SRS documentation, system design, and UML/ERD diagrams.",
+          "Sitting in with the dev team and the people who actually use the system to figure out what they need, then writing it up and mapping out how the pieces and the data fit together before anyone starts coding.",
       },
       {
-        headline: "Backend development with .NET",
+        headline: "Backend work",
         detail:
-          "Building features and REST APIs on .NET against an Oracle database, within an existing enterprise system.",
+          "Building features and REST APIs in .NET on top of an Oracle database, inside a system that is already live and being used every day.",
       },
     ],
-    stack: [".NET", "REST APIs", "Oracle", "UML", "ERD", "SRS"],
+    stack: [".NET", "ASP.NET", "FastAPI", "REST APIs", "Oracle"],
   },
   {
     role: "Full-Stack Developer Intern",
@@ -36,19 +36,19 @@ const experiences = [
     completed: true,
     impact: [
       {
-        headline: "Architecture and implementation",
+        headline: "Built things end to end",
         detail:
-          "Built data-intensive systems with Node.js, Express, Next.js and PostgreSQL, owning both architecture decisions and day-to-day implementation.",
+          "Worked on data-heavy apps with Node.js, Express, Next.js and PostgreSQL. I made the calls on how things were structured and then did the actual building too.",
       },
       {
-        headline: "Secured API layers",
+        headline: "Locked down the APIs",
         detail:
-          "Designed and hardened API layers with JWT authentication and role-based access control across multi-tenant applications.",
+          "Set up JWT auth and role-based access on apps that served several clients at once, so nobody could reach data that was not theirs.",
       },
       {
-        headline: "API documentation",
+        headline: "Wrote the API docs",
         detail:
-          "Produced full Swagger documentation, which cut frontend integration time and reduced back-and-forth over contract details.",
+          "Put together proper Swagger docs, which meant the frontend devs stopped having to message me every time they wanted to know what an endpoint returned.",
       },
     ],
     stack: ["Node.js", "Express", "Next.js", "PostgreSQL", "JWT", "Swagger"],
@@ -95,7 +95,7 @@ export default function Experience() {
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <SectionHeader
           title="Experience"
-          description="Two internships so far, one still running. Listed newest first."
+          description="Two internships so far, one still going. Newest first."
         />
 
         {/* A drawn axis: one continuous hairline, a node per role, the
@@ -226,7 +226,7 @@ export default function Experience() {
               aria-hidden="true"
               className="h-1.5 w-1.5 shrink-0 rounded-full bg-good"
             />
-            Currently open to full-time roles and internships.
+            Open to full-time roles and internships right now.
           </p>
           <a
             href="#contact"

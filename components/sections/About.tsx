@@ -98,15 +98,15 @@ const stats = [
 const story = [
   {
     title: "How I got here",
-    body: "It started because I wanted to build my own game. That took me into Computer Science in high school, where I picked up C and C++. Over time my interest shifted from building games to understanding how real systems work, and I moved toward backend architecture, data pipelines, and cloud infrastructure.",
+    body: "I got into this because I wanted to make my own game. That is what pushed me to take Computer Science in high school, where I picked up C and C++. Somewhere along the way I stopped caring about finishing the game and got a lot more interested in how the systems behind it actually worked. That is how I ended up on the backend side, working on APIs, databases and cloud stuff.",
   },
   {
     title: "Why backend and system design",
-    body: "Backend is where the harder problems tend to be: handling race conditions, keeping data consistent across services, and designing a schema that still holds up months later. I usually spend time mapping out how the parts of a system talk to each other before writing much code.",
+    body: "Backend is where the problems I actually enjoy are. Two requests hitting the same row at the same time, data that has to stay right across a few services, a database schema you will not regret in six months. I usually spend a while working out how the pieces talk to each other before I write much code, because untangling that later is genuinely painful.",
   },
   {
     title: "Where I'm headed",
-    body: "Longer term, I want to work on infrastructure where correctness really matters, such as banking systems, payment processing, and real-time transactions. I want to build systems people can rely on without thinking about them.",
+    body: "I want to end up on systems where being correct actually matters. The kind where a bug is not just an annoying ticket you pick up next sprint, it is something that costs more than any one person can reasonably cover, and saying sorry does not undo it. That pressure is the part I find interesting rather than scary. If something I build just quietly does its job and nobody ever has to think about it, that is the whole point.",
   },
 ];
 
@@ -241,7 +241,7 @@ export default function About() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <SectionHeader
           title="About"
-          description="Backend-focused developer who enjoys figuring out how complex systems fit together."
+          description="A bit about how I got into this, and what I want to work on next."
         />
 
         <div className="mt-14 grid lg:grid-cols-[280px_1fr] gap-10 xl:gap-16 items-start">

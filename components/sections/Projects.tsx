@@ -31,7 +31,7 @@ export default function Projects() {
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-10 sm:mb-14">
           <SectionHeader
             title="Projects"
-            description="Every project leads with the architecture it actually runs. Pick a stage to see what that layer owns, then open the write-up for the decisions behind it."
+            description="Each one starts with how it is actually put together. Tap a stage to see what that part does, or open the write-up if you want the details."
           />
           <p className="label-micro inline-flex items-center gap-2 shrink-0 sm:pb-1.5">
             <span
@@ -39,7 +39,7 @@ export default function Projects() {
               className="w-1.5 h-1.5 rounded-full bg-signal-lit"
             />
             <span className="tnum">{featuredProjects.length}</span>
-            &nbsp;systems, live diagrams
+            &nbsp;projects, with diagrams
           </p>
         </div>
 
@@ -158,7 +158,7 @@ export default function Projects() {
           className="mt-12 sm:mt-16 flex w-fit items-center gap-3 group"
         >
           <span className="label-micro group-hover:text-primary transition-colors">
-            Next: certifications and training
+            Next: certifications
           </span>
           <ArrowDown
             size={13}

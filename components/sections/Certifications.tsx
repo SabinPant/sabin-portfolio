@@ -83,7 +83,7 @@ export default function Certifications() {
         <div className="mb-9 md:mb-11">
           <SectionHeader
             title="Certifications"
-            description="Seven certifications across cloud infrastructure, machine learning, and product design. Each links to the verification source."
+            description="Seven of them, mostly cloud and machine learning with some design in there too. Each one links out if you want to check it."
           />
         </div>
 
@@ -178,7 +178,7 @@ export default function Certifications() {
           className="mt-10 md:mt-12 flex items-center gap-3 group w-fit"
         >
           <span className="label-micro group-hover:text-primary transition-colors">
-            Next: start a conversation
+            Next: get in touch
           </span>
           <ArrowDown
             size={13}
